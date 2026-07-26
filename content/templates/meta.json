@@ -1,0 +1,10 @@
+{
+  "title": "Templates",
+  "pages": [
+    "index",
+    "---Theme---",
+    "theme-toggles",
+    "---Page---",
+    "page-transitions"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Theme",
+  "pages": [
+    "animated-theme-toggler",
+    "theme-toggle-button",
+    "theme-toggle-switch"
+  ]
+}
