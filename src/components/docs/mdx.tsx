@@ -15,6 +15,7 @@ import {
 	Tabs as ShadcnTabs,
 	TabsTrigger as ShadcnTrigger,
 } from "@/components/ui/tabs";
+import Container from "../layout/Container";
 import { CopyBlock, TransitionDemo } from "./ComponentPreview";
 import ComponentShowcase from "./ComponentShowcase";
 import { BunIcon, NpmIcon, PnpmIcon, YarnIcon } from "./PackageIcons";
@@ -24,7 +25,7 @@ import {
 	ThemeToggleSwitchShowcase,
 } from "./ThemeTransitionShowcase";
 import TransitionGridMDX from "./TransitionGridMDX";
-import Container from "../layout/Container";
+import { TransitionsTable } from "./TransitionsTable";
 
 export function getMDXComponents(components?: MDXComponents) {
 	return {
@@ -39,6 +40,7 @@ export function getMDXComponents(components?: MDXComponents) {
 		BunIcon,
 		ComponentShowcase,
 		TransitionGridMDX,
+		TransitionsTable,
 		AnimatedThemeTogglerShowcase,
 		ThemeToggleButtonShowcase,
 		ThemeToggleSwitchShowcase,

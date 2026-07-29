@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Blocks, Github, Layers, Package } from "lucide-react";
+import { Github } from "lucide-react";
 import { AnimatedThemeToggler } from "#/registry/animated-theme-toggler";
 
 export default function Header() {
@@ -15,23 +15,8 @@ export default function Header() {
 							to="/"
 							className="flex items-center gap-2 text-sm font-semibold text-[var(--foreground)] no-underline"
 						>
-							<svg
-								width="20"
-								height="20"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								strokeWidth="2"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								role="img"
-								aria-label="Transitions logo"
-							>
-								<path d="M12 2L2 7l10 5 10-5-10-5z" />
-								<path d="M2 17l10 5 10-5" />
-								<path d="M2 12l10 5 10-5" />
-							</svg>
-							Transitions
+							<img src="/favicon.ico" className="w-4 h-4" />
+							Transition Kit
 						</Link>
 
 						<nav className="hidden md:flex items-center gap-1 text-sm font-medium text-[var(--muted-foreground)]">
@@ -43,7 +28,6 @@ export default function Header() {
 									className: "text-[var(--foreground)] bg-[var(--muted)]",
 								}}
 							>
-								<Layers className="size-3.5" />
 								Home
 							</Link>
 							<Link
@@ -53,7 +37,6 @@ export default function Header() {
 									className: "text-[var(--foreground)] bg-[var(--muted)]",
 								}}
 							>
-								<Blocks className="size-3.5" />
 								Templates
 							</Link>
 							<Link
@@ -63,7 +46,6 @@ export default function Header() {
 									className: "text-[var(--foreground)] bg-[var(--muted)]",
 								}}
 							>
-								<Package className="size-3.5" />
 								Components
 							</Link>
 						</nav>

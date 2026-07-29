@@ -39,6 +39,20 @@ export const Route = createFileRoute("/components/$")({
 		await clientLoader.preload(data.path);
 		return data;
 	},
+		head: ({ loaderData }) => {
+		if (!loaderData) return {};
+		return {
+			meta: [
+				{ title: `${loaderData.title} — Transition Kit` },
+				{ name: "description", content: loaderData.description },
+				{ property: "og:title", content: `${loaderData.title} — Transition Kit` },
+				{ property: "og:description", content: loaderData.description },
+				{ name: "twitter:title", content: `${loaderData.title} — Transition Kit` },
+				{ name: "twitter:description", content: loaderData.description },
+			],
+			links: [{ rel: "canonical", href: `https://transition-kit.vercel.app${loaderData.url}` }],
+		};
+	},
 });
 
 const serverLoader = createServerFn({
@@ -50,6 +64,9 @@ const serverLoader = createServerFn({
 		if (!page) throw notFound();
 
 		return {
+			title: page.data.title ?? "",
+			description: page.data.description ?? "",
+			url: page.url,
 			toc: page.data.toc.map((item) => ({
 				title: extractText(item.title),
 				url: item.url,

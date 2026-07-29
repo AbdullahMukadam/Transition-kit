@@ -26,13 +26,118 @@ export const Route = createRootRoute({
 				content: "width=device-width, initial-scale=1",
 			},
 			{
-				title: "Transitions — Page Transition Templates",
+				title: "Transition Kit — Page Transition Templates",
+			},
+			{
+				name: "description",
+				content:
+					"Pre-built, copy-paste page transition and theme toggle components using the View Transitions API. Fade, slide, scale, flip, blur, mask reveals, and more.",
+			},
+			{
+				name: "keywords",
+				content:
+					"view transitions, page transitions, theme toggle, CSS animations, React components, shadcn, fumadocs",
+			},
+			{
+				name: "theme-color",
+				content: "#ffffff",
+				media: "(prefers-color-scheme: light)",
+			},
+			{
+				name: "theme-color",
+				content: "#0a0a0a",
+				media: "(prefers-color-scheme: dark)",
+			},
+			{
+				property: "og:type",
+				content: "website",
+			},
+			{
+				property: "og:title",
+				content: "Transition Kit — Page Transition Templates",
+			},
+			{
+				property: "og:description",
+				content:
+					"Pre-built, copy-paste page transition and theme toggle components using the View Transitions API.",
+			},
+			{
+				property: "og:url",
+				content: "https://transition-kit.vercel.app",
+			},
+			{
+				property: "og:image",
+				content: "https://transition-kit.vercel.app/og-image.png",
+			},
+			{
+				name: "twitter:card",
+				content: "summary_large_image",
+			},
+			{
+				name: "twitter:title",
+				content: "Transition Kit — Page Transition Templates",
+			},
+			{
+				name: "twitter:description",
+				content:
+					"Pre-built, copy-paste page transition and theme toggle components using the View Transitions API.",
+			},
+			{
+				name: "twitter:image",
+				content: "https://transition-kit.vercel.app/og-image.png",
 			},
 		],
 		links: [
 			{
 				rel: "stylesheet",
 				href: appCss,
+			},
+			{
+				rel: "canonical",
+				href: "https://transition-kit.vercel.app",
+			},
+			{
+				rel: "icon",
+				type: "image/x-icon",
+				href: "/favicon.ico",
+			},
+			{
+				rel: "icon",
+				type: "image/png",
+				sizes: "32x32",
+				href: "/favicon-32x32.png",
+			},
+			{
+				rel: "icon",
+				type: "image/png",
+				sizes: "16x16",
+				href: "/favicon-16x16.png",
+			},
+			{
+				rel: "apple-touch-icon",
+				sizes: "180x180",
+				href: "/apple-touch-icon.png",
+			},
+			{
+				rel: "manifest",
+				href: "/manifest.json",
+			},
+		],
+		scripts: [
+			{
+				type: "application/ld+json",
+				dangerouslySetInnerHTML: {
+					__html: JSON.stringify({
+						"@context": "https://schema.org",
+						"@type": "WebSite",
+						name: "Transition Kit",
+						url: "https://transition-kit.vercel.app",
+						description:
+							"Pre-built, copy-paste page transition and theme toggle components using the View Transitions API.",
+						applicationCategory: "DeveloperApplication",
+						operatingSystem: "All",
+					}),
+				},
 			},
 		],
 	}),

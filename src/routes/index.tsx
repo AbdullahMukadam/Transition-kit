@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowUpRight, Blocks, Code2, Layers, Sparkles } from "lucide-react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import { useCallback, useRef } from "react";
 import NewUpdates from "#/components/home/NewUpdates";
 import GapDivider from "#/components/layout/GapDivider";
@@ -10,11 +10,40 @@ import { TimelineAnimation } from "#/components/ui/timeline-animation";
 import { transitions } from "#/data/transitions";
 import { triggerLiveTransition } from "#/lib/trigger-transition";
 
-export const Route = createFileRoute("/")({ component: App });
+export const Route = createFileRoute("/")({
+	component: App,
+	head: () => ({
+		meta: [
+			{
+				name: "description",
+				content:
+					"Browse 30+ page transition and theme toggle templates. Fade, slide, scale, flip, blur, mask reveals, and 3D transitions for the View Transitions API.",
+			},
+			{
+				property: "og:title",
+				content: "Transition Kit — Browse Templates",
+			},
+			{
+				property: "og:description",
+				content:
+					"Browse 30+ page transition and theme toggle templates for the View Transitions API.",
+			},
+			{
+				name: "twitter:title",
+				content: "Transition Kit — Browse Templates",
+			},
+			{
+				name: "twitter:description",
+				content:
+					"Browse 30+ page transition and theme toggle templates for the View Transitions API.",
+			},
+		],
+	}),
+});
 
 const maskTransitions = transitions.filter((t) => t.category === "mask");
 const featured = transitions.filter((t) => t.featured);
-const newTransitions = transitions.filter((t) => t.isNew);
+const newTransitions = transitions.filter((t) => t.isNew).slice(0, 6);
 
 function App() {
 	const timelineRef = useRef<HTMLDivElement>(null);
@@ -92,67 +121,6 @@ function App() {
 				</TimelineAnimation>
 
 				{/* Transition names marquee */}
-			</div>
-
-			<GapDivider />
-
-			{/* Features Grid */}
-			<div className="px-5 py-16 lg:px-20">
-				<TimelineAnimation
-					animationNum={2}
-					timelineRef={timelineRef}
-					className="mb-10"
-				>
-					<p className="island-kicker mb-2">Features</p>
-					<h2 className="text-2xl font-semibold text-[var(--foreground)] tracking-tight">
-						Everything you need
-					</h2>
-				</TimelineAnimation>
-
-				<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-					{(
-						[
-							{
-								title: "View Transitions API",
-								desc: "Native browser API for smooth page transitions.",
-								Icon: Sparkles,
-							},
-							{
-								title: "Copy & Paste Ready",
-								desc: "Grab the CSS or JS and drop it into your project.",
-								Icon: Code2,
-							},
-							{
-								title: "Framework Agnostic",
-								desc: "React, Next.js, Vue, Svelte, and vanilla JS.",
-								Icon: Blocks,
-							},
-							{
-								title: "Customizable",
-								desc: "Adjust duration, easing, and direction live.",
-								Icon: Layers,
-							},
-						] as const
-					).map(({ title, desc, Icon }, index) => (
-						<TimelineAnimation
-							key={title}
-							animationNum={3 + index}
-							timelineRef={timelineRef}
-							className="group relative overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--card)] p-5 transition-all hover:border-[var(--gray-500)]"
-						>
-							<div className="absolute inset-0 bg-[radial-gradient(var(--gray-alpha-200)_1px,transparent_1px)] bg-size-[12px_12px] opacity-0 group-hover:opacity-100 transition-opacity" />
-							<span className="relative h-9 w-9 bg-[var(--muted)] grid place-items-center rounded-lg mb-3">
-								<Icon className="text-[var(--foreground)] size-4.5" />
-							</span>
-							<h2 className="relative mb-1 text-sm font-semibold text-[var(--foreground)]">
-								{title}
-							</h2>
-							<p className="relative m-0 text-sm text-[var(--muted-foreground)]">
-								{desc}
-							</p>
-						</TimelineAnimation>
-					))}
-				</div>
 			</div>
 
 			<GapDivider />

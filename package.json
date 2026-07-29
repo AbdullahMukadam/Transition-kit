@@ -8,13 +8,14 @@
   "scripts": {
     "dev": "vite dev --port 3000",
     "generate-routes": "tsr generate",
-    "build": "vite build",
+    "build": "tsx scripts/generate-sitemap.ts && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "format": "biome format",
     "lint": "biome lint",
     "check": "biome check",
     "build-registry": "tsx scripts/build-registry.ts",
+    "generate-demos": "tsx scripts/capture-demos.ts",
     "deploy": "pnpm run build && wrangler deploy"
   },
   "dependencies": {
@@ -66,6 +67,7 @@
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^6.0.1",
     "jsdom": "^28.1.0",
+    "puppeteer": "^25.4.0",
     "tsx": "^4.19.0",
     "typescript": "^6.0.2",
     "vite": "^8.0.0",

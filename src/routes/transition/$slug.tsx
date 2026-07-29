@@ -32,6 +32,42 @@ export const Route = createFileRoute("/transition/$slug")({
 		if (!transition) throw notFound();
 		return { transition };
 	},
+	head: ({ loaderData }) => {
+		if (!loaderData) return {};
+		return {
+			meta: [
+				{
+					title: `${loaderData.transition.name} — Transition Kit`,
+				},
+				{
+					name: "description",
+					content: loaderData.transition.description,
+				},
+				{
+					property: "og:title",
+					content: `${loaderData.transition.name} — Transition Kit`,
+				},
+				{
+					property: "og:description",
+					content: loaderData.transition.description,
+				},
+				{
+					name: "twitter:title",
+					content: `${loaderData.transition.name} — Transition Kit`,
+				},
+				{
+					name: "twitter:description",
+					content: loaderData.transition.description,
+				},
+			],
+			links: [
+				{
+					rel: "canonical",
+					href: `https://transition-kit.vercel.app/transition/${loaderData.transition.slug}`,
+				},
+			],
+		};
+	},
 });
 
 function TransitionDetail() {
@@ -166,6 +202,14 @@ function TransitionDetail() {
 						</div>
 					</div>
 
+					<p className="mb-4 text-center text-base text-[var(--muted-foreground)]">
+						Click{" "}
+						<span className="font-medium text-[var(--foreground)]">
+							&quot;Try it live&quot;
+						</span>{" "}
+						to see this transition in action
+					</p>
+
 					{/* Mock site with Try it live */}
 					<div className="mb-4">
 						<MockSite
@@ -176,13 +220,6 @@ function TransitionDetail() {
 							direction={hasDirection ? direction : undefined}
 						/>
 					</div>
-					<p className="mb-12 text-center text-xs text-[var(--muted-foreground)]">
-						Click{" "}
-						<span className="font-medium text-[var(--foreground)]">
-							&quot;Try it live&quot;
-						</span>{" "}
-						above to see this transition in action
-					</p>
 				</div>
 
 				{/* Step-by-step integration guide */}

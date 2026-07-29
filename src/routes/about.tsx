@@ -2,6 +2,29 @@ import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/about")({
 	component: About,
+	head: () => ({
+		meta: [
+			{ title: "About — Transition Kit" },
+			{
+				name: "description",
+				content:
+					"Transition Kit provides pre-built, copy-paste page transition and theme toggle components built on the View Transitions API.",
+			},
+			{ property: "og:title", content: "About — Transition Kit" },
+			{
+				property: "og:description",
+				content:
+					"Transition Kit provides pre-built, copy-paste page transition and theme toggle components built on the View Transitions API.",
+			},
+			{ name: "twitter:title", content: "About — Transition Kit" },
+			{
+				name: "twitter:description",
+				content:
+					"Transition Kit provides pre-built, copy-paste page transition and theme toggle components built on the View Transitions API.",
+			},
+		],
+		links: [{ rel: "canonical", href: "https://transition-kit.vercel.app/about" }],
+	}),
 });
 
 function About() {

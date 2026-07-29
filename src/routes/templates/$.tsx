@@ -13,7 +13,6 @@ import { Suspense } from "react";
 import { useMDXComponents } from "#/components/docs/mdx";
 import { baseOptions } from "#/lib/layout.shared";
 import { templatesSource } from "#/lib/templates-source";
-import Container from "#/components/layout/Container";
 
 export const Route = createFileRoute("/templates/$")({
 	component: Page,
@@ -22,6 +21,20 @@ export const Route = createFileRoute("/templates/$")({
 		const data = await serverLoader({ data: slugs });
 		await clientLoader.preload(data.path);
 		return data;
+	},
+	head: ({ loaderData }) => {
+		if (!loaderData) return {};
+		return {
+			meta: [
+				{ title: `${loaderData.title} — Transition Kit` },
+				{ name: "description", content: loaderData.description },
+				{ property: "og:title", content: `${loaderData.title} — Transition Kit` },
+				{ property: "og:description", content: loaderData.description },
+				{ name: "twitter:title", content: `${loaderData.title} — Transition Kit` },
+				{ name: "twitter:description", content: loaderData.description },
+			],
+			links: [{ rel: "canonical", href: `https://transition-kit.vercel.app${loaderData.url}` }],
+		};
 	},
 });
 
@@ -34,6 +47,9 @@ const serverLoader = createServerFn({
 		if (!page) throw notFound();
 
 		return {
+			title: page.data.title ?? "",
+			description: page.data.description ?? "",
+			url: page.url,
 			path: page.path,
 			pageTree: await templatesSource.serializePageTree(
 				templatesSource.getPageTree(),
@@ -44,15 +60,18 @@ const serverLoader = createServerFn({
 const clientLoader = browserCollections.templates.createClientLoader({
 	component({ frontmatter, default: MDX }, _props: undefined) {
 		return (
-			<Container>
-				<DocsPage toc={undefined} tableOfContent={{ enabled: false }}>
+			<DocsPage
+				className="mx-auto"
+				toc={undefined}
+				tableOfContent={{ enabled: false }}
+				full
+			>
 				<DocsTitle>{frontmatter.title}</DocsTitle>
 				<DocsDescription>{frontmatter.description}</DocsDescription>
 				<DocsBody>
 					<MDX components={useMDXComponents()} />
 				</DocsBody>
 			</DocsPage>
-			</Container>
 		);
 	},
 });
