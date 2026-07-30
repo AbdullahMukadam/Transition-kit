@@ -13,7 +13,6 @@ import { Suspense } from "react";
 import { useMDXComponents } from "#/components/docs/mdx";
 import { baseOptions } from "#/lib/layout.shared";
 import { templatesSource } from "#/lib/templates-source";
-import Container from "#/components/layout/Container";
 
 export const Route = createFileRoute("/templates/")({
   component: Page,
@@ -62,7 +61,6 @@ const serverLoader = createServerFn({
 const clientLoader = browserCollections.templates.createClientLoader({
   component({ frontmatter, default: MDX }, _props: undefined) {
     return (
-      <Container className="h-screen">
         <DocsPage toc={undefined} tableOfContent={{ enabled: false }}>
           <DocsTitle>{frontmatter.title}</DocsTitle>
           <DocsDescription>{frontmatter.description}</DocsDescription>
@@ -70,7 +68,6 @@ const clientLoader = browserCollections.templates.createClientLoader({
             <MDX components={useMDXComponents()} />
           </DocsBody>
         </DocsPage>
-      </Container>
     );
   },
 });

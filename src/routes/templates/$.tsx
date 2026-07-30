@@ -57,11 +57,11 @@ const serverLoader = createServerFn({
 		};
 	});
 
-const clientLoader = browserCollections.templates.createClientLoader({
+	const clientLoader = browserCollections.templates.createClientLoader({
 	component({ frontmatter, default: MDX }, _props: undefined) {
 		return (
 			<DocsPage
-				className="mx-auto"
+				className="mx-auto w-full max-w-full min-w-0"
 				toc={undefined}
 				tableOfContent={{ enabled: false }}
 				full

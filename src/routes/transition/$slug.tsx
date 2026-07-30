@@ -4,7 +4,7 @@ import {
 	notFound,
 	useNavigate,
 } from "@tanstack/react-router";
-import { ArrowLeft, ChevronDown, Zap } from "lucide-react";
+import { ArrowLeft, ChevronDown, Settings2, Zap } from "lucide-react";
 import { useCallback, useState } from "react";
 import {
 	CodeBlock,
@@ -20,6 +20,7 @@ import {
 	CodeBlockSelectValue,
 } from "#/components/kibo-ui/code-block";
 import { MockSite } from "#/components/transitions/MockSite";
+import Playground from "#/components/transitions/Playground";
 import { PlaygroundSidebar } from "#/components/transitions/PlaygroundSidebar";
 import { Badge } from "#/components/ui/badge";
 import { getTransitionBySlug, transitions } from "#/data/transitions";
@@ -171,8 +172,8 @@ function TransitionDetail() {
 			</div>
 
 			{/* Main content */}
-			<main className="pt-16 lg:ml-64 lg:pt-0">
-				<div className="mx-auto max-w-5xl px-5 py-8 lg:px-12">
+			<main className="pt-16 lg:ml-64 lg:pt-0 overflow-x-hidden">
+				<div className="mx-auto w-full max-w-5xl px-5 py-8 lg:px-12 min-w-0">
 					{/* Header */}
 					<div className="mb-6">
 						<div className="flex flex-wrap items-center gap-3 mb-2">
@@ -222,8 +223,22 @@ function TransitionDetail() {
 					</div>
 				</div>
 
+				{/* Mobile playground controls */}
+				<div className="mx-auto max-w-4xl px-5 pb-6 lg:px-12 lg:hidden">
+					<MobileControls
+						duration={duration}
+						setDuration={setDuration}
+						easing={easing}
+						setEasing={setEasing}
+						direction={direction}
+						setDirection={setDirection}
+						hasDirection={hasDirection}
+						directionOptions={transition.config.directionOptions}
+					/>
+				</div>
+
 				{/* Step-by-step integration guide */}
-				<div className="mx-auto max-w-4xl px-5 pb-12 lg:px-12">
+				<div className="mx-auto w-full max-w-4xl px-5 pb-12 lg:px-12 min-w-0">
 					<h2 className="text-xl font-semibold text-[var(--foreground)] tracking-tight mb-8">
 						Get Started
 					</h2>
@@ -245,7 +260,7 @@ function TransitionDetail() {
 									updates live with playground changes.
 								</p>
 							</div>
-							<div>
+							<div className="min-w-0">
 								<CodeBlock
 									defaultValue="css"
 									data={[
@@ -259,7 +274,7 @@ function TransitionDetail() {
 									<CodeBlockHeader>
 										<CodeBlockCopyButton />
 									</CodeBlockHeader>
-									<CodeBlockBody className="max-w-[550px]">
+									<CodeBlockBody>
 										{(item) => (
 											<CodeBlockItem value={item.language}>
 												<CodeBlockContent language="css">
@@ -291,7 +306,7 @@ function TransitionDetail() {
 										: "Use your framework's router to wrap navigation in document.startViewTransition()."}
 								</p>
 							</div>
-							<div>
+							<div className="min-w-0">
 								<CodeBlock
 									defaultValue="js"
 									data={[
@@ -412,6 +427,62 @@ function TransitionDetail() {
 					</div>
 				</div>
 			</main>
+		</div>
+	);
+}
+
+function MobileControls({
+	duration,
+	setDuration,
+	easing,
+	setEasing,
+	direction,
+	setDirection,
+	hasDirection,
+	directionOptions,
+}: {
+	duration: number;
+	setDuration: (v: number) => void;
+	easing: string;
+	setEasing: (v: string) => void;
+	direction: string;
+	setDirection: (v: string) => void;
+	hasDirection: boolean;
+	directionOptions?: { label: string; value: string }[];
+}) {
+	const [open, setOpen] = useState(false);
+
+	return (
+		<div className="rounded-xl border border-[var(--border)] bg-[var(--muted)]/20">
+			<button
+				type="button"
+				onClick={() => setOpen((prev) => !prev)}
+				className="flex w-full cursor-pointer items-center justify-between gap-2 px-4 py-3 text-sm font-medium text-[var(--foreground)]"
+			>
+				<span className="flex items-center gap-2">
+					<Settings2 className="size-4" />
+					Playground Controls
+				</span>
+				<ChevronDown
+					className={`size-4 text-[var(--muted-foreground)] transition-transform duration-200 ${
+						open ? "rotate-180" : ""
+					}`}
+				/>
+			</button>
+			{open && (
+				<div className="border-t border-[var(--border)] px-4 py-4">
+					<Playground
+						duration={duration}
+						setDuration={setDuration}
+						easing={easing}
+						setEasing={setEasing}
+						direction={direction}
+						setDirection={setDirection}
+						hasDirection={hasDirection}
+						directionOptions={directionOptions}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }

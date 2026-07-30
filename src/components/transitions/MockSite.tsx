@@ -143,7 +143,7 @@ function DashboardPage() {
 				</div>
 			</section>
 
-			<section className="grid grid-cols-3 gap-3 border-t border-[var(--border)] px-5 py-4 sm:px-8">
+			<section className="grid grid-cols-2 gap-3 border-t border-[var(--border)] px-5 py-4 sm:grid-cols-3 sm:px-8">
 				{STATS.map((stat) => (
 					<div key={stat.label} className="text-center sm:text-left">
 						<p className="text-lg font-semibold tracking-[-0.02em] text-[var(--foreground)]">
@@ -426,10 +426,10 @@ export function MockSite({
 						<button
 							type="button"
 							onClick={handleTryLive}
-							className="flex items-center gap-1.5 rounded-full border border-[var(--border)] px-3 py-1.5 text-xs font-medium text-[var(--foreground)] transition-colors hover:bg-[var(--muted)]"
+							className="flex items-center gap-1.5 rounded-full border border-[var(--border)] px-1.5 py-1.5 text-xs font-medium text-[var(--foreground)] transition-colors hover:bg-[var(--muted)] sm:px-3"
 						>
 							<Zap className="size-3" />
-							Try it live
+							<span className="hidden sm:inline">Try it live</span>
 						</button>
 					)}
 					{transitionType === "page" && (
@@ -445,7 +445,7 @@ export function MockSite({
 					<MockLink className="hidden px-3 py-1.5 text-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] sm:block">
 						Sign in
 					</MockLink>
-					<MockLink className="rounded-full bg-[var(--foreground)] px-4 py-1.5 text-sm font-medium text-[var(--background)] hover:opacity-85">
+					<MockLink className="rounded-full bg-[var(--foreground)] px-3 py-1.5 text-xs font-medium text-[var(--background)] hover:opacity-85 sm:px-4 sm:text-sm">
 						Start free
 					</MockLink>
 				</div>
@@ -469,7 +469,7 @@ export function MockSite({
 
 			{/* Footer */}
 			<footer className="border-t border-[var(--border)] px-5 py-4 sm:px-8">
-				<div className="flex items-center justify-between">
+				<div className="flex flex-wrap items-center justify-between gap-1">
 					<span className="flex items-center gap-1.5 text-sm font-semibold tracking-tight text-[var(--foreground)]">
 						<Zap className="size-3.5 fill-current" />
 						Acme

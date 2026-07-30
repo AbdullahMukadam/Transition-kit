@@ -17,7 +17,7 @@ export default function Footer() {
 
 			<GapDivider />
 
-			<div className="max-w-7xl mx-auto px-5 py-16 lg:px-20 relative">
+			<div className="max-w-7xl mx-auto px-8 py-16 lg:px-20 relative">
 				{/* GitHub CTA Section */}
 				<div className="flex flex-col items-center text-center mb-16">
 					<h2 className="text-2xl font-semibold text-[var(--foreground)] tracking-tight mb-2">
@@ -35,7 +35,7 @@ export default function Footer() {
 				</div>
 
 				{/* Footer Links */}
-				<div className="flex flex-col items-center justify-center gap-8 md:flex-row md:gap-32 mb-8">
+				<div className="flex flex-col items-center justify-center gap-8 md:flex-row md:gap-32 mb-8 text-center">
 					<div className="flex flex-col gap-3">
 						<h3 className="text-sm font-semibold text-[var(--foreground)] mb-1">
 							Product
