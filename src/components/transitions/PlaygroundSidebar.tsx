@@ -6,6 +6,7 @@ import Playground from "#/components/transitions/Playground";
 import { PlaygroundActions } from "#/components/transitions/PlaygroundActions";
 import type { TransitionTemplate } from "#/data/transitions";
 import { cn } from "#/lib/utils";
+import PreviewVideo from "./PreviewVideo";
 
 const EASE = [0.23, 1, 0.32, 1] as const;
 
@@ -21,21 +22,31 @@ function TransitionPreviewCard({
 	return (
 		<button
 			type="button"
+			data-preview-card
 			aria-current={isActive ? "true" : undefined}
 			onClick={onClick}
 			className={cn(
-				"cursor-pointer rounded-xl border p-2 text-left transition-colors",
+				"group cursor-pointer rounded-xl border p-2 text-left transition-colors",
 				isActive
 					? "border-[var(--foreground)]/40 bg-[var(--muted)]/60"
 					: "border-[var(--border)] bg-[var(--muted)]/20 hover:bg-[var(--muted)]/50",
 			)}
 		>
-			<div
-				className="aspect-video overflow-hidden rounded-lg"
-				style={{
-					background: `linear-gradient(135deg, ${transition.previewColors.from}, ${transition.previewColors.to})`,
-				}}
-			/>
+			<div className="relative aspect-video overflow-hidden rounded-lg">
+				{transition.video ? (
+					<PreviewVideo
+						src={transition.video}
+						className="absolute inset-0 size-full object-cover"
+					/>
+				) : (
+					<div
+						className="size-full"
+						style={{
+							background: `linear-gradient(135deg, ${transition.previewColors.from}, ${transition.previewColors.to})`,
+						}}
+					/>
+				)}
+			</div>
 			<div className="mt-1.5 flex items-center gap-1.5 px-1 pb-0.5">
 				<span className="min-w-0 truncate text-[12px] font-medium text-[var(--foreground)]">
 					{transition.name}
@@ -137,17 +148,27 @@ export function PlaygroundSidebar({
 					</p>
 					<button
 						type="button"
+						data-preview-card
 						aria-expanded={pickerOpen}
 						aria-haspopup="dialog"
 						onClick={() => setPickerOpen((prev) => !prev)}
 						className="group w-full cursor-pointer rounded-xl border border-[var(--border)] bg-[var(--muted)]/30 p-2 text-left transition-colors hover:bg-[var(--muted)]/60"
 					>
-						<span
-							className="block aspect-video overflow-hidden rounded-lg"
-							style={{
-								background: `linear-gradient(135deg, ${activeTransition.previewColors.from}, ${activeTransition.previewColors.to})`,
-							}}
-						/>
+						<span className="relative block aspect-video overflow-hidden rounded-lg">
+							{activeTransition.video ? (
+								<PreviewVideo
+									src={activeTransition.video}
+									className="absolute inset-0 size-full object-cover"
+								/>
+							) : (
+								<span
+									className="block size-full"
+									style={{
+										background: `linear-gradient(135deg, ${activeTransition.previewColors.from}, ${activeTransition.previewColors.to})`,
+									}}
+								/>
+							)}
+						</span>
 						<span className="mt-2 flex items-center justify-between gap-2 px-1 pb-0.5">
 							<span className="min-w-0">
 								<span className="block truncate text-[13px] font-medium text-[var(--foreground)]">

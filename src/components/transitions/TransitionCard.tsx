@@ -3,6 +3,7 @@ import { Zap } from "lucide-react";
 import { useCallback, useState } from "react";
 import type { TransitionTemplate } from "@/data/transitions";
 import { triggerLiveTransition } from "@/lib/trigger-transition";
+import PreviewVideo from "./PreviewVideo";
 
 interface TransitionCardProps {
 	transition: TransitionTemplate;
@@ -39,9 +40,18 @@ export default function TransitionCard({
 			className={`group no-underline flex h-full flex-col rounded-2xl border border-border/60 bg-muted/30 p-2 transition-colors duration-150 hover:bg-muted/50 ${className}`}
 		>
 			<div
-				className={`relative flex aspect-4/3 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-dashed border-border/70 bg-zinc-800 dark:bg-zinc-900`}
+				className={`relative flex aspect-16/9 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-dashed border-border/70 bg-zinc-800 dark:bg-zinc-900`}
 				style={{ animationDelay: `${index * 80 + 60}ms` }}
 			>
+				{transition.video ? (
+					<PreviewVideo
+						src={transition.video}
+						className="absolute inset-0 size-full object-cover"
+					/>
+				) : null}
+				{transition.video ? (
+					<div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/10" />
+				) : null}
 				{flash ? <div className="absolute inset-0 bg-white/10" /> : null}
 				<div className="flex flex-col items-center gap-3 text-center">
 					<div className="flex flex-col items-center gap-1.5">

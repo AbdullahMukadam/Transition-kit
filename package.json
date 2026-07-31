@@ -6,7 +6,7 @@
     "#/*": "./src/*"
   },
   "scripts": {
-    "dev": "vite dev --port 3000",
+    "dev": "vite dev --port 3001",
     "generate-routes": "tsr generate",
     "build": "tsx scripts/generate-sitemap.ts && vite build",
     "preview": "vite preview",

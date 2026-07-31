@@ -23,6 +23,7 @@ export interface TransitionTemplate {
     from: string;
     to: string;
   };
+  video?: string;
   featured?: boolean;
   isNew?: boolean;
 }
@@ -260,6 +261,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#ededed",
       to: "#171717",
     },
+    video: "/demos/theme-toggles/circle-reveal.mp4",
     featured: true,
   },
   {
@@ -336,6 +338,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#ededed",
       to: "#0a0a0a",
     },
+    video: "/demos/theme-toggles/circle-blur.mp4",
     featured: true,
   },
   {
@@ -407,6 +410,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#ededed",
       to: "#171717",
     },
+    video: "/demos/theme-toggles/polygon-reveal.mp4",
     featured: true,
   },
   {
@@ -474,6 +478,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#ededed",
       to: "#171717",
     },
+    video: "/demos/theme-toggles/gif-frog.mp4",
     isNew: true,
   },
   {
@@ -494,7 +499,7 @@ document.startViewTransition(() => switchTheme());`,
 }
 
 ::view-transition-new(root) {
-  mask: url('https://media.tenor.com/1jHNXbaAAkQAAAAM/happy-dance.gif')
+  mask: url('https://media.tenor.com/tGCwmrNRc9wAAAAi/dance-dancer.gif')
     center / 0 no-repeat;
   animation: gif-penguin-reveal 1.5s both;
 }
@@ -540,6 +545,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#ededed",
       to: "#171717",
     },
+    video: "/demos/theme-toggles/gif-penguin.mp4",
     isNew: true,
   },
   {
@@ -560,7 +566,7 @@ document.startViewTransition(() => switchTheme());`,
 }
 
 ::view-transition-new(root) {
-  mask: url('https://media.tenor.com/DJdpKAy1lCAAAAAM/dancing.gif')
+  mask: url('https://media.tenor.com/GQAsycjoZG8AAAAi/scuba-scuba-cat.gif')
     center / 0 no-repeat;
   animation: gif-cat-reveal 1.5s both;
 }
@@ -606,6 +612,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#ededed",
       to: "#171717",
     },
+    video: "/demos/theme-toggles/gif-cat.mp4",
     isNew: true,
   },
   {
@@ -1033,6 +1040,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#ededed",
       to: "#171717",
     },
+    video: "/demos/theme-toggles/star-reveal.mp4",
     isNew: true,
   },
   {
@@ -1087,6 +1095,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#fdf2f8",
       to: "#171717",
     },
+    video: "/demos/theme-toggles/heart-reveal.mp4",
     isNew: true,
   },
   {
@@ -1158,6 +1167,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#ededed",
       to: "#171717",
     },
+    video: "/demos/theme-toggles/diagonal-wipe.mp4",
     isNew: true,
   },
   {
@@ -1212,6 +1222,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#ededed",
       to: "#171717",
     },
+    video: "/demos/theme-toggles/checkerboard-reveal.mp4",
     isNew: true,
   },
   {
@@ -1266,6 +1277,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#ededed",
       to: "#171717",
     },
+    video: "/demos/theme-toggles/ripple-reveal.mp4",
     isNew: true,
   },
   {
@@ -1347,6 +1359,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#ededed",
       to: "#171717",
     },
+    video: "/demos/theme-toggles/venetian-blinds-theme.mp4",
     isNew: true,
   },
   {
@@ -1400,6 +1413,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#ededed",
       to: "#171717",
     },
+    video: "/demos/theme-toggles/spiral-reveal.mp4",
     isNew: true,
   },
   {
@@ -1467,6 +1481,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#ededed",
       to: "#171717",
     },
+    video: "/demos/theme-toggles/wave-reveal-theme.mp4",
     isNew: true,
   },
 
