@@ -4,5 +4,5 @@
   "compatibility_date": "2025-09-02",
   "compatibility_flags": ["nodejs_compat"],
   "main": "@tanstack/react-start/server-entry",
-  "routes": [{ "pattern": "app.transition-kit.space", "custom_domain": true }],
+  "routes": [{ "pattern": "transition-kit.space", "custom_domain": true }],
 }
