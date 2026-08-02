@@ -12,8 +12,10 @@ import {
 } from "fumadocs-ui/layouts/docs/page";
 import type { ReactNode } from "react";
 import { Suspense } from "react";
+import { MarkdownCopyButton, ViewOptionsPopover } from "#/components/ai/page-actions";
 import { useMDXComponents } from "#/components/docs/mdx";
 import { baseOptions } from "#/lib/layout.shared";
+import { encodeMarkdownUrl } from "#/lib/shared";
 import { source } from "#/lib/source";
 
 function extractText(node: ReactNode): string {
@@ -73,16 +75,21 @@ const serverLoader = createServerFn({
 				depth: item.depth,
 			})),
 			path: page.path,
+			slugs: page.slugs,
 			pageTree: await source.serializePageTree(source.getPageTree()),
 		};
 	});
 
 const clientLoader = browserCollections.docs.createClientLoader({
-	component({ frontmatter, default: MDX }, props: { toc: TOCItemType[] }) {
+	component({ frontmatter, default: MDX }, props: { toc: TOCItemType[]; slugs: string[] }) {
 		return (
 			<DocsPage toc={props.toc}>
 				<DocsTitle>{frontmatter.title}</DocsTitle>
 				<DocsDescription>{frontmatter.description}</DocsDescription>
+				<div className="flex flex-row gap-2 items-center border-b pb-6">
+					<MarkdownCopyButton markdownUrl={encodeMarkdownUrl(props.slugs)} />
+					<ViewOptionsPopover markdownUrl={encodeMarkdownUrl(props.slugs)} />
+				</div>
 				<DocsBody>
 					<MDX components={useMDXComponents()} />
 				</DocsBody>
@@ -97,7 +104,7 @@ function Page() {
 	return (
 		<DocsLayout {...baseOptions()} tree={data.pageTree}>
 			<Suspense>
-				{clientLoader.useContent(data.path, { toc: data.toc })}
+				{clientLoader.useContent(data.path, { toc: data.toc, slugs: data.slugs })}
 			</Suspense>
 		</DocsLayout>
 	);

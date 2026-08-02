@@ -170,7 +170,7 @@ const TRANSITION_CSS: Record<string, string> = {
 }
 
 ::view-transition-new(root) {
-  mask: url('https://media.tenor.com/1jHNXbaAAkQAAAAM/happy-dance.gif')
+  mask: url('https://media.tenor.com/tGCwmrNRc9wAAAAi/dance-dancer.gif')
     center / 0 no-repeat;
   animation: gif-penguin-reveal 1.5s both;
 }
@@ -207,7 +207,7 @@ const TRANSITION_CSS: Record<string, string> = {
 }
 
 ::view-transition-new(root) {
-  mask: url('https://media.tenor.com/DJdpKAy1lCAAAAAM/dancing.gif')
+  mask: url('https://media.tenor.com/GQAsycjoZG8AAAAi/scuba-scuba-cat.gif')
     center / 0 no-repeat;
   animation: gif-cat-reveal 1.5s both;
 }
@@ -775,37 +775,6 @@ const TRANSITION_CSS: Record<string, string> = {
   to { transform: scale(1); opacity: 1; }
 }
 	`,
-	"staircase": `
-::view-transition-old(root) {
-  animation: staircase-out 600ms ease-in-out both;
-}
-
-::view-transition-new(root) {
-  animation: staircase-in 600ms ease-in-out both;
-}
-
-@keyframes staircase-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
-}
-
-@keyframes staircase-in {
-  from {
-    clip-path: polygon(
-      0 0%, 20% 0%, 20% 0%, 0 0%,
-      20% 20%, 40% 20%, 40% 20%, 20% 20%,
-      40% 40%, 60% 40%, 60% 40%, 40% 40%,
-      60% 60%, 80% 60%, 80% 60%, 60% 60%,
-      80% 80%, 100% 80%, 100% 80%, 80% 80%
-    );
-  }
-  to {
-    clip-path: polygon(
-      0 0%, 100% 0%, 100% 100%, 0 100%
-    );
-  }
-}
-	`,
 	"book-flip": `
 ::view-transition-old(root) {
   animation: book-flip-out 700ms ease-in-out both;
@@ -917,7 +886,13 @@ const TRANSITION_CSS: Record<string, string> = {
 
 let activeStyle: HTMLStyleElement | null = null;
 
-function triggerLiveTransition(css: string, duration: number, easing: string) {
+function applyThemeTransition(
+	target: "light" | "dark",
+	css: string,
+	duration: number,
+	easing: string,
+	onApplied?: () => void,
+) {
 	if (activeStyle) {
 		activeStyle.remove();
 		activeStyle = null;
@@ -931,26 +906,41 @@ function triggerLiveTransition(css: string, duration: number, easing: string) {
 	document.head.appendChild(style);
 	activeStyle = style;
 
+	const apply = () => {
+		setTheme(target);
+		onApplied?.();
+	};
+
 	if (typeof document.startViewTransition !== "function") {
-		const next = getCurrentTheme() === "light" ? "dark" : "light";
-		setTheme(next);
+		apply();
 		style.remove();
 		activeStyle = null;
 		return;
 	}
 
-	const next = getCurrentTheme() === "light" ? "dark" : "light";
-
 	document
-		.startViewTransition(() => {
-			setTheme(next);
-		})
+		.startViewTransition(apply)
 		.finished.finally(() => {
 			setTimeout(() => {
 				style.remove();
 				activeStyle = null;
 			}, 50);
 		});
+}
+
+function triggerLiveTransition(css: string, duration: number, easing: string) {
+	const next = getCurrentTheme() === "light" ? "dark" : "light";
+	triggerThemeTransition(next, css, duration, easing);
+}
+
+function triggerThemeTransition(
+	target: "light" | "dark",
+	css: string,
+	duration: number,
+	easing: string,
+	onApplied?: () => void,
+) {
+	applyThemeTransition(target, css, duration, easing, onApplied);
 }
 
 export interface AnimatedThemeTogglerOptions {

@@ -18,6 +18,7 @@ const staticPages = [
   { path: "components/theme/animated-theme-toggler", priority: "0.8", changefreq: "monthly" },
   { path: "components/theme/theme-toggle-button", priority: "0.8", changefreq: "monthly" },
   { path: "components/theme/theme-toggle-switch", priority: "0.8", changefreq: "monthly" },
+  { path: "components/theme/theme-switcher", priority: "0.8", changefreq: "monthly" },
   { path: "templates", priority: "0.9", changefreq: "weekly" },
   { path: "templates/theme-toggles", priority: "0.7", changefreq: "weekly" },
   { path: "templates/page-transitions", priority: "0.7", changefreq: "weekly" },

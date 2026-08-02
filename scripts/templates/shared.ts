@@ -22,7 +22,13 @@ export const TRANSITION_CSS: Record<string, string> = {
 
 let activeStyle: HTMLStyleElement | null = null;
 
-export function triggerLiveTransition(css: string, duration: number, easing: string) {
+function applyThemeTransition(
+	target: "light" | "dark",
+	css: string,
+	duration: number,
+	easing: string,
+	onApplied?: () => void,
+) {
 	if (activeStyle) {
 		activeStyle.remove();
 		activeStyle = null;
@@ -36,24 +42,39 @@ export function triggerLiveTransition(css: string, duration: number, easing: str
 	document.head.appendChild(style);
 	activeStyle = style;
 
+	const apply = () => {
+		setTheme(target);
+		onApplied?.();
+	};
+
 	if (typeof document.startViewTransition !== "function") {
-		const next = getCurrentTheme() === "light" ? "dark" : "light";
-		setTheme(next);
+		apply();
 		style.remove();
 		activeStyle = null;
 		return;
 	}
 
-	const next = getCurrentTheme() === "light" ? "dark" : "light";
-
 	document
-		.startViewTransition(() => {
-			setTheme(next);
-		})
+		.startViewTransition(apply)
 		.finished.finally(() => {
 			setTimeout(() => {
 				style.remove();
 				activeStyle = null;
 			}, 50);
 		});
+}
+
+export function triggerLiveTransition(css: string, duration: number, easing: string) {
+	const next = getCurrentTheme() === "light" ? "dark" : "light";
+	triggerThemeTransition(next, css, duration, easing);
+}
+
+export function triggerThemeTransition(
+	target: "light" | "dark",
+	css: string,
+	duration: number,
+	easing: string,
+	onApplied?: () => void,
+) {
+	applyThemeTransition(target, css, duration, easing, onApplied);
 }

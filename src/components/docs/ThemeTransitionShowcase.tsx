@@ -4,6 +4,7 @@ import { transitions } from "#/data/transitions";
 import { AnimatedThemeToggler } from "#/registry/animated-theme-toggler";
 import { ThemeToggleButton } from "#/registry/theme-toggle-button";
 import { ThemeToggleSwitch } from "#/registry/theme-toggle-switch";
+import { ThemeSwitcher } from "#/registry/theme-switcher";
 import ComponentShowcase from "./ComponentShowcase";
 
 const themeTransitions = transitions.filter((t) => t.type === "theme");
@@ -53,6 +54,21 @@ export function ThemeToggleSwitchShowcase() {
 			usageCode={(v) => `import { ThemeToggleSwitch } from "@/registry/theme-toggle-switch";
 
 <ThemeToggleSwitch transition="${v}" />`}
+		/>
+	);
+}
+
+export function ThemeSwitcherShowcase() {
+	return (
+		<ComponentShowcase
+			name="ThemeSwitcher"
+			description="System/Light/Dark segmented switcher with transition animations"
+			variants={variants}
+			renderVariant={(v) => <ThemeSwitcher transition={v} />}
+			installCode="npx shadcn@latest add @transitions/theme-switcher"
+			usageCode={(v) => `import { ThemeSwitcher } from "@/registry/theme-switcher";
+
+<ThemeSwitcher transition="${v}" />`}
 		/>
 	);
 }

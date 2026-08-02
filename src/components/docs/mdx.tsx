@@ -9,6 +9,7 @@ import type { MDXComponents } from "mdx/types";
 import { AnimatedThemeToggler } from "#/registry/animated-theme-toggler";
 import { ThemeToggleButton } from "#/registry/theme-toggle-button";
 import { ThemeToggleSwitch } from "#/registry/theme-toggle-switch";
+import { ThemeSwitcher } from "#/registry/theme-switcher";
 import {
 	TabsContent as ShadcnContent,
 	TabsList as ShadcnTabList,
@@ -23,6 +24,7 @@ import {
 	AnimatedThemeTogglerShowcase,
 	ThemeToggleButtonShowcase,
 	ThemeToggleSwitchShowcase,
+	ThemeSwitcherShowcase,
 } from "./ThemeTransitionShowcase";
 import TransitionGridMDX from "./TransitionGridMDX";
 import { TransitionsTable } from "./TransitionsTable";
@@ -44,11 +46,13 @@ export function getMDXComponents(components?: MDXComponents) {
 		AnimatedThemeTogglerShowcase,
 		ThemeToggleButtonShowcase,
 		ThemeToggleSwitchShowcase,
+		ThemeSwitcherShowcase,
 		TransitionDemo,
 		CopyBlock,
 		AnimatedThemeToggler,
 		ThemeToggleButton,
 		ThemeToggleSwitch,
+		ThemeSwitcher,
 		ShadcnTabs,
 		ShadcnContent,
 		ShadcnTabList,

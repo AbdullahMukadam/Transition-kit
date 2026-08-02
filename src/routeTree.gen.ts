@@ -11,8 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as LlmsFullDottxtRouteImport } from './routes/llms-full[.]txt'
+import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as ApiSearchRouteImport } from './routes/api/search'
 import { Route as ComponentsSplatRouteImport } from './routes/components/$'
+import { Route as ComponentsChar123Char125DotmdRouteImport } from './routes/components/{$}[.]md'
 import { Route as TemplatesIndexRouteImport } from './routes/templates/index'
 import { Route as TemplatesSplatRouteImport } from './routes/templates/$'
 import { Route as TransitionSlugRouteImport } from './routes/transition/$slug'
@@ -27,6 +30,16 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LlmsFullDottxtRoute = LlmsFullDottxtRouteImport.update({
+  id: '/llms-full.txt',
+  path: '/llms-full.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
+  id: '/llms.txt',
+  path: '/llms.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiSearchRoute = ApiSearchRouteImport.update({
   id: '/api/search',
   path: '/api/search',
@@ -37,6 +50,12 @@ const ComponentsSplatRoute = ComponentsSplatRouteImport.update({
   path: '/components/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComponentsChar123Char125DotmdRoute =
+  ComponentsChar123Char125DotmdRouteImport.update({
+    id: '/components/{$}.md',
+    path: '/components/{$}.md',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const TemplatesIndexRoute = TemplatesIndexRouteImport.update({
   id: '/templates/',
   path: '/templates/',
@@ -56,8 +75,11 @@ const TransitionSlugRoute = TransitionSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/llms-full.txt': typeof LlmsFullDottxtRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/api/search': typeof ApiSearchRoute
   '/components/$': typeof ComponentsSplatRoute
+  '/components/{$}.md': typeof ComponentsChar123Char125DotmdRoute
   '/templates/$': typeof TemplatesSplatRoute
   '/transition/$slug': typeof TransitionSlugRoute
   '/templates/': typeof TemplatesIndexRoute
@@ -65,8 +87,11 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/llms-full.txt': typeof LlmsFullDottxtRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/api/search': typeof ApiSearchRoute
   '/components/$': typeof ComponentsSplatRoute
+  '/components/{$}.md': typeof ComponentsChar123Char125DotmdRoute
   '/templates/$': typeof TemplatesSplatRoute
   '/transition/$slug': typeof TransitionSlugRoute
   '/templates': typeof TemplatesIndexRoute
@@ -75,8 +100,11 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/llms-full.txt': typeof LlmsFullDottxtRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/api/search': typeof ApiSearchRoute
   '/components/$': typeof ComponentsSplatRoute
+  '/components/{$}.md': typeof ComponentsChar123Char125DotmdRoute
   '/templates/$': typeof TemplatesSplatRoute
   '/transition/$slug': typeof TransitionSlugRoute
   '/templates/': typeof TemplatesIndexRoute
@@ -86,8 +114,11 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/llms-full.txt'
+    | '/llms.txt'
     | '/api/search'
     | '/components/$'
+    | '/components/{$}.md'
     | '/templates/$'
     | '/transition/$slug'
     | '/templates/'
@@ -95,8 +126,11 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/llms-full.txt'
+    | '/llms.txt'
     | '/api/search'
     | '/components/$'
+    | '/components/{$}.md'
     | '/templates/$'
     | '/transition/$slug'
     | '/templates'
@@ -104,8 +138,11 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/llms-full.txt'
+    | '/llms.txt'
     | '/api/search'
     | '/components/$'
+    | '/components/{$}.md'
     | '/templates/$'
     | '/transition/$slug'
     | '/templates/'
@@ -114,8 +151,11 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  LlmsFullDottxtRoute: typeof LlmsFullDottxtRoute
+  LlmsDottxtRoute: typeof LlmsDottxtRoute
   ApiSearchRoute: typeof ApiSearchRoute
   ComponentsSplatRoute: typeof ComponentsSplatRoute
+  ComponentsChar123Char125DotmdRoute: typeof ComponentsChar123Char125DotmdRoute
   TemplatesSplatRoute: typeof TemplatesSplatRoute
   TransitionSlugRoute: typeof TransitionSlugRoute
   TemplatesIndexRoute: typeof TemplatesIndexRoute
@@ -137,6 +177,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/llms-full.txt': {
+      id: '/llms-full.txt'
+      path: '/llms-full.txt'
+      fullPath: '/llms-full.txt'
+      preLoaderRoute: typeof LlmsFullDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/llms.txt': {
+      id: '/llms.txt'
+      path: '/llms.txt'
+      fullPath: '/llms.txt'
+      preLoaderRoute: typeof LlmsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/search': {
       id: '/api/search'
       path: '/api/search'
@@ -149,6 +203,13 @@ declare module '@tanstack/react-router' {
       path: '/components/$'
       fullPath: '/components/$'
       preLoaderRoute: typeof ComponentsSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/{$}.md': {
+      id: '/components/{$}.md'
+      path: '/components/{$}.md'
+      fullPath: '/components/{$}.md'
+      preLoaderRoute: typeof ComponentsChar123Char125DotmdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/templates/': {
@@ -178,8 +239,11 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  LlmsFullDottxtRoute: LlmsFullDottxtRoute,
+  LlmsDottxtRoute: LlmsDottxtRoute,
   ApiSearchRoute: ApiSearchRoute,
   ComponentsSplatRoute: ComponentsSplatRoute,
+  ComponentsChar123Char125DotmdRoute: ComponentsChar123Char125DotmdRoute,
   TemplatesSplatRoute: TemplatesSplatRoute,
   TransitionSlugRoute: TransitionSlugRoute,
   TemplatesIndexRoute: TemplatesIndexRoute,

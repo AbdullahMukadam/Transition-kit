@@ -36,6 +36,7 @@ const COMPONENTS: ComponentConfig[] = [
 	{ name: "animated-theme-toggler", pascalName: "AnimatedThemeToggler", frameworks: ["react", "vue", "svelte", "vanilla"] },
 	{ name: "theme-toggle-button", pascalName: "ThemeToggleButton", frameworks: ["react", "vue", "svelte", "vanilla"] },
 	{ name: "theme-toggle-switch", pascalName: "ThemeToggleSwitch", frameworks: ["react", "vue", "svelte", "vanilla"] },
+	{ name: "theme-switcher", pascalName: "ThemeSwitcher", frameworks: ["react", "vue", "svelte", "vanilla"] },
 ];
 
 function getTemplateExtension(f: Framework): string {
@@ -270,6 +271,17 @@ updateMDXManualCode(transitionCSSEntries, [
 			{ framework: "vue", codeBlockTitle: "src/components/ThemeToggleSwitch.vue" },
 			{ framework: "svelte", codeBlockTitle: "src/components/ThemeToggleSwitch.svelte" },
 			{ framework: "vanilla", codeBlockTitle: "src/components/ThemeToggleSwitch.ts" },
+		],
+	},
+	{
+		mdxPath: "content/docs/theme/theme-switcher.mdx",
+		componentName: "theme-switcher",
+		pascalName: "ThemeSwitcher",
+		frameworks: [
+			{ framework: "react", codeBlockTitle: "src/components/ThemeSwitcher.tsx" },
+			{ framework: "vue", codeBlockTitle: "src/components/ThemeSwitcher.vue" },
+			{ framework: "svelte", codeBlockTitle: "src/components/ThemeSwitcher.svelte" },
+			{ framework: "vanilla", codeBlockTitle: "src/components/ThemeSwitcher.ts" },
 		],
 	},
 ]);

@@ -662,6 +662,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#f2f2f2",
       to: "#171717",
     },
+    video: "/demos/page-transitions/fade.mp4",
     featured: true,
   },
   {
@@ -719,6 +720,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#f2f2f2",
       to: "#171717",
     },
+    video: "/demos/page-transitions/slide.mp4",
   },
   {
     slug: "scale",
@@ -767,6 +769,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#f2f2f2",
       to: "#171717",
     },
+    video: "/demos/page-transitions/scale.mp4",
     featured: true,
   },
   {
@@ -820,6 +823,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#f2f2f2",
       to: "#171717",
     },
+    video: "/demos/page-transitions/flip.mp4",
   },
   {
     slug: "blur",
@@ -884,6 +888,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#f2f2f2",
       to: "#171717",
     },
+    video: "/demos/page-transitions/blur.mp4",
   },
   {
     slug: "rotate",
@@ -933,6 +938,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#f2f2f2",
       to: "#171717",
     },
+    video: "/demos/page-transitions/rotate.mp4",
     isNew: true,
   },
   {
@@ -982,6 +988,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#f2f2f2",
       to: "#171717",
     },
+    video: "/demos/page-transitions/zoom.mp4",
     isNew: true,
   },
 
@@ -1546,6 +1553,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#f2f2f2",
       to: "#171717",
     },
+    video: "/demos/page-transitions/curtain.mp4",
     isNew: true,
   },
   {
@@ -1598,6 +1606,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#f2f2f2",
       to: "#171717",
     },
+    video: "/demos/page-transitions/cube.mp4",
     isNew: true,
   },
   {
@@ -1648,6 +1657,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#f2f2f2",
       to: "#171717",
     },
+    video: "/demos/page-transitions/skew-slide.mp4",
     isNew: true,
   },
   {
@@ -1711,6 +1721,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#f2f2f2",
       to: "#171717",
     },
+    video: "/demos/page-transitions/page-curl.mp4",
     isNew: true,
   },
   {
@@ -1763,6 +1774,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#f2f2f2",
       to: "#171717",
     },
+    video: "/demos/page-transitions/accordian.mp4",
     isNew: true,
   },
   {
@@ -1814,68 +1826,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#f2f2f2",
       to: "#171717",
     },
-    isNew: true,
-  },
-  {
-    slug: "staircase",
-    name: "Staircase",
-    description:
-      "New page reveals in stepped horizontal bands, like a staircase unfolding.",
-    category: "composite",
-    type: "page",
-    css: `::view-transition-old(root) {
-  animation: staircase-out 600ms ease-in-out both;
-}
-
-::view-transition-new(root) {
-  animation: staircase-in 600ms ease-in-out both;
-}
-
-@keyframes staircase-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
-}
-
-@keyframes staircase-in {
-  from {
-    clip-path: polygon(
-      0 0%, 20% 0%, 20% 0%, 0 0%,
-      20% 20%, 40% 20%, 40% 20%, 20% 20%,
-      40% 40%, 60% 40%, 60% 40%, 40% 40%,
-      60% 60%, 80% 60%, 80% 60%, 60% 60%,
-      80% 80%, 100% 80%, 100% 80%, 80% 80%
-    );
-  }
-  to {
-    clip-path: polygon(
-      0 0%, 100% 0%, 100% 100%, 0 100%
-    );
-  }
-}`,
-    js: `function navigateTo(url) {
-  if (!document.startViewTransition) {
-    window.location.href = url;
-    return;
-  }
-  document.startViewTransition(() => {
-    window.location.href = url;
-  });
-}`,
-    frameworks: {
-      vanilla: PAGE_VANILLA_SNIPPET,
-      react: PAGE_REACT_SNIPPET,
-      nextjs: PAGE_NEXTJS_SNIPPET,
-      vue: PAGE_VUE_SNIPPET,
-      svelte: PAGE_SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 600,
-      easing: "ease-in-out",
-    },
-    previewColors: {
-      from: "#f2f2f2",
-      to: "#171717",
-    },
+    video: "/demos/page-transitions/doorway.mp4",
     isNew: true,
   },
   {
@@ -1928,6 +1879,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#f2f2f2",
       to: "#171717",
     },
+    video: "/demos/page-transitions/book-flip.mp4",
     isNew: true,
   },
   {
@@ -1980,6 +1932,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#f2f2f2",
       to: "#171717",
     },
+    video: "/demos/page-transitions/roll.mp4",
     isNew: true,
   },
   {
@@ -2031,6 +1984,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#f2f2f2",
       to: "#171717",
     },
+    video: "/demos/page-transitions/fold.mp4",
     isNew: true,
   },
   {
@@ -2087,6 +2041,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#f2f2f2",
       to: "#171717",
     },
+    video: "/demos/page-transitions/glitch.mp4",
     isNew: true,
   },
   {
@@ -2138,6 +2093,7 @@ document.startViewTransition(() => switchTheme());`,
       from: "#f2f2f2",
       to: "#171717",
     },
+    video: "/demos/page-transitions/iris-wipe.mp4",
     isNew: true,
   },
 ];
