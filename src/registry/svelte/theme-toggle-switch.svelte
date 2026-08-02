@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { onMount, onDestroy } from "svelte";
-	// --- inlined shared + vanilla engine ---
+import { onDestroy, onMount } from "svelte";
+
+// --- inlined shared + vanilla engine ---
 function getCurrentTheme(): "light" | "dark" {
 	const el = document.documentElement;
 	if (el.classList.contains("dark")) return "dark";
@@ -20,7 +21,7 @@ function setTheme(theme: "light" | "dark") {
 }
 
 const TRANSITION_CSS: Record<string, string> = {
-		"circle-reveal": `
+	"circle-reveal": `
 ::view-transition-old(root),
 .dark::view-transition-old(root) {
   animation: none;
@@ -234,7 +235,7 @@ const TRANSITION_CSS: Record<string, string> = {
   }
 }
 	`,
-	"fade": `
+	fade: `
 ::view-transition-old(root) {
   animation: fade-out 300ms ease-in-out both;
 }
@@ -253,7 +254,7 @@ const TRANSITION_CSS: Record<string, string> = {
   to { opacity: 1; }
 }
 	`,
-	"slide": `
+	slide: `
 ::view-transition-old(root) {
   animation: slide-out 400ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
@@ -272,7 +273,7 @@ const TRANSITION_CSS: Record<string, string> = {
   to { transform: translateX(0); }
 }
 	`,
-	"scale": `
+	scale: `
 ::view-transition-old(root) {
   animation: scale-out 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -291,7 +292,7 @@ const TRANSITION_CSS: Record<string, string> = {
   to { transform: scale(1); opacity: 1; }
 }
 	`,
-	"flip": `
+	flip: `
 ::view-transition-old(root) {
   animation: flip-out 600ms ease-in-out both;
   transform-origin: left center;
@@ -314,7 +315,7 @@ const TRANSITION_CSS: Record<string, string> = {
   to { transform: perspective(1200px) rotateY(0deg); }
 }
 	`,
-	"blur": `
+	blur: `
 ::view-transition-old(root) {
   animation: blur-out 500ms ease-in-out both;
 }
@@ -349,7 +350,7 @@ const TRANSITION_CSS: Record<string, string> = {
   }
 }
 	`,
-	"rotate": `
+	rotate: `
 ::view-transition-old(root) {
   animation: rotate-out 500ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
@@ -368,7 +369,7 @@ const TRANSITION_CSS: Record<string, string> = {
   to { transform: rotate(0deg) scale(1); opacity: 1; }
 }
 	`,
-	"zoom": `
+	zoom: `
 ::view-transition-old(root) {
   animation: zoom-out 400ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
@@ -636,7 +637,7 @@ const TRANSITION_CSS: Record<string, string> = {
   }
 }
 	`,
-	"curtain": `
+	curtain: `
 ::view-transition-old(root) {
   animation: curtain-out 600ms cubic-bezier(0.65, 0, 0.35, 1) both;
 }
@@ -665,7 +666,7 @@ const TRANSITION_CSS: Record<string, string> = {
   }
 }
 	`,
-	"cube": `
+	cube: `
 ::view-transition-old(root) {
   animation: cube-out 700ms ease-in-out both;
   transform-origin: right center;
@@ -737,7 +738,7 @@ const TRANSITION_CSS: Record<string, string> = {
   }
 }
 	`,
-	"accordion": `
+	accordion: `
 ::view-transition-old(root) {
   animation: accordion-out 550ms ease-in-out both;
   transform-origin: left center;
@@ -758,7 +759,7 @@ const TRANSITION_CSS: Record<string, string> = {
   to { transform: scaleX(1); opacity: 1; }
 }
 	`,
-	"doorway": `
+	doorway: `
 ::view-transition-old(root) {
   animation: doorway-out 600ms ease-in both;
   transform-origin: left center;
@@ -799,7 +800,7 @@ const TRANSITION_CSS: Record<string, string> = {
   to { transform: perspective(1600px) rotateX(0deg); opacity: 1; }
 }
 	`,
-	"roll": `
+	roll: `
 ::view-transition-old(root) {
   animation: roll-out 550ms cubic-bezier(0.4, 0, 0.2, 1) both;
   transform-origin: top center;
@@ -820,7 +821,7 @@ const TRANSITION_CSS: Record<string, string> = {
   to { transform: scaleY(1) translateY(0); opacity: 1; }
 }
 	`,
-	"fold": `
+	fold: `
 ::view-transition-old(root) {
   animation: fold-out 600ms ease-in-out both;
   transform-origin: center center;
@@ -840,7 +841,7 @@ const TRANSITION_CSS: Record<string, string> = {
   to { transform: scale(1); opacity: 1; }
 }
 	`,
-	"glitch": `
+	glitch: `
 ::view-transition-old(root) {
   animation: glitch-out 400ms steps(6, end) both;
 }
@@ -884,7 +885,7 @@ const TRANSITION_CSS: Record<string, string> = {
   from { mask: radial-gradient(circle at center, white 0%, white 0%, transparent 0%); }
   to { mask: radial-gradient(circle at center, white 100%, white 100%, transparent 100%); }
 }
-	`
+	`,
 };
 
 let activeStyle: HTMLStyleElement | null = null;
@@ -921,14 +922,12 @@ function applyThemeTransition(
 		return;
 	}
 
-	document
-		.startViewTransition(apply)
-		.finished.finally(() => {
-			setTimeout(() => {
-				style.remove();
-				activeStyle = null;
-			}, 50);
-		});
+	document.startViewTransition(apply).finished.finally(() => {
+		setTimeout(() => {
+			style.remove();
+			activeStyle = null;
+		}, 50);
+	});
 }
 
 function triggerLiveTransition(css: string, duration: number, easing: string) {
@@ -999,9 +998,7 @@ export function createThemeToggleSwitch(
 		button.style.backgroundColor = isDark
 			? "var(--foreground)"
 			: "var(--muted)";
-		thumb.style.transform = isDark
-			? "translateX(1.25rem)"
-			: "translateX(0)";
+		thumb.style.transform = isDark ? "translateX(1.25rem)" : "translateX(0)";
 	}
 
 	function toggleTheme() {
@@ -1035,47 +1032,47 @@ export function createThemeToggleSwitch(
 export { getCurrentTheme, setTheme, triggerLiveTransition, TRANSITION_CSS };
 // --- end inlined ---
 
-	interface Props {
-		transition?: string;
-		css?: string;
-		duration?: number;
-		easing?: string;
+interface Props {
+	transition?: string;
+	css?: string;
+	duration?: number;
+	easing?: string;
+}
+
+let { transition = "fade", css, duration, easing }: Props = $props();
+
+let isDark = $state(false);
+let observer: MutationObserver | null = null;
+
+function toggleTheme() {
+	const t = TRANSITION_CSS[transition];
+	const resolvedCSS = css ?? t;
+	if (resolvedCSS) {
+		const resolvedDuration = duration ?? (t ? undefined : 300);
+		const resolvedEasing = easing ?? (t ? undefined : "ease-in-out");
+		triggerLiveTransition(
+			resolvedCSS,
+			resolvedDuration ?? 300,
+			resolvedEasing ?? "ease-in-out",
+		);
 	}
+	isDark = getCurrentTheme() === "dark";
+}
 
-	let { transition = "fade", css, duration, easing }: Props = $props();
-
-	let isDark = $state(false);
-	let observer: MutationObserver | null = null;
-
-	function toggleTheme() {
-		const t = TRANSITION_CSS[transition];
-		const resolvedCSS = css ?? t;
-		if (resolvedCSS) {
-			const resolvedDuration = duration ?? (t ? undefined : 300);
-			const resolvedEasing = easing ?? (t ? undefined : "ease-in-out");
-			triggerLiveTransition(
-				resolvedCSS,
-				resolvedDuration ?? 300,
-				resolvedEasing ?? "ease-in-out",
-			);
-		}
+onMount(() => {
+	isDark = getCurrentTheme() === "dark";
+	observer = new MutationObserver(() => {
 		isDark = getCurrentTheme() === "dark";
-	}
-
-	onMount(() => {
-		isDark = getCurrentTheme() === "dark";
-		observer = new MutationObserver(() => {
-			isDark = getCurrentTheme() === "dark";
-		});
-		observer.observe(document.documentElement, {
-			attributes: true,
-			attributeFilter: ["class"],
-		});
 	});
-
-	onDestroy(() => {
-		observer?.disconnect();
+	observer.observe(document.documentElement, {
+		attributes: true,
+		attributeFilter: ["class"],
 	});
+});
+
+onDestroy(() => {
+	observer?.disconnect();
+});
 </script>
 
 <button

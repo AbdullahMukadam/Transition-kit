@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
 			},
 			{
 				property: "og:title",
-				content: "Transition Kit — Browse Templates",
+				content: "Transition Kit | Browse Templates",
 			},
 			{
 				property: "og:description",
@@ -30,7 +30,7 @@ export const Route = createFileRoute("/")({
 			},
 			{
 				name: "twitter:title",
-				content: "Transition Kit — Browse Templates",
+				content: "Transition Kit | Browse Templates",
 			},
 			{
 				name: "twitter:description",
@@ -77,7 +77,7 @@ function App() {
 					timelineRef={timelineRef}
 					className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.1] tracking-tight text-[var(--foreground)] mb-6 max-w-3xl mx-auto relative"
 				>
-					Beautiful page transitions for the{" "}
+					Beautiful transitions for the{" "}
 					<span className="font-semibold text-[var(--foreground)]">
 						modern web
 					</span>
@@ -90,9 +90,9 @@ function App() {
 					timelineRef={timelineRef}
 					className="text-base text-[var(--muted-foreground)] leading-relaxed mb-10 max-w-xl mx-auto relative"
 				>
-					Premade page transition templates using the View Transitions API.
-					Preview them live, customize parameters, and copy the code directly
-					into your project.
+					Premade page and theme transition templates using the View
+					Transitions API. Preview them live, customize parameters, and copy
+					the code directly into your project.
 				</TimelineAnimation>
 
 				<TimelineAnimation

@@ -5,7 +5,7 @@ import GapDivider from "./GapDivider";
 export default function Footer() {
 	const handleRedirect = () => {
 		window.open(
-			"https://github.com/nicholasgriffintn/page-transitions",
+			"https://github.com/AbdullahMukadam/Transition-kit",
 			"_blank",
 			"noreferrer",
 		);
@@ -81,7 +81,7 @@ export default function Footer() {
 							Community
 						</h3>
 						<a
-							href="https://github.com/nicholasgriffintn/page-transitions"
+							href="https://github.com/AbdullahMukadam/Transition-kit"
 							className="inline-flex items-center gap-1 text-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors no-underline"
 							target="_blank"
 							rel="noreferrer"
@@ -90,7 +90,7 @@ export default function Footer() {
 							<ArrowUpRight className="size-3" />
 						</a>
 						<a
-							href="https://github.com/nicholasgriffintn/page-transitions/issues"
+							href="https://github.com/AbdullahMukadam/Transition-kit"
 							className="inline-flex items-center gap-1 text-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors no-underline"
 							target="_blank"
 							rel="noreferrer"

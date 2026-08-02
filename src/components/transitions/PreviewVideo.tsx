@@ -16,7 +16,17 @@ export default function PreviewVideo({ src, className }: PreviewVideoProps) {
 
 		const card =
 			video.closest("a, [data-preview-card]") ?? video.parentElement ?? video;
+
+		let loaded = false;
+		const load = () => {
+			if (loaded || !src) return;
+			loaded = true;
+			video.src = src;
+			video.load();
+		};
+
 		const play = () => {
+			load();
 			void video.play().catch(() => {});
 		};
 		const pause = () => {
@@ -27,18 +37,29 @@ export default function PreviewVideo({ src, className }: PreviewVideoProps) {
 		card.addEventListener("pointerleave", pause);
 		card.addEventListener("focusin", play);
 		card.addEventListener("focusout", pause);
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (entry.isIntersecting) load();
+				}
+			},
+			{ rootMargin: "300px" },
+		);
+		observer.observe(video);
+
 		return () => {
+			observer.disconnect();
 			card.removeEventListener("pointerenter", play);
 			card.removeEventListener("pointerleave", pause);
 			card.removeEventListener("focusin", play);
 			card.removeEventListener("focusout", pause);
 		};
-	}, []);
+	}, [src]);
 
 	return (
 		<video
 			ref={ref}
-			src={src}
 			loop
 			muted
 			playsInline

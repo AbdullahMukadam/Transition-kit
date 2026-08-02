@@ -135,11 +135,13 @@ function TransitionDetail() {
 						onChange={(event) => handleSelectTransition(event.target.value)}
 						className="h-9 w-full cursor-pointer appearance-none truncate rounded-lg border border-[var(--border)] bg-[var(--background)] pr-8 pl-2.5 text-sm font-medium text-[var(--foreground)]"
 					>
-						{transitions.map((t) => (
-							<option key={t.slug} value={t.slug}>
-								{t.name}
-							</option>
-						))}
+						{transitions
+							.filter((t) => t.type === transition.type)
+							.map((t) => (
+								<option key={t.slug} value={t.slug}>
+									{t.name}
+								</option>
+							))}
 					</select>
 					<ChevronDown
 						aria-hidden

@@ -2,9 +2,9 @@
 
 import { transitions } from "#/data/transitions";
 import { AnimatedThemeToggler } from "#/registry/animated-theme-toggler";
+import { ThemeSwitcher } from "#/registry/theme-switcher";
 import { ThemeToggleButton } from "#/registry/theme-toggle-button";
 import { ThemeToggleSwitch } from "#/registry/theme-toggle-switch";
-import { ThemeSwitcher } from "#/registry/theme-switcher";
 import ComponentShowcase from "./ComponentShowcase";
 
 const themeTransitions = transitions.filter((t) => t.type === "theme");
@@ -21,7 +21,9 @@ export function AnimatedThemeTogglerShowcase() {
 			variants={variants}
 			renderVariant={(v) => <AnimatedThemeToggler transition={v} />}
 			installCode="npx shadcn@latest add @transitions/animated-theme-toggler"
-			usageCode={(v) => `import { AnimatedThemeToggler } from "@/registry/animated-theme-toggler";
+			usageCode={(
+				v,
+			) => `import { AnimatedThemeToggler } from "@/registry/animated-theme-toggler";
 
 <AnimatedThemeToggler transition="${v}" />`}
 		/>
@@ -36,7 +38,9 @@ export function ThemeToggleButtonShowcase() {
 			variants={variants}
 			renderVariant={(v) => <ThemeToggleButton transition={v} />}
 			installCode="npx shadcn@latest add @transitions/theme-toggle-button"
-			usageCode={(v) => `import { ThemeToggleButton } from "@/registry/theme-toggle-button";
+			usageCode={(
+				v,
+			) => `import { ThemeToggleButton } from "@/registry/theme-toggle-button";
 
 <ThemeToggleButton transition="${v}" />`}
 		/>
@@ -51,7 +55,9 @@ export function ThemeToggleSwitchShowcase() {
 			variants={variants}
 			renderVariant={(v) => <ThemeToggleSwitch transition={v} />}
 			installCode="npx shadcn@latest add @transitions/theme-toggle-switch"
-			usageCode={(v) => `import { ThemeToggleSwitch } from "@/registry/theme-toggle-switch";
+			usageCode={(
+				v,
+			) => `import { ThemeToggleSwitch } from "@/registry/theme-toggle-switch";
 
 <ThemeToggleSwitch transition="${v}" />`}
 		/>
@@ -66,7 +72,9 @@ export function ThemeSwitcherShowcase() {
 			variants={variants}
 			renderVariant={(v) => <ThemeSwitcher transition={v} />}
 			installCode="npx shadcn@latest add @transitions/theme-switcher"
-			usageCode={(v) => `import { ThemeSwitcher } from "@/registry/theme-switcher";
+			usageCode={(
+				v,
+			) => `import { ThemeSwitcher } from "@/registry/theme-switcher";
 
 <ThemeSwitcher transition="${v}" />`}
 		/>

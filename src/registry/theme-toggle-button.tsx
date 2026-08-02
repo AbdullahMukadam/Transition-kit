@@ -1,7 +1,5 @@
 "use client";
 
-
-
 function getCurrentTheme(): "light" | "dark" {
 	const el = document.documentElement;
 	if (el.classList.contains("dark")) return "dark";
@@ -21,7 +19,7 @@ function setTheme(theme: "light" | "dark") {
 }
 
 const TRANSITION_CSS: Record<string, string> = {
-		"circle-reveal": `
+	"circle-reveal": `
 ::view-transition-old(root),
 .dark::view-transition-old(root) {
   animation: none;
@@ -235,7 +233,7 @@ const TRANSITION_CSS: Record<string, string> = {
   }
 }
 	`,
-	"fade": `
+	fade: `
 ::view-transition-old(root) {
   animation: fade-out 300ms ease-in-out both;
 }
@@ -254,7 +252,7 @@ const TRANSITION_CSS: Record<string, string> = {
   to { opacity: 1; }
 }
 	`,
-	"slide": `
+	slide: `
 ::view-transition-old(root) {
   animation: slide-out 400ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
@@ -273,7 +271,7 @@ const TRANSITION_CSS: Record<string, string> = {
   to { transform: translateX(0); }
 }
 	`,
-	"scale": `
+	scale: `
 ::view-transition-old(root) {
   animation: scale-out 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -292,7 +290,7 @@ const TRANSITION_CSS: Record<string, string> = {
   to { transform: scale(1); opacity: 1; }
 }
 	`,
-	"flip": `
+	flip: `
 ::view-transition-old(root) {
   animation: flip-out 600ms ease-in-out both;
   transform-origin: left center;
@@ -315,7 +313,7 @@ const TRANSITION_CSS: Record<string, string> = {
   to { transform: perspective(1200px) rotateY(0deg); }
 }
 	`,
-	"blur": `
+	blur: `
 ::view-transition-old(root) {
   animation: blur-out 500ms ease-in-out both;
 }
@@ -350,7 +348,7 @@ const TRANSITION_CSS: Record<string, string> = {
   }
 }
 	`,
-	"rotate": `
+	rotate: `
 ::view-transition-old(root) {
   animation: rotate-out 500ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
@@ -369,7 +367,7 @@ const TRANSITION_CSS: Record<string, string> = {
   to { transform: rotate(0deg) scale(1); opacity: 1; }
 }
 	`,
-	"zoom": `
+	zoom: `
 ::view-transition-old(root) {
   animation: zoom-out 400ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
@@ -637,7 +635,7 @@ const TRANSITION_CSS: Record<string, string> = {
   }
 }
 	`,
-	"curtain": `
+	curtain: `
 ::view-transition-old(root) {
   animation: curtain-out 600ms cubic-bezier(0.65, 0, 0.35, 1) both;
 }
@@ -666,7 +664,7 @@ const TRANSITION_CSS: Record<string, string> = {
   }
 }
 	`,
-	"cube": `
+	cube: `
 ::view-transition-old(root) {
   animation: cube-out 700ms ease-in-out both;
   transform-origin: right center;
@@ -738,7 +736,7 @@ const TRANSITION_CSS: Record<string, string> = {
   }
 }
 	`,
-	"accordion": `
+	accordion: `
 ::view-transition-old(root) {
   animation: accordion-out 550ms ease-in-out both;
   transform-origin: left center;
@@ -759,7 +757,7 @@ const TRANSITION_CSS: Record<string, string> = {
   to { transform: scaleX(1); opacity: 1; }
 }
 	`,
-	"doorway": `
+	doorway: `
 ::view-transition-old(root) {
   animation: doorway-out 600ms ease-in both;
   transform-origin: left center;
@@ -800,7 +798,7 @@ const TRANSITION_CSS: Record<string, string> = {
   to { transform: perspective(1600px) rotateX(0deg); opacity: 1; }
 }
 	`,
-	"roll": `
+	roll: `
 ::view-transition-old(root) {
   animation: roll-out 550ms cubic-bezier(0.4, 0, 0.2, 1) both;
   transform-origin: top center;
@@ -821,7 +819,7 @@ const TRANSITION_CSS: Record<string, string> = {
   to { transform: scaleY(1) translateY(0); opacity: 1; }
 }
 	`,
-	"fold": `
+	fold: `
 ::view-transition-old(root) {
   animation: fold-out 600ms ease-in-out both;
   transform-origin: center center;
@@ -841,7 +839,7 @@ const TRANSITION_CSS: Record<string, string> = {
   to { transform: scale(1); opacity: 1; }
 }
 	`,
-	"glitch": `
+	glitch: `
 ::view-transition-old(root) {
   animation: glitch-out 400ms steps(6, end) both;
 }
@@ -885,7 +883,7 @@ const TRANSITION_CSS: Record<string, string> = {
   from { mask: radial-gradient(circle at center, white 0%, white 0%, transparent 0%); }
   to { mask: radial-gradient(circle at center, white 100%, white 100%, transparent 100%); }
 }
-	`
+	`,
 };
 
 let activeStyle: HTMLStyleElement | null = null;
@@ -922,14 +920,12 @@ function applyThemeTransition(
 		return;
 	}
 
-	document
-		.startViewTransition(apply)
-		.finished.finally(() => {
-			setTimeout(() => {
-				style.remove();
-				activeStyle = null;
-			}, 50);
-		});
+	document.startViewTransition(apply).finished.finally(() => {
+		setTimeout(() => {
+			style.remove();
+			activeStyle = null;
+		}, 50);
+	});
 }
 
 function triggerLiveTransition(css: string, duration: number, easing: string) {
@@ -946,8 +942,6 @@ function triggerThemeTransition(
 ) {
 	applyThemeTransition(target, css, duration, easing, onApplied);
 }
-
-
 
 export interface ThemeToggleButtonOptions {
 	transition?: string;
@@ -1022,13 +1016,12 @@ export function createThemeToggleButton(
 
 export { getCurrentTheme, setTheme, triggerLiveTransition, TRANSITION_CSS };
 
-
-
-"use client";
+("use client");
 
 import { useCallback, useEffect, useState } from "react";
 
-interface ThemeToggleButtonProps extends React.ComponentPropsWithoutRef<"button"> {
+interface ThemeToggleButtonProps
+	extends React.ComponentPropsWithoutRef<"button"> {
 	transition?: string;
 	css?: string;
 	duration?: number;
@@ -1097,7 +1090,21 @@ export const ThemeToggleButton = ({
 			{...props}
 		>
 			{internalIsDark ? "Light" : "Dark"}
-			<span style={{ position: "absolute", width: "1px", height: "1px", padding: 0, margin: "-1px", overflow: "hidden", clip: "rect(0, 0, 0, 0)", whiteSpace: "nowrap", borderWidth: 0 }}>Toggle theme</span>
+			<span
+				style={{
+					position: "absolute",
+					width: "1px",
+					height: "1px",
+					padding: 0,
+					margin: "-1px",
+					overflow: "hidden",
+					clip: "rect(0, 0, 0, 0)",
+					whiteSpace: "nowrap",
+					borderWidth: 0,
+				}}
+			>
+				Toggle theme
+			</span>
 		</button>
 	);
 };

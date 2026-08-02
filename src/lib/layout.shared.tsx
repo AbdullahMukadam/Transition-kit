@@ -5,6 +5,6 @@ export function baseOptions(): BaseLayoutProps {
 		nav: {
 			title: "Transition Kit",
 		},
-		githubUrl: "https://github.com/AbdullahMukadam/Transition-kit"
+		githubUrl: "https://github.com/AbdullahMukadam/Transition-kit",
 	};
 }

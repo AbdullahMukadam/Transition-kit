@@ -7,9 +7,9 @@ import {
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { MDXComponents } from "mdx/types";
 import { AnimatedThemeToggler } from "#/registry/animated-theme-toggler";
+import { ThemeSwitcher } from "#/registry/theme-switcher";
 import { ThemeToggleButton } from "#/registry/theme-toggle-button";
 import { ThemeToggleSwitch } from "#/registry/theme-toggle-switch";
-import { ThemeSwitcher } from "#/registry/theme-switcher";
 import {
 	TabsContent as ShadcnContent,
 	TabsList as ShadcnTabList,
@@ -22,9 +22,9 @@ import ComponentShowcase from "./ComponentShowcase";
 import { BunIcon, NpmIcon, PnpmIcon, YarnIcon } from "./PackageIcons";
 import {
 	AnimatedThemeTogglerShowcase,
+	ThemeSwitcherShowcase,
 	ThemeToggleButtonShowcase,
 	ThemeToggleSwitchShowcase,
-	ThemeSwitcherShowcase,
 } from "./ThemeTransitionShowcase";
 import TransitionGridMDX from "./TransitionGridMDX";
 import { TransitionsTable } from "./TransitionsTable";

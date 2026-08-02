@@ -1,10 +1,11 @@
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, rmSync } from "node:fs";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
 const ROOT = resolve(import.meta.dirname, "..");
 const SRC = resolve(ROOT, "src");
 const TEMPLATES = resolve(ROOT, "scripts/templates");
+const PUBLIC_R = resolve(ROOT, "public", "r");
 
 // Import TRANSITION_CSS directly from the single source of truth
 const { TRANSITION_CSS } = await import(
@@ -30,13 +31,43 @@ interface ComponentConfig {
 	name: string;
 	pascalName: string;
 	frameworks: Framework[];
+	title: string;
+	description: string;
 }
 
 const COMPONENTS: ComponentConfig[] = [
-	{ name: "animated-theme-toggler", pascalName: "AnimatedThemeToggler", frameworks: ["react", "vue", "svelte", "vanilla"] },
-	{ name: "theme-toggle-button", pascalName: "ThemeToggleButton", frameworks: ["react", "vue", "svelte", "vanilla"] },
-	{ name: "theme-toggle-switch", pascalName: "ThemeToggleSwitch", frameworks: ["react", "vue", "svelte", "vanilla"] },
-	{ name: "theme-switcher", pascalName: "ThemeSwitcher", frameworks: ["react", "vue", "svelte", "vanilla"] },
+	{
+		name: "animated-theme-toggler",
+		pascalName: "AnimatedThemeToggler",
+		frameworks: ["react", "vue", "svelte", "vanilla"],
+		title: "Animated Theme Toggler",
+		description:
+			"A shape-based theme toggler using clip-path transitions (circle, square, triangle, diamond, hexagon, rectangle, star) with the View Transitions API.",
+	},
+	{
+		name: "theme-toggle-button",
+		pascalName: "ThemeToggleButton",
+		frameworks: ["react", "vue", "svelte", "vanilla"],
+		title: "Theme Toggle Button",
+		description:
+			"A button with text cycling (Light/Dark) that supports multiple transition animations (fade, slide, scale, blur, flip) via the View Transitions API.",
+	},
+	{
+		name: "theme-toggle-switch",
+		pascalName: "ThemeToggleSwitch",
+		frameworks: ["react", "vue", "svelte", "vanilla"],
+		title: "Theme Toggle Switch",
+		description:
+			"An iOS-style toggle switch for theme switching with multiple transition animations (fade, slide, scale, blur, flip) via the View Transitions API.",
+	},
+	{
+		name: "theme-switcher",
+		pascalName: "ThemeSwitcher",
+		frameworks: ["react", "vue", "svelte", "vanilla"],
+		title: "Theme Switcher",
+		description:
+			"A segmented System/Light/Dark theme switcher with a sliding indicator and multiple transition animations via the View Transitions API.",
+	},
 ];
 
 function getTemplateExtension(f: Framework): string {
@@ -140,7 +171,16 @@ function buildRegistryFiles(transitionCSSEntries: string) {
 					: resolve(SRC, "registry", framework);
 			mkdirSync(outputDir, { recursive: true });
 			writeFileSync(resolve(outputDir, outputName), output);
+
+			// Publish standalone files under public/r/ (served at https://transition-kit.space/r/<path>)
+			const publishDir =
+				framework === "react"
+					? PUBLIC_R
+					: resolve(PUBLIC_R, framework);
+			mkdirSync(publishDir, { recursive: true });
+			writeFileSync(resolve(publishDir, outputName), output);
 			console.log(`  ✓ src/registry/${framework === "react" ? "" : `${framework}/`}${outputName}`);
+			console.log(`  ✓ public/r/${framework === "react" ? "" : `${framework}/`}${outputName}`);
 		}
 	}
 }
@@ -228,6 +268,58 @@ function updateMDXManualCode(
 	}
 }
 
+// ── Generate public/r/registry.json (new shadcn schema) ────────────
+
+const CSS_VARS = {
+	light: {
+		"--background": "#ffffff",
+		"--foreground": "#171717",
+		"--muted": "#f2f2f2",
+		"--muted-foreground": "#8f8f8f",
+		"--border": "#eaeaea",
+		"--ring": "#171717",
+	},
+	dark: {
+		"--background": "#0a0a0a",
+		"--foreground": "#ededed",
+		"--muted": "#222222",
+		"--muted-foreground": "#888888",
+		"--border": "#333333",
+		"--ring": "#ededed",
+	},
+};
+
+function buildRegistryJson() {
+	const items = COMPONENTS.map((component) => ({
+		name: component.name,
+		type: "registry:ui",
+		title: component.title,
+		description: component.description,
+		dependencies: [],
+		files: [
+			{
+				path: `${component.name}.tsx`,
+				type: "registry:ui",
+				target: `components/ui/${component.name}.tsx`,
+			},
+		],
+		cssVars: CSS_VARS,
+	}));
+
+	const registry = {
+		$schema: "https://ui.shadcn.com/schema/registry.json",
+		name: "transition-kit",
+		homepage: "https://transition-kit.space",
+		items,
+	};
+
+	writeFileSync(
+		resolve(PUBLIC_R, "registry.json"),
+		`${JSON.stringify(registry, null, 2)}\n`,
+	);
+	console.log("  ✓ public/r/registry.json");
+}
+
 // ── Main ───────────────────────────────────────────────────────────
 
 console.log("Building registry components...\n");
@@ -235,8 +327,15 @@ console.log(`Found ${Object.keys(TRANSITION_CSS).length} transitions\n`);
 
 const transitionCSSEntries = buildTransitionCSSEntries(TRANSITION_CSS);
 
+console.log("Cleaning public/r/...");
+rmSync(PUBLIC_R, { recursive: true, force: true });
+mkdirSync(PUBLIC_R, { recursive: true });
+
 console.log("Generating registry files:");
 buildRegistryFiles(transitionCSSEntries);
+
+console.log("\nGenerating registry manifest (public/r/registry.json):");
+buildRegistryJson();
 
 console.log("\nUpdating MDX manual install code:");
 updateMDXManualCode(transitionCSSEntries, [

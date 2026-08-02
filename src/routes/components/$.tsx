@@ -12,7 +12,10 @@ import {
 } from "fumadocs-ui/layouts/docs/page";
 import type { ReactNode } from "react";
 import { Suspense } from "react";
-import { MarkdownCopyButton, ViewOptionsPopover } from "#/components/ai/page-actions";
+import {
+	MarkdownCopyButton,
+	ViewOptionsPopover,
+} from "#/components/ai/page-actions";
 import { useMDXComponents } from "#/components/docs/mdx";
 import { baseOptions } from "#/lib/layout.shared";
 import { encodeMarkdownUrl } from "#/lib/shared";
@@ -41,18 +44,29 @@ export const Route = createFileRoute("/components/$")({
 		await clientLoader.preload(data.path);
 		return data;
 	},
-		head: ({ loaderData }) => {
+	head: ({ loaderData }) => {
 		if (!loaderData) return {};
 		return {
 			meta: [
-				{ title: `${loaderData.title} — Transition Kit` },
+				{ title: `${loaderData.title} | Transition Kit` },
 				{ name: "description", content: loaderData.description },
-				{ property: "og:title", content: `${loaderData.title} — Transition Kit` },
+				{
+					property: "og:title",
+					content: `${loaderData.title} | Transition Kit`,
+				},
 				{ property: "og:description", content: loaderData.description },
-				{ name: "twitter:title", content: `${loaderData.title} — Transition Kit` },
+				{
+					name: "twitter:title",
+					content: `${loaderData.title} | Transition Kit`,
+				},
 				{ name: "twitter:description", content: loaderData.description },
 			],
-			links: [{ rel: "canonical", href: `https://transition-kit.space${loaderData.url}` }],
+			links: [
+				{
+					rel: "canonical",
+					href: `https://transition-kit.space${loaderData.url}`,
+				},
+			],
 		};
 	},
 });
@@ -81,7 +95,10 @@ const serverLoader = createServerFn({
 	});
 
 const clientLoader = browserCollections.docs.createClientLoader({
-	component({ frontmatter, default: MDX }, props: { toc: TOCItemType[]; slugs: string[] }) {
+	component(
+		{ frontmatter, default: MDX },
+		props: { toc: TOCItemType[]; slugs: string[] },
+	) {
 		return (
 			<DocsPage toc={props.toc}>
 				<DocsTitle>{frontmatter.title}</DocsTitle>
@@ -104,7 +121,10 @@ function Page() {
 	return (
 		<DocsLayout {...baseOptions()} tree={data.pageTree}>
 			<Suspense>
-				{clientLoader.useContent(data.path, { toc: data.toc, slugs: data.slugs })}
+				{clientLoader.useContent(data.path, {
+					toc: data.toc,
+					slugs: data.slugs,
+				})}
 			</Suspense>
 		</DocsLayout>
 	);

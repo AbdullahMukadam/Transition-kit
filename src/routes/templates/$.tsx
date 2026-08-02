@@ -26,14 +26,25 @@ export const Route = createFileRoute("/templates/$")({
 		if (!loaderData) return {};
 		return {
 			meta: [
-				{ title: `${loaderData.title} — Transition Kit` },
+				{ title: `${loaderData.title} | Transition Kit` },
 				{ name: "description", content: loaderData.description },
-				{ property: "og:title", content: `${loaderData.title} — Transition Kit` },
+				{
+					property: "og:title",
+					content: `${loaderData.title} | Transition Kit`,
+				},
 				{ property: "og:description", content: loaderData.description },
-				{ name: "twitter:title", content: `${loaderData.title} — Transition Kit` },
+				{
+					name: "twitter:title",
+					content: `${loaderData.title} | Transition Kit`,
+				},
 				{ name: "twitter:description", content: loaderData.description },
 			],
-			links: [{ rel: "canonical", href: `https://transition-kit.space${loaderData.url}` }],
+			links: [
+				{
+					rel: "canonical",
+					href: `https://transition-kit.space${loaderData.url}`,
+				},
+			],
 		};
 	},
 });
@@ -57,7 +68,7 @@ const serverLoader = createServerFn({
 		};
 	});
 
-	const clientLoader = browserCollections.templates.createClientLoader({
+const clientLoader = browserCollections.templates.createClientLoader({
 	component({ frontmatter, default: MDX }, _props: undefined) {
 		return (
 			<DocsPage

@@ -26,7 +26,7 @@ export const Route = createRootRoute({
 				content: "width=device-width, initial-scale=1",
 			},
 			{
-				title: "Transition Kit — Page Transition Templates",
+				title: "Transition Kit | Page Transition Templates",
 			},
 			{
 				name: "description",
@@ -54,7 +54,7 @@ export const Route = createRootRoute({
 			},
 			{
 				property: "og:title",
-				content: "Transition Kit — Page Transition Templates",
+				content: "Transition Kit | Page Transition Templates",
 			},
 			{
 				property: "og:description",
@@ -75,7 +75,7 @@ export const Route = createRootRoute({
 			},
 			{
 				name: "twitter:title",
-				content: "Transition Kit — Page Transition Templates",
+				content: "Transition Kit | Page Transition Templates",
 			},
 			{
 				name: "twitter:description",

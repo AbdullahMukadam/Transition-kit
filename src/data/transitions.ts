@@ -1,31 +1,31 @@
 export interface TransitionTemplate {
-  slug: string;
-  name: string;
-  description: string;
-  category: "simple" | "mask" | "3d" | "composite";
-  type: "theme" | "page";
-  css: string;
-  js: string;
-  frameworks: {
-    vanilla: string;
-    react: string;
-    nextjs: string;
-    vue: string;
-    svelte: string;
-  };
-  config: {
-    duration: number;
-    easing: string;
-    direction?: string;
-    directionOptions?: { label: string; value: string }[];
-  };
-  previewColors: {
-    from: string;
-    to: string;
-  };
-  video?: string;
-  featured?: boolean;
-  isNew?: boolean;
+	slug: string;
+	name: string;
+	description: string;
+	category: "simple" | "mask" | "3d" | "composite";
+	type: "theme" | "page";
+	css: string;
+	js: string;
+	frameworks: {
+		vanilla: string;
+		react: string;
+		nextjs: string;
+		vue: string;
+		svelte: string;
+	};
+	config: {
+		duration: number;
+		easing: string;
+		direction?: string;
+		directionOptions?: { label: string; value: string }[];
+	};
+	previewColors: {
+		from: string;
+		to: string;
+	};
+	video?: string;
+	featured?: boolean;
+	isNew?: boolean;
 }
 
 const VANILLA_SNIPPET = `function switchTheme() {
@@ -209,14 +209,14 @@ const PAGE_SVELTE_SNIPPET = `<script>
 <button on:click={navigateToPage}>Go to Page</button>`;
 
 export const transitions: TransitionTemplate[] = [
-  {
-    slug: "circle-reveal",
-    name: "Circle Reveal",
-    description:
-      "Expanding circular mask reveals the new theme from the center.",
-    category: "mask",
-    type: "theme",
-    css: `::view-transition-old(root),
+	{
+		slug: "circle-reveal",
+		name: "Circle Reveal",
+		description:
+			"Expanding circular mask reveals the new theme from the center.",
+		category: "mask",
+		type: "theme",
+		css: `::view-transition-old(root),
 .dark::view-transition-old(root) {
   animation: none;
   animation-fill-mode: both;
@@ -238,7 +238,7 @@ export const transitions: TransitionTemplate[] = [
     mask-size: 200vmax;
   }
 }`,
-    js: `function switchTheme() {
+		js: `function switchTheme() {
   const el = document.documentElement;
   el.classList.toggle("dark");
   localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
@@ -246,32 +246,32 @@ export const transitions: TransitionTemplate[] = [
 
 if (!document.startViewTransition) switchTheme();
 document.startViewTransition(() => switchTheme());`,
-    frameworks: {
-      vanilla: VANILLA_SNIPPET,
-      react: REACT_SNIPPET,
-      nextjs: NEXTJS_SNIPPET,
-      vue: VUE_SNIPPET,
-      svelte: SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 1000,
-      easing: "ease-in-out",
-    },
-    previewColors: {
-      from: "#ededed",
-      to: "#171717",
-    },
-    video: "/demos/theme-toggles/circle-reveal.mp4",
-    featured: true,
-  },
-  {
-    slug: "circle-blur",
-    name: "Circle Blur",
-    description:
-      "Circular mask with gaussian blur for a soft, diffused reveal. Use direction controls to change origin.",
-    category: "mask",
-    type: "theme",
-    css: `::view-transition-group(root) {
+		frameworks: {
+			vanilla: VANILLA_SNIPPET,
+			react: REACT_SNIPPET,
+			nextjs: NEXTJS_SNIPPET,
+			vue: VUE_SNIPPET,
+			svelte: SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 1000,
+			easing: "ease-in-out",
+		},
+		previewColors: {
+			from: "#ededed",
+			to: "#171717",
+		},
+		video: "/demos/theme-toggles/circle-reveal.mp4",
+		featured: true,
+	},
+	{
+		slug: "circle-blur",
+		name: "Circle Blur",
+		description:
+			"Circular mask with gaussian blur for a soft, diffused reveal. Use direction controls to change origin.",
+		category: "mask",
+		type: "theme",
+		css: `::view-transition-group(root) {
   animation-timing-function: var(--expo-out);
 }
 
@@ -307,7 +307,7 @@ document.startViewTransition(() => switchTheme());`,
   0.9529 44.08%, 0.9711 51.14%,
   0.9833 59.06%, 0.9915 68.74%, 1 100%
 }`,
-    js: `function switchTheme() {
+		js: `function switchTheme() {
   const el = document.documentElement;
   el.classList.toggle("dark");
   localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
@@ -315,40 +315,40 @@ document.startViewTransition(() => switchTheme());`,
 
 if (!document.startViewTransition) switchTheme();
 document.startViewTransition(() => switchTheme());`,
-    frameworks: {
-      vanilla: VANILLA_SNIPPET,
-      react: REACT_SNIPPET,
-      nextjs: NEXTJS_SNIPPET,
-      vue: VUE_SNIPPET,
-      svelte: SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 1000,
-      easing: "cubic-bezier(0.16, 1, 0.3, 1)",
-      direction: "center",
-      directionOptions: [
-        { label: "Center", value: "center" },
-        { label: "Top Left", value: "top-left" },
-        { label: "Top Right", value: "top-right" },
-        { label: "Bottom Left", value: "bottom-left" },
-        { label: "Bottom Right", value: "bottom-right" },
-      ],
-    },
-    previewColors: {
-      from: "#ededed",
-      to: "#0a0a0a",
-    },
-    video: "/demos/theme-toggles/circle-blur.mp4",
-    featured: true,
-  },
-  {
-    slug: "polygon-reveal",
-    name: "Polygon Reveal",
-    description:
-      "Clip-path polygon animates a geometric wipe to reveal the new theme.",
-    category: "mask",
-    type: "theme",
-    css: `::view-transition-group(root) {
+		frameworks: {
+			vanilla: VANILLA_SNIPPET,
+			react: REACT_SNIPPET,
+			nextjs: NEXTJS_SNIPPET,
+			vue: VUE_SNIPPET,
+			svelte: SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 1000,
+			easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+			direction: "center",
+			directionOptions: [
+				{ label: "Center", value: "center" },
+				{ label: "Top Left", value: "top-left" },
+				{ label: "Top Right", value: "top-right" },
+				{ label: "Bottom Left", value: "bottom-left" },
+				{ label: "Bottom Right", value: "bottom-right" },
+			],
+		},
+		previewColors: {
+			from: "#ededed",
+			to: "#0a0a0a",
+		},
+		video: "/demos/theme-toggles/circle-blur.mp4",
+		featured: true,
+	},
+	{
+		slug: "polygon-reveal",
+		name: "Polygon Reveal",
+		description:
+			"Clip-path polygon animates a geometric wipe to reveal the new theme.",
+		category: "mask",
+		type: "theme",
+		css: `::view-transition-group(root) {
   animation-duration: 0.7s;
   animation-timing-function: var(--expo-out);
 }
@@ -387,7 +387,7 @@ document.startViewTransition(() => switchTheme());`,
     clip-path: polygon(171% 50%, 50% 171%, -50% 71%, 50% -71%);
   }
 }`,
-    js: `function switchTheme() {
+		js: `function switchTheme() {
   const el = document.documentElement;
   el.classList.toggle("dark");
   localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
@@ -395,32 +395,32 @@ document.startViewTransition(() => switchTheme());`,
 
 if (!document.startViewTransition) switchTheme();
 document.startViewTransition(() => switchTheme());`,
-    frameworks: {
-      vanilla: VANILLA_SNIPPET,
-      react: REACT_SNIPPET,
-      nextjs: NEXTJS_SNIPPET,
-      vue: VUE_SNIPPET,
-      svelte: SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 700,
-      easing: "cubic-bezier(0.16, 1, 0.3, 1)",
-    },
-    previewColors: {
-      from: "#ededed",
-      to: "#171717",
-    },
-    video: "/demos/theme-toggles/polygon-reveal.mp4",
-    featured: true,
-  },
-  {
-    slug: "gif-frog",
-    name: "GIF Frog",
-    description:
-      "A cute dancing frog reveals the new theme through an expanding mask.",
-    category: "mask",
-    type: "theme",
-    css: `::view-transition-group(root) {
+		frameworks: {
+			vanilla: VANILLA_SNIPPET,
+			react: REACT_SNIPPET,
+			nextjs: NEXTJS_SNIPPET,
+			vue: VUE_SNIPPET,
+			svelte: SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 700,
+			easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+		},
+		previewColors: {
+			from: "#ededed",
+			to: "#171717",
+		},
+		video: "/demos/theme-toggles/polygon-reveal.mp4",
+		featured: true,
+	},
+	{
+		slug: "gif-frog",
+		name: "GIF Frog",
+		description:
+			"A cute dancing frog reveals the new theme through an expanding mask.",
+		category: "mask",
+		type: "theme",
+		css: `::view-transition-group(root) {
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -455,7 +455,7 @@ document.startViewTransition(() => switchTheme());`,
     mask-size: 2000vmax;
   }
 }`,
-    js: `function switchTheme() {
+		js: `function switchTheme() {
   const el = document.documentElement;
   el.classList.toggle("dark");
   localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
@@ -463,31 +463,31 @@ document.startViewTransition(() => switchTheme());`,
 
 if (!document.startViewTransition) switchTheme();
 document.startViewTransition(() => switchTheme());`,
-    frameworks: {
-      vanilla: VANILLA_SNIPPET,
-      react: REACT_SNIPPET,
-      nextjs: NEXTJS_SNIPPET,
-      vue: VUE_SNIPPET,
-      svelte: SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 1500,
-      easing: "cubic-bezier(0.16, 1, 0.3, 1)",
-    },
-    previewColors: {
-      from: "#ededed",
-      to: "#171717",
-    },
-    video: "/demos/theme-toggles/gif-frog.mp4",
-    isNew: true,
-  },
-  {
-    slug: "gif-penguin",
-    name: "GIF Penguin",
-    description: "A happy dancing penguin masks the theme transition.",
-    category: "mask",
-    type: "theme",
-    css: `::view-transition-group(root) {
+		frameworks: {
+			vanilla: VANILLA_SNIPPET,
+			react: REACT_SNIPPET,
+			nextjs: NEXTJS_SNIPPET,
+			vue: VUE_SNIPPET,
+			svelte: SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 1500,
+			easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+		},
+		previewColors: {
+			from: "#ededed",
+			to: "#171717",
+		},
+		video: "/demos/theme-toggles/gif-frog.mp4",
+		isNew: true,
+	},
+	{
+		slug: "gif-penguin",
+		name: "GIF Penguin",
+		description: "A happy dancing penguin masks the theme transition.",
+		category: "mask",
+		type: "theme",
+		css: `::view-transition-group(root) {
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -522,7 +522,7 @@ document.startViewTransition(() => switchTheme());`,
     mask-size: 2000vmax;
   }
 }`,
-    js: `function switchTheme() {
+		js: `function switchTheme() {
   const el = document.documentElement;
   el.classList.toggle("dark");
   localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
@@ -530,31 +530,31 @@ document.startViewTransition(() => switchTheme());`,
 
 if (!document.startViewTransition) switchTheme();
 document.startViewTransition(() => switchTheme());`,
-    frameworks: {
-      vanilla: VANILLA_SNIPPET,
-      react: REACT_SNIPPET,
-      nextjs: NEXTJS_SNIPPET,
-      vue: VUE_SNIPPET,
-      svelte: SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 1500,
-      easing: "cubic-bezier(0.16, 1, 0.3, 1)",
-    },
-    previewColors: {
-      from: "#ededed",
-      to: "#171717",
-    },
-    video: "/demos/theme-toggles/gif-penguin.mp4",
-    isNew: true,
-  },
-  {
-    slug: "gif-cat",
-    name: "GIF Cat",
-    description: "A dancing orange cat animates the theme reveal.",
-    category: "mask",
-    type: "theme",
-    css: `::view-transition-group(root) {
+		frameworks: {
+			vanilla: VANILLA_SNIPPET,
+			react: REACT_SNIPPET,
+			nextjs: NEXTJS_SNIPPET,
+			vue: VUE_SNIPPET,
+			svelte: SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 1500,
+			easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+		},
+		previewColors: {
+			from: "#ededed",
+			to: "#171717",
+		},
+		video: "/demos/theme-toggles/gif-penguin.mp4",
+		isNew: true,
+	},
+	{
+		slug: "gif-cat",
+		name: "GIF Cat",
+		description: "A dancing orange cat animates the theme reveal.",
+		category: "mask",
+		type: "theme",
+		css: `::view-transition-group(root) {
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -589,7 +589,7 @@ document.startViewTransition(() => switchTheme());`,
     mask-size: 2000vmax;
   }
 }`,
-    js: `function switchTheme() {
+		js: `function switchTheme() {
   const el = document.documentElement;
   el.classList.toggle("dark");
   localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
@@ -597,31 +597,31 @@ document.startViewTransition(() => switchTheme());`,
 
 if (!document.startViewTransition) switchTheme();
 document.startViewTransition(() => switchTheme());`,
-    frameworks: {
-      vanilla: VANILLA_SNIPPET,
-      react: REACT_SNIPPET,
-      nextjs: NEXTJS_SNIPPET,
-      vue: VUE_SNIPPET,
-      svelte: SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 1500,
-      easing: "cubic-bezier(0.16, 1, 0.3, 1)",
-    },
-    previewColors: {
-      from: "#ededed",
-      to: "#171717",
-    },
-    video: "/demos/theme-toggles/gif-cat.mp4",
-    isNew: true,
-  },
-  {
-    slug: "fade",
-    name: "Fade",
-    description: "Smooth opacity crossfade between old and new page content.",
-    category: "simple",
-    type: "page",
-    css: `::view-transition-old(root) {
+		frameworks: {
+			vanilla: VANILLA_SNIPPET,
+			react: REACT_SNIPPET,
+			nextjs: NEXTJS_SNIPPET,
+			vue: VUE_SNIPPET,
+			svelte: SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 1500,
+			easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+		},
+		previewColors: {
+			from: "#ededed",
+			to: "#171717",
+		},
+		video: "/demos/theme-toggles/gif-cat.mp4",
+		isNew: true,
+	},
+	{
+		slug: "fade",
+		name: "Fade",
+		description: "Smooth opacity crossfade between old and new page content.",
+		category: "simple",
+		type: "page",
+		css: `::view-transition-old(root) {
   animation: fade-out 300ms ease-in-out both;
 }
 
@@ -638,7 +638,7 @@ document.startViewTransition(() => switchTheme());`,
   from { opacity: 0; }
   to { opacity: 1; }
 }`,
-    js: `function navigateTo(url) {
+		js: `function navigateTo(url) {
   if (!document.startViewTransition) {
     window.location.href = url;
     return;
@@ -647,32 +647,32 @@ document.startViewTransition(() => switchTheme());`,
     window.location.href = url;
   });
 }`,
-    frameworks: {
-      vanilla: PAGE_VANILLA_SNIPPET,
-      react: PAGE_REACT_SNIPPET,
-      nextjs: PAGE_NEXTJS_SNIPPET,
-      vue: PAGE_VUE_SNIPPET,
-      svelte: PAGE_SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 300,
-      easing: "ease-in-out",
-    },
-    previewColors: {
-      from: "#f2f2f2",
-      to: "#171717",
-    },
-    video: "/demos/page-transitions/fade.mp4",
-    featured: true,
-  },
-  {
-    slug: "slide",
-    name: "Slide",
-    description:
-      "Old page slides out, new page slides in. Use direction controls to change which way.",
-    category: "simple",
-    type: "page",
-    css: `::view-transition-old(root) {
+		frameworks: {
+			vanilla: PAGE_VANILLA_SNIPPET,
+			react: PAGE_REACT_SNIPPET,
+			nextjs: PAGE_NEXTJS_SNIPPET,
+			vue: PAGE_VUE_SNIPPET,
+			svelte: PAGE_SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 300,
+			easing: "ease-in-out",
+		},
+		previewColors: {
+			from: "#f2f2f2",
+			to: "#171717",
+		},
+		video: "/demos/page-transitions/fade.mp4",
+		featured: true,
+	},
+	{
+		slug: "slide",
+		name: "Slide",
+		description:
+			"Old page slides out, new page slides in. Use direction controls to change which way.",
+		category: "simple",
+		type: "page",
+		css: `::view-transition-old(root) {
   animation: slide-out 400ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
@@ -689,7 +689,7 @@ document.startViewTransition(() => switchTheme());`,
   from { transform: translateX(100%); }
   to { transform: translateX(0); }
 }`,
-    js: `function navigateTo(url) {
+		js: `function navigateTo(url) {
   if (!document.startViewTransition) {
     window.location.href = url;
     return;
@@ -698,37 +698,37 @@ document.startViewTransition(() => switchTheme());`,
     window.location.href = url;
   });
 }`,
-    frameworks: {
-      vanilla: PAGE_VANILLA_SNIPPET,
-      react: PAGE_REACT_SNIPPET,
-      nextjs: PAGE_NEXTJS_SNIPPET,
-      vue: PAGE_VUE_SNIPPET,
-      svelte: PAGE_SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 400,
-      easing: "cubic-bezier(0.4, 0, 0.2, 1)",
-      direction: "left",
-      directionOptions: [
-        { label: "Left", value: "left" },
-        { label: "Right", value: "right" },
-        { label: "Up", value: "up" },
-        { label: "Down", value: "down" },
-      ],
-    },
-    previewColors: {
-      from: "#f2f2f2",
-      to: "#171717",
-    },
-    video: "/demos/page-transitions/slide.mp4",
-  },
-  {
-    slug: "scale",
-    name: "Scale",
-    description: "New page scales up from center while old page fades out.",
-    category: "simple",
-    type: "page",
-    css: `::view-transition-old(root) {
+		frameworks: {
+			vanilla: PAGE_VANILLA_SNIPPET,
+			react: PAGE_REACT_SNIPPET,
+			nextjs: PAGE_NEXTJS_SNIPPET,
+			vue: PAGE_VUE_SNIPPET,
+			svelte: PAGE_SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 400,
+			easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+			direction: "left",
+			directionOptions: [
+				{ label: "Left", value: "left" },
+				{ label: "Right", value: "right" },
+				{ label: "Up", value: "up" },
+				{ label: "Down", value: "down" },
+			],
+		},
+		previewColors: {
+			from: "#f2f2f2",
+			to: "#171717",
+		},
+		video: "/demos/page-transitions/slide.mp4",
+	},
+	{
+		slug: "scale",
+		name: "Scale",
+		description: "New page scales up from center while old page fades out.",
+		category: "simple",
+		type: "page",
+		css: `::view-transition-old(root) {
   animation: scale-out 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -745,7 +745,7 @@ document.startViewTransition(() => switchTheme());`,
   from { transform: scale(1.2); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }`,
-    js: `function navigateTo(url) {
+		js: `function navigateTo(url) {
   if (!document.startViewTransition) {
     window.location.href = url;
     return;
@@ -754,31 +754,31 @@ document.startViewTransition(() => switchTheme());`,
     window.location.href = url;
   });
 }`,
-    frameworks: {
-      vanilla: PAGE_VANILLA_SNIPPET,
-      react: PAGE_REACT_SNIPPET,
-      nextjs: PAGE_NEXTJS_SNIPPET,
-      vue: PAGE_VUE_SNIPPET,
-      svelte: PAGE_SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 500,
-      easing: "cubic-bezier(0.16, 1, 0.3, 1)",
-    },
-    previewColors: {
-      from: "#f2f2f2",
-      to: "#171717",
-    },
-    video: "/demos/page-transitions/scale.mp4",
-    featured: true,
-  },
-  {
-    slug: "flip",
-    name: "Flip",
-    description: "3D card flip on the Y-axis to reveal the new page.",
-    category: "3d",
-    type: "page",
-    css: `::view-transition-old(root) {
+		frameworks: {
+			vanilla: PAGE_VANILLA_SNIPPET,
+			react: PAGE_REACT_SNIPPET,
+			nextjs: PAGE_NEXTJS_SNIPPET,
+			vue: PAGE_VUE_SNIPPET,
+			svelte: PAGE_SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 500,
+			easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+		},
+		previewColors: {
+			from: "#f2f2f2",
+			to: "#171717",
+		},
+		video: "/demos/page-transitions/scale.mp4",
+		featured: true,
+	},
+	{
+		slug: "flip",
+		name: "Flip",
+		description: "3D card flip on the Y-axis to reveal the new page.",
+		category: "3d",
+		type: "page",
+		css: `::view-transition-old(root) {
   animation: flip-out 600ms ease-in-out both;
   transform-origin: left center;
   backface-visibility: hidden;
@@ -799,7 +799,7 @@ document.startViewTransition(() => switchTheme());`,
   from { transform: perspective(1200px) rotateY(90deg); }
   to { transform: perspective(1200px) rotateY(0deg); }
 }`,
-    js: `function navigateTo(url) {
+		js: `function navigateTo(url) {
   if (!document.startViewTransition) {
     window.location.href = url;
     return;
@@ -808,30 +808,30 @@ document.startViewTransition(() => switchTheme());`,
     window.location.href = url;
   });
 }`,
-    frameworks: {
-      vanilla: PAGE_VANILLA_SNIPPET,
-      react: PAGE_REACT_SNIPPET,
-      nextjs: PAGE_NEXTJS_SNIPPET,
-      vue: PAGE_VUE_SNIPPET,
-      svelte: PAGE_SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 600,
-      easing: "ease-in-out",
-    },
-    previewColors: {
-      from: "#f2f2f2",
-      to: "#171717",
-    },
-    video: "/demos/page-transitions/flip.mp4",
-  },
-  {
-    slug: "blur",
-    name: "Blur",
-    description: "Old page blurs and fades while new page sharpens in.",
-    category: "composite",
-    type: "page",
-    css: `::view-transition-old(root) {
+		frameworks: {
+			vanilla: PAGE_VANILLA_SNIPPET,
+			react: PAGE_REACT_SNIPPET,
+			nextjs: PAGE_NEXTJS_SNIPPET,
+			vue: PAGE_VUE_SNIPPET,
+			svelte: PAGE_SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 600,
+			easing: "ease-in-out",
+		},
+		previewColors: {
+			from: "#f2f2f2",
+			to: "#171717",
+		},
+		video: "/demos/page-transitions/flip.mp4",
+	},
+	{
+		slug: "blur",
+		name: "Blur",
+		description: "Old page blurs and fades while new page sharpens in.",
+		category: "composite",
+		type: "page",
+		css: `::view-transition-old(root) {
   animation: blur-out 500ms ease-in-out both;
 }
 
@@ -864,7 +864,7 @@ document.startViewTransition(() => switchTheme());`,
     transform: scale(1);
   }
 }`,
-    js: `function navigateTo(url) {
+		js: `function navigateTo(url) {
   if (!document.startViewTransition) {
     window.location.href = url;
     return;
@@ -873,31 +873,31 @@ document.startViewTransition(() => switchTheme());`,
     window.location.href = url;
   });
 }`,
-    frameworks: {
-      vanilla: PAGE_VANILLA_SNIPPET,
-      react: PAGE_REACT_SNIPPET,
-      nextjs: PAGE_NEXTJS_SNIPPET,
-      vue: PAGE_VUE_SNIPPET,
-      svelte: PAGE_SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 500,
-      easing: "ease-in-out",
-    },
-    previewColors: {
-      from: "#f2f2f2",
-      to: "#171717",
-    },
-    video: "/demos/page-transitions/blur.mp4",
-  },
-  {
-    slug: "rotate",
-    name: "Rotate",
-    description:
-      "New page rotates in from the center while old page fades out.",
-    category: "simple",
-    type: "page",
-    css: `::view-transition-old(root) {
+		frameworks: {
+			vanilla: PAGE_VANILLA_SNIPPET,
+			react: PAGE_REACT_SNIPPET,
+			nextjs: PAGE_NEXTJS_SNIPPET,
+			vue: PAGE_VUE_SNIPPET,
+			svelte: PAGE_SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 500,
+			easing: "ease-in-out",
+		},
+		previewColors: {
+			from: "#f2f2f2",
+			to: "#171717",
+		},
+		video: "/demos/page-transitions/blur.mp4",
+	},
+	{
+		slug: "rotate",
+		name: "Rotate",
+		description:
+			"New page rotates in from the center while old page fades out.",
+		category: "simple",
+		type: "page",
+		css: `::view-transition-old(root) {
   animation: rotate-out 500ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
@@ -914,7 +914,7 @@ document.startViewTransition(() => switchTheme());`,
   from { transform: rotate(10deg) scale(0.9); opacity: 0; }
   to { transform: rotate(0deg) scale(1); opacity: 1; }
 }`,
-    js: `function navigateTo(url) {
+		js: `function navigateTo(url) {
   if (!document.startViewTransition) {
     window.location.href = url;
     return;
@@ -923,31 +923,31 @@ document.startViewTransition(() => switchTheme());`,
     window.location.href = url;
   });
 }`,
-    frameworks: {
-      vanilla: PAGE_VANILLA_SNIPPET,
-      react: PAGE_REACT_SNIPPET,
-      nextjs: PAGE_NEXTJS_SNIPPET,
-      vue: PAGE_VUE_SNIPPET,
-      svelte: PAGE_SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 500,
-      easing: "cubic-bezier(0.4, 0, 0.2, 1)",
-    },
-    previewColors: {
-      from: "#f2f2f2",
-      to: "#171717",
-    },
-    video: "/demos/page-transitions/rotate.mp4",
-    isNew: true,
-  },
-  {
-    slug: "zoom",
-    name: "Zoom",
-    description: "Old page zooms out and fades, new page zooms in from center.",
-    category: "simple",
-    type: "page",
-    css: `::view-transition-old(root) {
+		frameworks: {
+			vanilla: PAGE_VANILLA_SNIPPET,
+			react: PAGE_REACT_SNIPPET,
+			nextjs: PAGE_NEXTJS_SNIPPET,
+			vue: PAGE_VUE_SNIPPET,
+			svelte: PAGE_SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 500,
+			easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+		},
+		previewColors: {
+			from: "#f2f2f2",
+			to: "#171717",
+		},
+		video: "/demos/page-transitions/rotate.mp4",
+		isNew: true,
+	},
+	{
+		slug: "zoom",
+		name: "Zoom",
+		description: "Old page zooms out and fades, new page zooms in from center.",
+		category: "simple",
+		type: "page",
+		css: `::view-transition-old(root) {
   animation: zoom-out 400ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
@@ -964,7 +964,7 @@ document.startViewTransition(() => switchTheme());`,
   from { transform: scale(2); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }`,
-    js: `function navigateTo(url) {
+		js: `function navigateTo(url) {
   if (!document.startViewTransition) {
     window.location.href = url;
     return;
@@ -973,36 +973,36 @@ document.startViewTransition(() => switchTheme());`,
     window.location.href = url;
   });
 }`,
-    frameworks: {
-      vanilla: PAGE_VANILLA_SNIPPET,
-      react: PAGE_REACT_SNIPPET,
-      nextjs: PAGE_NEXTJS_SNIPPET,
-      vue: PAGE_VUE_SNIPPET,
-      svelte: PAGE_SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 400,
-      easing: "cubic-bezier(0.4, 0, 0.2, 1)",
-    },
-    previewColors: {
-      from: "#f2f2f2",
-      to: "#171717",
-    },
-    video: "/demos/page-transitions/zoom.mp4",
-    isNew: true,
-  },
+		frameworks: {
+			vanilla: PAGE_VANILLA_SNIPPET,
+			react: PAGE_REACT_SNIPPET,
+			nextjs: PAGE_NEXTJS_SNIPPET,
+			vue: PAGE_VUE_SNIPPET,
+			svelte: PAGE_SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 400,
+			easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+		},
+		previewColors: {
+			from: "#f2f2f2",
+			to: "#171717",
+		},
+		video: "/demos/page-transitions/zoom.mp4",
+		isNew: true,
+	},
 
-  // ─────────────────────────────────────────────
-  // NEW: theme transitions
-  // ─────────────────────────────────────────────
-  {
-    slug: "star-reveal",
-    name: "Star Reveal",
-    description:
-      "Expanding star-shaped mask reveals the new theme from the center.",
-    category: "mask",
-    type: "theme",
-    css: `::view-transition-old(root),
+	// ─────────────────────────────────────────────
+	// NEW: theme transitions
+	// ─────────────────────────────────────────────
+	{
+		slug: "star-reveal",
+		name: "Star Reveal",
+		description:
+			"Expanding star-shaped mask reveals the new theme from the center.",
+		category: "mask",
+		type: "theme",
+		css: `::view-transition-old(root),
 .dark::view-transition-old(root) {
   animation: none;
   animation-fill-mode: both;
@@ -1024,7 +1024,7 @@ document.startViewTransition(() => switchTheme());`,
     mask-size: 200vmax;
   }
 }`,
-    js: `function switchTheme() {
+		js: `function switchTheme() {
   const el = document.documentElement;
   el.classList.toggle("dark");
   localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
@@ -1032,32 +1032,32 @@ document.startViewTransition(() => switchTheme());`,
 
 if (!document.startViewTransition) switchTheme();
 document.startViewTransition(() => switchTheme());`,
-    frameworks: {
-      vanilla: VANILLA_SNIPPET,
-      react: REACT_SNIPPET,
-      nextjs: NEXTJS_SNIPPET,
-      vue: VUE_SNIPPET,
-      svelte: SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 1000,
-      easing: "ease-in-out",
-    },
-    previewColors: {
-      from: "#ededed",
-      to: "#171717",
-    },
-    video: "/demos/theme-toggles/star-reveal.mp4",
-    isNew: true,
-  },
-  {
-    slug: "heart-reveal",
-    name: "Heart Reveal",
-    description:
-      "Expanding heart-shaped mask reveals the new theme from the center.",
-    category: "mask",
-    type: "theme",
-    css: `::view-transition-old(root),
+		frameworks: {
+			vanilla: VANILLA_SNIPPET,
+			react: REACT_SNIPPET,
+			nextjs: NEXTJS_SNIPPET,
+			vue: VUE_SNIPPET,
+			svelte: SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 1000,
+			easing: "ease-in-out",
+		},
+		previewColors: {
+			from: "#ededed",
+			to: "#171717",
+		},
+		video: "/demos/theme-toggles/star-reveal.mp4",
+		isNew: true,
+	},
+	{
+		slug: "heart-reveal",
+		name: "Heart Reveal",
+		description:
+			"Expanding heart-shaped mask reveals the new theme from the center.",
+		category: "mask",
+		type: "theme",
+		css: `::view-transition-old(root),
 .dark::view-transition-old(root) {
   animation: none;
   animation-fill-mode: both;
@@ -1079,7 +1079,7 @@ document.startViewTransition(() => switchTheme());`,
     mask-size: 200vmax;
   }
 }`,
-    js: `function switchTheme() {
+		js: `function switchTheme() {
   const el = document.documentElement;
   el.classList.toggle("dark");
   localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
@@ -1087,32 +1087,32 @@ document.startViewTransition(() => switchTheme());`,
 
 if (!document.startViewTransition) switchTheme();
 document.startViewTransition(() => switchTheme());`,
-    frameworks: {
-      vanilla: VANILLA_SNIPPET,
-      react: REACT_SNIPPET,
-      nextjs: NEXTJS_SNIPPET,
-      vue: VUE_SNIPPET,
-      svelte: SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 1200,
-      easing: "ease-in-out",
-    },
-    previewColors: {
-      from: "#fdf2f8",
-      to: "#171717",
-    },
-    video: "/demos/theme-toggles/heart-reveal.mp4",
-    isNew: true,
-  },
-  {
-    slug: "diagonal-wipe",
-    name: "Diagonal Wipe",
-    description:
-      "A diagonal clip-path band sweeps across the screen to reveal the new theme.",
-    category: "composite",
-    type: "theme",
-    css: `::view-transition-group(root) {
+		frameworks: {
+			vanilla: VANILLA_SNIPPET,
+			react: REACT_SNIPPET,
+			nextjs: NEXTJS_SNIPPET,
+			vue: VUE_SNIPPET,
+			svelte: SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 1200,
+			easing: "ease-in-out",
+		},
+		previewColors: {
+			from: "#fdf2f8",
+			to: "#171717",
+		},
+		video: "/demos/theme-toggles/heart-reveal.mp4",
+		isNew: true,
+	},
+	{
+		slug: "diagonal-wipe",
+		name: "Diagonal Wipe",
+		description:
+			"A diagonal clip-path band sweeps across the screen to reveal the new theme.",
+		category: "composite",
+		type: "theme",
+		css: `::view-transition-group(root) {
   animation-duration: 600ms;
   animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
 }
@@ -1151,7 +1151,7 @@ document.startViewTransition(() => switchTheme());`,
     clip-path: polygon(120% 0, -20% 0, -40% 120%, 100% 120%);
   }
 }`,
-    js: `function switchTheme() {
+		js: `function switchTheme() {
   const el = document.documentElement;
   el.classList.toggle("dark");
   localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
@@ -1159,32 +1159,32 @@ document.startViewTransition(() => switchTheme());`,
 
 if (!document.startViewTransition) switchTheme();
 document.startViewTransition(() => switchTheme());`,
-    frameworks: {
-      vanilla: VANILLA_SNIPPET,
-      react: REACT_SNIPPET,
-      nextjs: NEXTJS_SNIPPET,
-      vue: VUE_SNIPPET,
-      svelte: SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 600,
-      easing: "cubic-bezier(0.65, 0, 0.35, 1)",
-    },
-    previewColors: {
-      from: "#ededed",
-      to: "#171717",
-    },
-    video: "/demos/theme-toggles/diagonal-wipe.mp4",
-    isNew: true,
-  },
-  {
-    slug: "checkerboard-reveal",
-    name: "Checkerboard Reveal",
-    description:
-      "A checkerboard-patterned mask expands to reveal the new theme in tiles.",
-    category: "mask",
-    type: "theme",
-    css: `::view-transition-old(root),
+		frameworks: {
+			vanilla: VANILLA_SNIPPET,
+			react: REACT_SNIPPET,
+			nextjs: NEXTJS_SNIPPET,
+			vue: VUE_SNIPPET,
+			svelte: SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 600,
+			easing: "cubic-bezier(0.65, 0, 0.35, 1)",
+		},
+		previewColors: {
+			from: "#ededed",
+			to: "#171717",
+		},
+		video: "/demos/theme-toggles/diagonal-wipe.mp4",
+		isNew: true,
+	},
+	{
+		slug: "checkerboard-reveal",
+		name: "Checkerboard Reveal",
+		description:
+			"A checkerboard-patterned mask expands to reveal the new theme in tiles.",
+		category: "mask",
+		type: "theme",
+		css: `::view-transition-old(root),
 .dark::view-transition-old(root) {
   animation: none;
   animation-fill-mode: both;
@@ -1206,7 +1206,7 @@ document.startViewTransition(() => switchTheme());`,
     mask-size: 200vmax;
   }
 }`,
-    js: `function switchTheme() {
+		js: `function switchTheme() {
   const el = document.documentElement;
   el.classList.toggle("dark");
   localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
@@ -1214,32 +1214,32 @@ document.startViewTransition(() => switchTheme());`,
 
 if (!document.startViewTransition) switchTheme();
 document.startViewTransition(() => switchTheme());`,
-    frameworks: {
-      vanilla: VANILLA_SNIPPET,
-      react: REACT_SNIPPET,
-      nextjs: NEXTJS_SNIPPET,
-      vue: VUE_SNIPPET,
-      svelte: SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 1000,
-      easing: "ease-in-out",
-    },
-    previewColors: {
-      from: "#ededed",
-      to: "#171717",
-    },
-    video: "/demos/theme-toggles/checkerboard-reveal.mp4",
-    isNew: true,
-  },
-  {
-    slug: "ripple-reveal",
-    name: "Ripple Reveal",
-    description:
-      "Concentric ring mask ripples outward from the click point to reveal the theme.",
-    category: "mask",
-    type: "theme",
-    css: `::view-transition-old(root),
+		frameworks: {
+			vanilla: VANILLA_SNIPPET,
+			react: REACT_SNIPPET,
+			nextjs: NEXTJS_SNIPPET,
+			vue: VUE_SNIPPET,
+			svelte: SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 1000,
+			easing: "ease-in-out",
+		},
+		previewColors: {
+			from: "#ededed",
+			to: "#171717",
+		},
+		video: "/demos/theme-toggles/checkerboard-reveal.mp4",
+		isNew: true,
+	},
+	{
+		slug: "ripple-reveal",
+		name: "Ripple Reveal",
+		description:
+			"Concentric ring mask ripples outward from the click point to reveal the theme.",
+		category: "mask",
+		type: "theme",
+		css: `::view-transition-old(root),
 .dark::view-transition-old(root) {
   animation: none;
   animation-fill-mode: both;
@@ -1261,7 +1261,7 @@ document.startViewTransition(() => switchTheme());`,
     mask-size: 220vmax;
   }
 }`,
-    js: `function switchTheme() {
+		js: `function switchTheme() {
   const el = document.documentElement;
   el.classList.toggle("dark");
   localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
@@ -1269,32 +1269,32 @@ document.startViewTransition(() => switchTheme());`,
 
 if (!document.startViewTransition) switchTheme();
 document.startViewTransition(() => switchTheme());`,
-    frameworks: {
-      vanilla: VANILLA_SNIPPET,
-      react: REACT_SNIPPET,
-      nextjs: NEXTJS_SNIPPET,
-      vue: VUE_SNIPPET,
-      svelte: SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 1100,
-      easing: "ease-in-out",
-    },
-    previewColors: {
-      from: "#ededed",
-      to: "#171717",
-    },
-    video: "/demos/theme-toggles/ripple-reveal.mp4",
-    isNew: true,
-  },
-  {
-    slug: "venetian-blinds-theme",
-    name: "Venetian Blinds",
-    description:
-      "Horizontal slats clip open one by one, like blinds, to reveal the new theme.",
-    category: "composite",
-    type: "theme",
-    css: `::view-transition-group(root) {
+		frameworks: {
+			vanilla: VANILLA_SNIPPET,
+			react: REACT_SNIPPET,
+			nextjs: NEXTJS_SNIPPET,
+			vue: VUE_SNIPPET,
+			svelte: SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 1100,
+			easing: "ease-in-out",
+		},
+		previewColors: {
+			from: "#ededed",
+			to: "#171717",
+		},
+		video: "/demos/theme-toggles/ripple-reveal.mp4",
+		isNew: true,
+	},
+	{
+		slug: "venetian-blinds-theme",
+		name: "Venetian Blinds",
+		description:
+			"Horizontal slats clip open one by one, like blinds, to reveal the new theme.",
+		category: "composite",
+		type: "theme",
+		css: `::view-transition-group(root) {
   animation-duration: 700ms;
   animation-timing-function: ease-in-out;
 }
@@ -1343,7 +1343,7 @@ document.startViewTransition(() => switchTheme());`,
     );
   }
 }`,
-    js: `function switchTheme() {
+		js: `function switchTheme() {
   const el = document.documentElement;
   el.classList.toggle("dark");
   localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
@@ -1351,31 +1351,31 @@ document.startViewTransition(() => switchTheme());`,
 
 if (!document.startViewTransition) switchTheme();
 document.startViewTransition(() => switchTheme());`,
-    frameworks: {
-      vanilla: VANILLA_SNIPPET,
-      react: REACT_SNIPPET,
-      nextjs: NEXTJS_SNIPPET,
-      vue: VUE_SNIPPET,
-      svelte: SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 700,
-      easing: "ease-in-out",
-    },
-    previewColors: {
-      from: "#ededed",
-      to: "#171717",
-    },
-    video: "/demos/theme-toggles/venetian-blinds-theme.mp4",
-    isNew: true,
-  },
-  {
-    slug: "spiral-reveal",
-    name: "Spiral Reveal",
-    description: "A spiral-shaped mask winds outward to reveal the new theme.",
-    category: "mask",
-    type: "theme",
-    css: `::view-transition-old(root),
+		frameworks: {
+			vanilla: VANILLA_SNIPPET,
+			react: REACT_SNIPPET,
+			nextjs: NEXTJS_SNIPPET,
+			vue: VUE_SNIPPET,
+			svelte: SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 700,
+			easing: "ease-in-out",
+		},
+		previewColors: {
+			from: "#ededed",
+			to: "#171717",
+		},
+		video: "/demos/theme-toggles/venetian-blinds-theme.mp4",
+		isNew: true,
+	},
+	{
+		slug: "spiral-reveal",
+		name: "Spiral Reveal",
+		description: "A spiral-shaped mask winds outward to reveal the new theme.",
+		category: "mask",
+		type: "theme",
+		css: `::view-transition-old(root),
 .dark::view-transition-old(root) {
   animation: none;
   animation-fill-mode: both;
@@ -1397,7 +1397,7 @@ document.startViewTransition(() => switchTheme());`,
     mask-size: 220vmax;
   }
 }`,
-    js: `function switchTheme() {
+		js: `function switchTheme() {
   const el = document.documentElement;
   el.classList.toggle("dark");
   localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
@@ -1405,32 +1405,32 @@ document.startViewTransition(() => switchTheme());`,
 
 if (!document.startViewTransition) switchTheme();
 document.startViewTransition(() => switchTheme());`,
-    frameworks: {
-      vanilla: VANILLA_SNIPPET,
-      react: REACT_SNIPPET,
-      nextjs: NEXTJS_SNIPPET,
-      vue: VUE_SNIPPET,
-      svelte: SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 1300,
-      easing: "ease-in-out",
-    },
-    previewColors: {
-      from: "#ededed",
-      to: "#171717",
-    },
-    video: "/demos/theme-toggles/spiral-reveal.mp4",
-    isNew: true,
-  },
-  {
-    slug: "wave-reveal-theme",
-    name: "Wave Reveal",
-    description:
-      "A wavy clip-path edge sweeps across the screen for an organic theme reveal.",
-    category: "composite",
-    type: "theme",
-    css: `::view-transition-group(root) {
+		frameworks: {
+			vanilla: VANILLA_SNIPPET,
+			react: REACT_SNIPPET,
+			nextjs: NEXTJS_SNIPPET,
+			vue: VUE_SNIPPET,
+			svelte: SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 1300,
+			easing: "ease-in-out",
+		},
+		previewColors: {
+			from: "#ededed",
+			to: "#171717",
+		},
+		video: "/demos/theme-toggles/spiral-reveal.mp4",
+		isNew: true,
+	},
+	{
+		slug: "wave-reveal-theme",
+		name: "Wave Reveal",
+		description:
+			"A wavy clip-path edge sweeps across the screen for an organic theme reveal.",
+		category: "composite",
+		type: "theme",
+		css: `::view-transition-group(root) {
   animation-duration: 800ms;
   animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
 }
@@ -1465,7 +1465,7 @@ document.startViewTransition(() => switchTheme());`,
     );
   }
 }`,
-    js: `function switchTheme() {
+		js: `function switchTheme() {
   const el = document.documentElement;
   el.classList.toggle("dark");
   localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
@@ -1473,36 +1473,36 @@ document.startViewTransition(() => switchTheme());`,
 
 if (!document.startViewTransition) switchTheme();
 document.startViewTransition(() => switchTheme());`,
-    frameworks: {
-      vanilla: VANILLA_SNIPPET,
-      react: REACT_SNIPPET,
-      nextjs: NEXTJS_SNIPPET,
-      vue: VUE_SNIPPET,
-      svelte: SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 800,
-      easing: "cubic-bezier(0.65, 0, 0.35, 1)",
-    },
-    previewColors: {
-      from: "#ededed",
-      to: "#171717",
-    },
-    video: "/demos/theme-toggles/wave-reveal-theme.mp4",
-    isNew: true,
-  },
+		frameworks: {
+			vanilla: VANILLA_SNIPPET,
+			react: REACT_SNIPPET,
+			nextjs: NEXTJS_SNIPPET,
+			vue: VUE_SNIPPET,
+			svelte: SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 800,
+			easing: "cubic-bezier(0.65, 0, 0.35, 1)",
+		},
+		previewColors: {
+			from: "#ededed",
+			to: "#171717",
+		},
+		video: "/demos/theme-toggles/wave-reveal-theme.mp4",
+		isNew: true,
+	},
 
-  // ─────────────────────────────────────────────
-  // NEW: page transitions
-  // ─────────────────────────────────────────────
-  {
-    slug: "curtain",
-    name: "Curtain",
-    description:
-      "Old page splits and slides apart like curtains to reveal the new page.",
-    category: "composite",
-    type: "page",
-    css: `::view-transition-old(root) {
+	// ─────────────────────────────────────────────
+	// NEW: page transitions
+	// ─────────────────────────────────────────────
+	{
+		slug: "curtain",
+		name: "Curtain",
+		description:
+			"Old page splits and slides apart like curtains to reveal the new page.",
+		category: "composite",
+		type: "page",
+		css: `::view-transition-old(root) {
   animation: curtain-out 600ms cubic-bezier(0.65, 0, 0.35, 1) both;
 }
 
@@ -1529,7 +1529,7 @@ document.startViewTransition(() => switchTheme());`,
     clip-path: inset(0 0 0 0);
   }
 }`,
-    js: `function navigateTo(url) {
+		js: `function navigateTo(url) {
   if (!document.startViewTransition) {
     window.location.href = url;
     return;
@@ -1538,32 +1538,32 @@ document.startViewTransition(() => switchTheme());`,
     window.location.href = url;
   });
 }`,
-    frameworks: {
-      vanilla: PAGE_VANILLA_SNIPPET,
-      react: PAGE_REACT_SNIPPET,
-      nextjs: PAGE_NEXTJS_SNIPPET,
-      vue: PAGE_VUE_SNIPPET,
-      svelte: PAGE_SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 600,
-      easing: "cubic-bezier(0.65, 0, 0.35, 1)",
-    },
-    previewColors: {
-      from: "#f2f2f2",
-      to: "#171717",
-    },
-    video: "/demos/page-transitions/curtain.mp4",
-    isNew: true,
-  },
-  {
-    slug: "cube",
-    name: "Cube",
-    description:
-      "Pages rotate around a 3D cube axis, old page swinging away as the new one turns in.",
-    category: "3d",
-    type: "page",
-    css: `::view-transition-old(root) {
+		frameworks: {
+			vanilla: PAGE_VANILLA_SNIPPET,
+			react: PAGE_REACT_SNIPPET,
+			nextjs: PAGE_NEXTJS_SNIPPET,
+			vue: PAGE_VUE_SNIPPET,
+			svelte: PAGE_SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 600,
+			easing: "cubic-bezier(0.65, 0, 0.35, 1)",
+		},
+		previewColors: {
+			from: "#f2f2f2",
+			to: "#171717",
+		},
+		video: "/demos/page-transitions/curtain.mp4",
+		isNew: true,
+	},
+	{
+		slug: "cube",
+		name: "Cube",
+		description:
+			"Pages rotate around a 3D cube axis, old page swinging away as the new one turns in.",
+		category: "3d",
+		type: "page",
+		css: `::view-transition-old(root) {
   animation: cube-out 700ms ease-in-out both;
   transform-origin: right center;
 }
@@ -1582,7 +1582,7 @@ document.startViewTransition(() => switchTheme());`,
   from { transform: perspective(1500px) rotateY(90deg) translateZ(-200px); }
   to { transform: perspective(1500px) rotateY(0deg) translateZ(0); }
 }`,
-    js: `function navigateTo(url) {
+		js: `function navigateTo(url) {
   if (!document.startViewTransition) {
     window.location.href = url;
     return;
@@ -1591,32 +1591,32 @@ document.startViewTransition(() => switchTheme());`,
     window.location.href = url;
   });
 }`,
-    frameworks: {
-      vanilla: PAGE_VANILLA_SNIPPET,
-      react: PAGE_REACT_SNIPPET,
-      nextjs: PAGE_NEXTJS_SNIPPET,
-      vue: PAGE_VUE_SNIPPET,
-      svelte: PAGE_SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 700,
-      easing: "ease-in-out",
-    },
-    previewColors: {
-      from: "#f2f2f2",
-      to: "#171717",
-    },
-    video: "/demos/page-transitions/cube.mp4",
-    isNew: true,
-  },
-  {
-    slug: "skew-slide",
-    name: "Skew Slide",
-    description:
-      "Pages skew slightly as they slide past each other for a dynamic, energetic feel.",
-    category: "3d",
-    type: "page",
-    css: `::view-transition-old(root) {
+		frameworks: {
+			vanilla: PAGE_VANILLA_SNIPPET,
+			react: PAGE_REACT_SNIPPET,
+			nextjs: PAGE_NEXTJS_SNIPPET,
+			vue: PAGE_VUE_SNIPPET,
+			svelte: PAGE_SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 700,
+			easing: "ease-in-out",
+		},
+		previewColors: {
+			from: "#f2f2f2",
+			to: "#171717",
+		},
+		video: "/demos/page-transitions/cube.mp4",
+		isNew: true,
+	},
+	{
+		slug: "skew-slide",
+		name: "Skew Slide",
+		description:
+			"Pages skew slightly as they slide past each other for a dynamic, energetic feel.",
+		category: "3d",
+		type: "page",
+		css: `::view-transition-old(root) {
   animation: skew-slide-out 450ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
@@ -1633,7 +1633,7 @@ document.startViewTransition(() => switchTheme());`,
   from { transform: skewX(8deg) translateX(100%); opacity: 0; }
   to { transform: skewX(0deg) translateX(0); opacity: 1; }
 }`,
-    js: `function navigateTo(url) {
+		js: `function navigateTo(url) {
   if (!document.startViewTransition) {
     window.location.href = url;
     return;
@@ -1642,32 +1642,32 @@ document.startViewTransition(() => switchTheme());`,
     window.location.href = url;
   });
 }`,
-    frameworks: {
-      vanilla: PAGE_VANILLA_SNIPPET,
-      react: PAGE_REACT_SNIPPET,
-      nextjs: PAGE_NEXTJS_SNIPPET,
-      vue: PAGE_VUE_SNIPPET,
-      svelte: PAGE_SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 450,
-      easing: "cubic-bezier(0.4, 0, 0.2, 1)",
-    },
-    previewColors: {
-      from: "#f2f2f2",
-      to: "#171717",
-    },
-    video: "/demos/page-transitions/skew-slide.mp4",
-    isNew: true,
-  },
-  {
-    slug: "page-curl",
-    name: "Page Curl",
-    description:
-      "The old page curls up from the bottom corner like a turning book page.",
-    category: "3d",
-    type: "page",
-    css: `::view-transition-old(root) {
+		frameworks: {
+			vanilla: PAGE_VANILLA_SNIPPET,
+			react: PAGE_REACT_SNIPPET,
+			nextjs: PAGE_NEXTJS_SNIPPET,
+			vue: PAGE_VUE_SNIPPET,
+			svelte: PAGE_SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 450,
+			easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+		},
+		previewColors: {
+			from: "#f2f2f2",
+			to: "#171717",
+		},
+		video: "/demos/page-transitions/skew-slide.mp4",
+		isNew: true,
+	},
+	{
+		slug: "page-curl",
+		name: "Page Curl",
+		description:
+			"The old page curls up from the bottom corner like a turning book page.",
+		category: "3d",
+		type: "page",
+		css: `::view-transition-old(root) {
   animation: page-curl-out 650ms ease-in both;
   transform-origin: bottom right;
 }
@@ -1697,7 +1697,7 @@ document.startViewTransition(() => switchTheme());`,
     opacity: 1;
   }
 }`,
-    js: `function navigateTo(url) {
+		js: `function navigateTo(url) {
   if (!document.startViewTransition) {
     window.location.href = url;
     return;
@@ -1706,32 +1706,32 @@ document.startViewTransition(() => switchTheme());`,
     window.location.href = url;
   });
 }`,
-    frameworks: {
-      vanilla: PAGE_VANILLA_SNIPPET,
-      react: PAGE_REACT_SNIPPET,
-      nextjs: PAGE_NEXTJS_SNIPPET,
-      vue: PAGE_VUE_SNIPPET,
-      svelte: PAGE_SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 650,
-      easing: "ease-in-out",
-    },
-    previewColors: {
-      from: "#f2f2f2",
-      to: "#171717",
-    },
-    video: "/demos/page-transitions/page-curl.mp4",
-    isNew: true,
-  },
-  {
-    slug: "accordion",
-    name: "Accordion",
-    description:
-      "Old page folds shut in vertical pleats while the new page unfolds open.",
-    category: "3d",
-    type: "page",
-    css: `::view-transition-old(root) {
+		frameworks: {
+			vanilla: PAGE_VANILLA_SNIPPET,
+			react: PAGE_REACT_SNIPPET,
+			nextjs: PAGE_NEXTJS_SNIPPET,
+			vue: PAGE_VUE_SNIPPET,
+			svelte: PAGE_SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 650,
+			easing: "ease-in-out",
+		},
+		previewColors: {
+			from: "#f2f2f2",
+			to: "#171717",
+		},
+		video: "/demos/page-transitions/page-curl.mp4",
+		isNew: true,
+	},
+	{
+		slug: "accordion",
+		name: "Accordion",
+		description:
+			"Old page folds shut in vertical pleats while the new page unfolds open.",
+		category: "3d",
+		type: "page",
+		css: `::view-transition-old(root) {
   animation: accordion-out 550ms ease-in-out both;
   transform-origin: left center;
 }
@@ -1750,7 +1750,7 @@ document.startViewTransition(() => switchTheme());`,
   from { transform: scaleX(0); opacity: 0.4; }
   to { transform: scaleX(1); opacity: 1; }
 }`,
-    js: `function navigateTo(url) {
+		js: `function navigateTo(url) {
   if (!document.startViewTransition) {
     window.location.href = url;
     return;
@@ -1759,32 +1759,32 @@ document.startViewTransition(() => switchTheme());`,
     window.location.href = url;
   });
 }`,
-    frameworks: {
-      vanilla: PAGE_VANILLA_SNIPPET,
-      react: PAGE_REACT_SNIPPET,
-      nextjs: PAGE_NEXTJS_SNIPPET,
-      vue: PAGE_VUE_SNIPPET,
-      svelte: PAGE_SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 550,
-      easing: "ease-in-out",
-    },
-    previewColors: {
-      from: "#f2f2f2",
-      to: "#171717",
-    },
-    video: "/demos/page-transitions/accordian.mp4",
-    isNew: true,
-  },
-  {
-    slug: "doorway",
-    name: "Doorway",
-    description:
-      "Old page swings away like a door on a hinge, revealing the new page behind it.",
-    category: "3d",
-    type: "page",
-    css: `::view-transition-old(root) {
+		frameworks: {
+			vanilla: PAGE_VANILLA_SNIPPET,
+			react: PAGE_REACT_SNIPPET,
+			nextjs: PAGE_NEXTJS_SNIPPET,
+			vue: PAGE_VUE_SNIPPET,
+			svelte: PAGE_SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 550,
+			easing: "ease-in-out",
+		},
+		previewColors: {
+			from: "#f2f2f2",
+			to: "#171717",
+		},
+		video: "/demos/page-transitions/accordian.mp4",
+		isNew: true,
+	},
+	{
+		slug: "doorway",
+		name: "Doorway",
+		description:
+			"Old page swings away like a door on a hinge, revealing the new page behind it.",
+		category: "3d",
+		type: "page",
+		css: `::view-transition-old(root) {
   animation: doorway-out 600ms ease-in both;
   transform-origin: left center;
 }
@@ -1802,7 +1802,7 @@ document.startViewTransition(() => switchTheme());`,
   from { transform: scale(1.05); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }`,
-    js: `function navigateTo(url) {
+		js: `function navigateTo(url) {
   if (!document.startViewTransition) {
     window.location.href = url;
     return;
@@ -1811,32 +1811,32 @@ document.startViewTransition(() => switchTheme());`,
     window.location.href = url;
   });
 }`,
-    frameworks: {
-      vanilla: PAGE_VANILLA_SNIPPET,
-      react: PAGE_REACT_SNIPPET,
-      nextjs: PAGE_NEXTJS_SNIPPET,
-      vue: PAGE_VUE_SNIPPET,
-      svelte: PAGE_SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 600,
-      easing: "ease-in-out",
-    },
-    previewColors: {
-      from: "#f2f2f2",
-      to: "#171717",
-    },
-    video: "/demos/page-transitions/doorway.mp4",
-    isNew: true,
-  },
-  {
-    slug: "book-flip",
-    name: "Book Flip",
-    description:
-      "New page flips over the old one like a page turning in a book, centered on the spine.",
-    category: "3d",
-    type: "page",
-    css: `::view-transition-old(root) {
+		frameworks: {
+			vanilla: PAGE_VANILLA_SNIPPET,
+			react: PAGE_REACT_SNIPPET,
+			nextjs: PAGE_NEXTJS_SNIPPET,
+			vue: PAGE_VUE_SNIPPET,
+			svelte: PAGE_SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 600,
+			easing: "ease-in-out",
+		},
+		previewColors: {
+			from: "#f2f2f2",
+			to: "#171717",
+		},
+		video: "/demos/page-transitions/doorway.mp4",
+		isNew: true,
+	},
+	{
+		slug: "book-flip",
+		name: "Book Flip",
+		description:
+			"New page flips over the old one like a page turning in a book, centered on the spine.",
+		category: "3d",
+		type: "page",
+		css: `::view-transition-old(root) {
   animation: book-flip-out 700ms ease-in-out both;
   transform-origin: center center;
 }
@@ -1855,7 +1855,7 @@ document.startViewTransition(() => switchTheme());`,
   from { transform: perspective(1600px) rotateX(-90deg); opacity: 0.3; }
   to { transform: perspective(1600px) rotateX(0deg); opacity: 1; }
 }`,
-    js: `function navigateTo(url) {
+		js: `function navigateTo(url) {
   if (!document.startViewTransition) {
     window.location.href = url;
     return;
@@ -1864,32 +1864,32 @@ document.startViewTransition(() => switchTheme());`,
     window.location.href = url;
   });
 }`,
-    frameworks: {
-      vanilla: PAGE_VANILLA_SNIPPET,
-      react: PAGE_REACT_SNIPPET,
-      nextjs: PAGE_NEXTJS_SNIPPET,
-      vue: PAGE_VUE_SNIPPET,
-      svelte: PAGE_SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 700,
-      easing: "ease-in-out",
-    },
-    previewColors: {
-      from: "#f2f2f2",
-      to: "#171717",
-    },
-    video: "/demos/page-transitions/book-flip.mp4",
-    isNew: true,
-  },
-  {
-    slug: "roll",
-    name: "Roll",
-    description:
-      "Old page rolls away like a scroll while the new page unrolls into place.",
-    category: "composite",
-    type: "page",
-    css: `::view-transition-old(root) {
+		frameworks: {
+			vanilla: PAGE_VANILLA_SNIPPET,
+			react: PAGE_REACT_SNIPPET,
+			nextjs: PAGE_NEXTJS_SNIPPET,
+			vue: PAGE_VUE_SNIPPET,
+			svelte: PAGE_SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 700,
+			easing: "ease-in-out",
+		},
+		previewColors: {
+			from: "#f2f2f2",
+			to: "#171717",
+		},
+		video: "/demos/page-transitions/book-flip.mp4",
+		isNew: true,
+	},
+	{
+		slug: "roll",
+		name: "Roll",
+		description:
+			"Old page rolls away like a scroll while the new page unrolls into place.",
+		category: "composite",
+		type: "page",
+		css: `::view-transition-old(root) {
   animation: roll-out 550ms cubic-bezier(0.4, 0, 0.2, 1) both;
   transform-origin: top center;
 }
@@ -1908,7 +1908,7 @@ document.startViewTransition(() => switchTheme());`,
   from { transform: scaleY(0) translateY(-20%); opacity: 0; }
   to { transform: scaleY(1) translateY(0); opacity: 1; }
 }`,
-    js: `function navigateTo(url) {
+		js: `function navigateTo(url) {
   if (!document.startViewTransition) {
     window.location.href = url;
     return;
@@ -1917,32 +1917,32 @@ document.startViewTransition(() => switchTheme());`,
     window.location.href = url;
   });
 }`,
-    frameworks: {
-      vanilla: PAGE_VANILLA_SNIPPET,
-      react: PAGE_REACT_SNIPPET,
-      nextjs: PAGE_NEXTJS_SNIPPET,
-      vue: PAGE_VUE_SNIPPET,
-      svelte: PAGE_SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 550,
-      easing: "cubic-bezier(0.4, 0, 0.2, 1)",
-    },
-    previewColors: {
-      from: "#f2f2f2",
-      to: "#171717",
-    },
-    video: "/demos/page-transitions/roll.mp4",
-    isNew: true,
-  },
-  {
-    slug: "fold",
-    name: "Fold",
-    description:
-      "Old page folds inward along its vertical center as the new page emerges.",
-    category: "3d",
-    type: "page",
-    css: `::view-transition-old(root) {
+		frameworks: {
+			vanilla: PAGE_VANILLA_SNIPPET,
+			react: PAGE_REACT_SNIPPET,
+			nextjs: PAGE_NEXTJS_SNIPPET,
+			vue: PAGE_VUE_SNIPPET,
+			svelte: PAGE_SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 550,
+			easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+		},
+		previewColors: {
+			from: "#f2f2f2",
+			to: "#171717",
+		},
+		video: "/demos/page-transitions/roll.mp4",
+		isNew: true,
+	},
+	{
+		slug: "fold",
+		name: "Fold",
+		description:
+			"Old page folds inward along its vertical center as the new page emerges.",
+		category: "3d",
+		type: "page",
+		css: `::view-transition-old(root) {
   animation: fold-out 600ms ease-in-out both;
   transform-origin: center center;
 }
@@ -1960,7 +1960,7 @@ document.startViewTransition(() => switchTheme());`,
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }`,
-    js: `function navigateTo(url) {
+		js: `function navigateTo(url) {
   if (!document.startViewTransition) {
     window.location.href = url;
     return;
@@ -1969,32 +1969,32 @@ document.startViewTransition(() => switchTheme());`,
     window.location.href = url;
   });
 }`,
-    frameworks: {
-      vanilla: PAGE_VANILLA_SNIPPET,
-      react: PAGE_REACT_SNIPPET,
-      nextjs: PAGE_NEXTJS_SNIPPET,
-      vue: PAGE_VUE_SNIPPET,
-      svelte: PAGE_SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 600,
-      easing: "ease-in-out",
-    },
-    previewColors: {
-      from: "#f2f2f2",
-      to: "#171717",
-    },
-    video: "/demos/page-transitions/fold.mp4",
-    isNew: true,
-  },
-  {
-    slug: "glitch",
-    name: "Glitch",
-    description:
-      "Old page breaks into offset RGB-split slices before the new page snaps into focus.",
-    category: "composite",
-    type: "page",
-    css: `::view-transition-old(root) {
+		frameworks: {
+			vanilla: PAGE_VANILLA_SNIPPET,
+			react: PAGE_REACT_SNIPPET,
+			nextjs: PAGE_NEXTJS_SNIPPET,
+			vue: PAGE_VUE_SNIPPET,
+			svelte: PAGE_SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 600,
+			easing: "ease-in-out",
+		},
+		previewColors: {
+			from: "#f2f2f2",
+			to: "#171717",
+		},
+		video: "/demos/page-transitions/fold.mp4",
+		isNew: true,
+	},
+	{
+		slug: "glitch",
+		name: "Glitch",
+		description:
+			"Old page breaks into offset RGB-split slices before the new page snaps into focus.",
+		category: "composite",
+		type: "page",
+		css: `::view-transition-old(root) {
   animation: glitch-out 400ms steps(6, end) both;
 }
 
@@ -2017,7 +2017,7 @@ document.startViewTransition(() => switchTheme());`,
   60% { transform: translate(6px, 0); opacity: 0.8; }
   100% { transform: translate(0, 0); opacity: 1; }
 }`,
-    js: `function navigateTo(url) {
+		js: `function navigateTo(url) {
   if (!document.startViewTransition) {
     window.location.href = url;
     return;
@@ -2026,32 +2026,32 @@ document.startViewTransition(() => switchTheme());`,
     window.location.href = url;
   });
 }`,
-    frameworks: {
-      vanilla: PAGE_VANILLA_SNIPPET,
-      react: PAGE_REACT_SNIPPET,
-      nextjs: PAGE_NEXTJS_SNIPPET,
-      vue: PAGE_VUE_SNIPPET,
-      svelte: PAGE_SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 400,
-      easing: "steps(6, end)",
-    },
-    previewColors: {
-      from: "#f2f2f2",
-      to: "#171717",
-    },
-    video: "/demos/page-transitions/glitch.mp4",
-    isNew: true,
-  },
-  {
-    slug: "iris-wipe-page",
-    name: "Iris Wipe",
-    description:
-      "A circular iris closes over the old page then opens onto the new one, like an old film cut.",
-    category: "mask",
-    type: "page",
-    css: `::view-transition-old(root) {
+		frameworks: {
+			vanilla: PAGE_VANILLA_SNIPPET,
+			react: PAGE_REACT_SNIPPET,
+			nextjs: PAGE_NEXTJS_SNIPPET,
+			vue: PAGE_VUE_SNIPPET,
+			svelte: PAGE_SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 400,
+			easing: "steps(6, end)",
+		},
+		previewColors: {
+			from: "#f2f2f2",
+			to: "#171717",
+		},
+		video: "/demos/page-transitions/glitch.mp4",
+		isNew: true,
+	},
+	{
+		slug: "iris-wipe-page",
+		name: "Iris Wipe",
+		description:
+			"A circular iris closes over the old page then opens onto the new one, like an old film cut.",
+		category: "mask",
+		type: "page",
+		css: `::view-transition-old(root) {
   animation: iris-close 350ms ease-in both;
 }
 
@@ -2069,7 +2069,7 @@ document.startViewTransition(() => switchTheme());`,
   from { mask: radial-gradient(circle at center, white 0%, white 0%, transparent 0%); }
   to { mask: radial-gradient(circle at center, white 100%, white 100%, transparent 100%); }
 }`,
-    js: `function navigateTo(url) {
+		js: `function navigateTo(url) {
   if (!document.startViewTransition) {
     window.location.href = url;
     return;
@@ -2078,42 +2078,42 @@ document.startViewTransition(() => switchTheme());`,
     window.location.href = url;
   });
 }`,
-    frameworks: {
-      vanilla: PAGE_VANILLA_SNIPPET,
-      react: PAGE_REACT_SNIPPET,
-      nextjs: PAGE_NEXTJS_SNIPPET,
-      vue: PAGE_VUE_SNIPPET,
-      svelte: PAGE_SVELTE_SNIPPET,
-    },
-    config: {
-      duration: 700,
-      easing: "ease-in-out",
-    },
-    previewColors: {
-      from: "#f2f2f2",
-      to: "#171717",
-    },
-    video: "/demos/page-transitions/iris-wipe.mp4",
-    isNew: true,
-  },
+		frameworks: {
+			vanilla: PAGE_VANILLA_SNIPPET,
+			react: PAGE_REACT_SNIPPET,
+			nextjs: PAGE_NEXTJS_SNIPPET,
+			vue: PAGE_VUE_SNIPPET,
+			svelte: PAGE_SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 700,
+			easing: "ease-in-out",
+		},
+		previewColors: {
+			from: "#f2f2f2",
+			to: "#171717",
+		},
+		video: "/demos/page-transitions/iris-wipe.mp4",
+		isNew: true,
+	},
 ];
 
 export const TRANSITION_CSS: Record<string, string> = Object.fromEntries(
-  transitions.map((t) => [t.slug, t.css])
+	transitions.map((t) => [t.slug, t.css]),
 );
 
 export function getTransitionBySlug(
-  slug: string
+	slug: string,
 ): TransitionTemplate | undefined {
-  return transitions.find((t) => t.slug === slug);
+	return transitions.find((t) => t.slug === slug);
 }
 
 export const categories = [
-  { id: "all", label: "All" },
-  { id: "simple", label: "Simple" },
-  { id: "mask", label: "Mask" },
-  { id: "3d", label: "3D" },
-  { id: "composite", label: "Composite" },
+	{ id: "all", label: "All" },
+	{ id: "simple", label: "Simple" },
+	{ id: "mask", label: "Mask" },
+	{ id: "3d", label: "3D" },
+	{ id: "composite", label: "Composite" },
 ] as const;
 
 export type CategoryId = (typeof categories)[number]["id"];

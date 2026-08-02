@@ -15,6 +15,7 @@ const staticPages = [
   { path: "", priority: "1.0", changefreq: "weekly" },
   { path: "about", priority: "0.5", changefreq: "monthly" },
   { path: "components", priority: "0.9", changefreq: "weekly" },
+  { path: "components/edge-cases", priority: "0.8", changefreq: "monthly" },
   { path: "components/theme/animated-theme-toggler", priority: "0.8", changefreq: "monthly" },
   { path: "components/theme/theme-toggle-button", priority: "0.8", changefreq: "monthly" },
   { path: "components/theme/theme-toggle-switch", priority: "0.8", changefreq: "monthly" },
