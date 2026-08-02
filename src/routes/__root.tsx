@@ -63,11 +63,11 @@ export const Route = createRootRoute({
 			},
 			{
 				property: "og:url",
-				content: "https://transition-kit.vercel.app",
+				content: "https://transition-kit.space",
 			},
 			{
 				property: "og:image",
-				content: "https://transition-kit.vercel.app/og-image.png",
+				content: "https://transition-kit.space/og-image.png",
 			},
 			{
 				name: "twitter:card",
@@ -84,7 +84,7 @@ export const Route = createRootRoute({
 			},
 			{
 				name: "twitter:image",
-				content: "https://transition-kit.vercel.app/og-image.png",
+				content: "https://transition-kit.space/og-image.png",
 			},
 		],
 		links: [
@@ -94,7 +94,7 @@ export const Route = createRootRoute({
 			},
 			{
 				rel: "canonical",
-				href: "https://transition-kit.vercel.app",
+				href: "https://transition-kit.space",
 			},
 			{
 				rel: "icon",
@@ -131,7 +131,7 @@ export const Route = createRootRoute({
 						"@context": "https://schema.org",
 						"@type": "WebSite",
 						name: "Transition Kit",
-						url: "https://transition-kit.vercel.app",
+						url: "https://transition-kit.space",
 						description:
 							"Pre-built, copy-paste page transition and theme toggle components using the View Transitions API.",
 						applicationCategory: "DeveloperApplication",

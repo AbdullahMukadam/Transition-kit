@@ -33,7 +33,7 @@ export const Route = createFileRoute("/templates/$")({
 				{ name: "twitter:title", content: `${loaderData.title} — Transition Kit` },
 				{ name: "twitter:description", content: loaderData.description },
 			],
-			links: [{ rel: "canonical", href: `https://transition-kit.vercel.app${loaderData.url}` }],
+			links: [{ rel: "canonical", href: `https://transition-kit.space${loaderData.url}` }],
 		};
 	},
 });

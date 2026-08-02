@@ -64,7 +64,7 @@ export const Route = createFileRoute("/transition/$slug")({
 			links: [
 				{
 					rel: "canonical",
-					href: `https://transition-kit.vercel.app/transition/${loaderData.transition.slug}`,
+					href: `https://transition-kit.space/transition/${loaderData.transition.slug}`,
 				},
 			],
 		};

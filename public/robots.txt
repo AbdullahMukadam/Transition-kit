@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://transition-kit.vercel.app/sitemap.xml
+Sitemap: https://transition-kit.space/sitemap.xml

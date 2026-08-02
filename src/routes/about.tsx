@@ -23,7 +23,7 @@ export const Route = createFileRoute("/about")({
 					"Transition Kit provides pre-built, copy-paste page transition and theme toggle components built on the View Transitions API.",
 			},
 		],
-		links: [{ rel: "canonical", href: "https://transition-kit.vercel.app/about" }],
+		links: [{ rel: "canonical", href: "https://transition-kit.space/about" }],
 	}),
 });
 

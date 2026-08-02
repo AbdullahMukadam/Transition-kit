@@ -12,7 +12,7 @@ import { useEffect, useRef, useState } from "react";
 import type { TransitionTemplate } from "#/data/transitions";
 import { cn } from "#/lib/utils";
 
-const SITE_URL = "https://transitions.dev";
+const SITE_URL = "https://transition-kit.space";
 
 function XIcon(props: React.SVGProps<SVGSVGElement>) {
 	return (

@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 import { transitions } from "../src/data/transitions";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const BASE = "https://transition-kit.vercel.app";
+const BASE = "https://transition-kit.space";
 
 const staticPages = [
   { path: "", priority: "1.0", changefreq: "weekly" },
