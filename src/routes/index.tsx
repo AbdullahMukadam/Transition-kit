@@ -1,44 +1,48 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { HomeLayout } from "fumadocs-ui/layouts/home";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { useCallback, useRef } from "react";
-import NewUpdates from "#/components/home/NewUpdates";
+import { Hero } from "#/components/home/Hero";
 import GapDivider from "#/components/layout/GapDivider";
+import { MockSite } from "#/components/transitions/MockSite";
 import TransitionCard from "#/components/transitions/TransitionCard";
 import { Button } from "#/components/ui/button";
 import ButtonCreativeRight from "#/components/ui/creative-button-right";
 import { TimelineAnimation } from "#/components/ui/timeline-animation";
 import { transitions } from "#/data/transitions";
 import { triggerLiveTransition } from "#/lib/trigger-transition";
+import { homeOptions } from "@/lib/layout.shared";
+import NewUpdates from "#/components/home/NewUpdates";
 
 export const Route = createFileRoute("/")({
-	component: App,
-	head: () => ({
-		meta: [
-			{
-				name: "description",
-				content:
-					"Browse 30+ page transition and theme toggle templates. Fade, slide, scale, flip, blur, mask reveals, and 3D transitions for the View Transitions API.",
-			},
-			{
-				property: "og:title",
-				content: "Transition Kit | Browse Templates",
-			},
-			{
-				property: "og:description",
-				content:
-					"Browse 30+ page transition and theme toggle templates for the View Transitions API.",
-			},
-			{
-				name: "twitter:title",
-				content: "Transition Kit | Browse Templates",
-			},
-			{
-				name: "twitter:description",
-				content:
-					"Browse 30+ page transition and theme toggle templates for the View Transitions API.",
-			},
-		],
-	}),
+  component: App,
+  head: () => ({
+    meta: [
+      {
+        name: "description",
+        content:
+          "Browse 30+ page transition and theme toggle templates. Fade, slide, scale, flip, blur, mask reveals, and 3D transitions for the View Transitions API.",
+      },
+      {
+        property: "og:title",
+        content: "Transition Kit | Beautiful Transitions for the Modern Web",
+      },
+      {
+        property: "og:description",
+        content:
+          "Browse 30+ page transition and theme toggle templates for the View Transitions API.",
+      },
+      {
+        name: "twitter:title",
+        content: "Transition Kit | Beautiful Transitions for the Modern Web",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Browse 30+ page transition and theme toggle templates for the View Transitions API.",
+      },
+    ],
+  }),
 });
 
 const maskTransitions = transitions.filter((t) => t.category === "mask");
@@ -46,178 +50,167 @@ const featured = transitions.filter((t) => t.featured);
 const newTransitions = transitions.filter((t) => t.isNew).slice(0, 6);
 
 function App() {
-	const timelineRef = useRef<HTMLDivElement>(null);
-	const navigate = useNavigate();
-	const maskIndexRef = useRef(0);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const maskIndexRef = useRef(0);
 
-	const handleDemo = useCallback(() => {
-		const t = maskTransitions[maskIndexRef.current % maskTransitions.length];
-		maskIndexRef.current += 1;
-		triggerLiveTransition(t.css, t.config.duration, t.config.easing);
-	}, []);
+  const handleDemo = useCallback(() => {
+    const t = maskTransitions[maskIndexRef.current % maskTransitions.length];
+    maskIndexRef.current += 1;
+    triggerLiveTransition(t.css, t.config.duration, t.config.easing);
+  }, []);
 
-	return (
-		<main className="min-h-screen" ref={timelineRef}>
-			{/* Announcement Bar */}
-			{/* <AnnouncementBar /> */}
+  return (
+    <HomeLayout {...homeOptions()}>
+      <main className="min-h-screen pt-4 pb-6 md:pb-12" ref={timelineRef}>
+        {/* Hero */}
+        <div className="relative mx-auto flex h-[70vh] min-h-[600px] w-full max-w-[1250px] overflow-hidden rounded-2xl border p-4 md:p-8">
+          <Hero />
+          {/* Preview image — clipped by container: centered on mobile, right on desktop */}
+          <div className="pointer-events-none absolute left-1/2 top-[60%] z-[1] w-[85%] -translate-x-1/2 md:left-auto md:right-0 md:w-[55%] md:translate-x-0">
+            <MockSite />
+          </div>
+          <div className="z-[2] flex size-full flex-col max-md:items-center max-md:text-center px-4 md:p-12">
+            <TimelineAnimation
+              animationNum={2}
+              timelineRef={timelineRef}
+              className=" relative"
+            >
+              <NewUpdates />
+            </TimelineAnimation>
 
-			{/* Hero Section */}
-			<div className="text-center px-5 py-20 lg:py-32 lg:px-20 relative">
-				<TimelineAnimation
-					animationNum={2}
-					timelineRef={timelineRef}
-					className="mb-4 relative"
-				>
-					<NewUpdates />
-				</TimelineAnimation>
+            <h1 className="mt-4 mb-6 text-4xl text-white leading-[1.05] font-medium xl:mt-8 xl:mb-10 xl:text-5xl">
+              Build beautiful
+              <br className="md:hidden" /> transitions,
+              <br />
+              your <span className="text-white">style</span>.
+            </h1>
+            <div className="flex flex-row flex-wrap items-center justify-center gap-4 w-fit">
+              <Button size="lg" onClick={handleDemo} className="gap-2">
+                <Sparkles className="size-4" />
+                Try a theme toggle
+              </Button>
+              <Link to="/templates" className="no-underline">
+                <Button size="lg" variant="secondary" className="gap-1.5">
+                  Browse templates
+                  <ArrowUpRight className="size-3.5" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
 
-				<TimelineAnimation
-					as="h1"
-					animationNum={3}
-					timelineRef={timelineRef}
-					className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.1] tracking-tight text-[var(--foreground)] mb-6 max-w-3xl mx-auto relative"
-				>
-					Beautiful transitions for the{" "}
-					<span className="font-semibold text-[var(--foreground)]">
-						modern web
-					</span>
-					.
-				</TimelineAnimation>
+        {/* Statement */}
+        <div className="mx-auto mt-12 grid w-full max-w-[1400px] mb-8 grid-cols-1 gap-10 px-6 lg:mt-12 md:px-12 lg:grid-cols-2">
+          <p className="text-2xl leading-snug tracking-tight font-light col-span-full md:text-3xl xl:text-4xl">
+            Transition Kit is a{" "}
+            <span className="font-medium">page transition</span> and{" "}
+            <span className="font-medium">theme toggle</span> library for the
+            modern web, powered by the{" "}
+            <span className="font-medium">View Transitions API</span>. Preview
+            templates live, customize the timing and easing, and copy the code
+            straight into your project.
+          </p>
+        </div>
 
-				<TimelineAnimation
-					as="p"
-					animationNum={4}
-					timelineRef={timelineRef}
-					className="text-base text-[var(--muted-foreground)] leading-relaxed mb-10 max-w-xl mx-auto relative"
-				>
-					Premade page and theme transition templates using the View
-					Transitions API. Preview them live, customize parameters, and copy
-					the code directly into your project.
-				</TimelineAnimation>
+        <GapDivider />
 
-				<TimelineAnimation
-					animationNum={5}
-					timelineRef={timelineRef}
-					className="flex flex-col sm:flex-row items-center justify-center gap-3 relative"
-				>
-					<Button
-						size="lg"
-						onClick={handleDemo}
-						className="gap-2 bg-[var(--foreground)] text-[var(--background)] hover:bg-[var(--foreground)]/90 shadow-[0_2px_8px_rgba(0,0,0,0.15)]"
-					>
-						<Sparkles className="size-4" />
-						Try a theme toggle
-					</Button>
-					<Link to="/templates">
-						<Button
-							size="lg"
-							variant="outline"
-							className="gap-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
-						>
-							Browse templates
-							<ArrowUpRight className="size-3.5" />
-						</Button>
-					</Link>
-				</TimelineAnimation>
+        {/* New Templates */}
+        <section className="mx-auto w-full px-5 py-16 lg:px-20">
+          <TimelineAnimation
+            animationNum={2}
+            timelineRef={timelineRef}
+            className="mb-8 flex items-end justify-between"
+          >
+            <div>
+              <h2 className="text-xl font-semibold text-[var(--foreground)] tracking-tight">
+                New Templates
+              </h2>
+              <p className="mt-1 text-sm text-[var(--muted-foreground)]">
+                GIF mask-based theme transitions
+              </p>
+            </div>
+            <Link
+              to="/templates"
+              className="text-sm font-medium text-[var(--foreground)] no-underline transition hover:text-[var(--muted-foreground)] inline-flex items-center gap-1"
+            >
+              View all
+              <ArrowUpRight className="size-3.5" />
+            </Link>
+          </TimelineAnimation>
 
-				{/* Transition names marquee */}
-			</div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {newTransitions.map((t, i) => (
+              <TimelineAnimation
+                key={t.slug}
+                animationNum={3 + i}
+                timelineRef={timelineRef}
+              >
+                <TransitionCard transition={t} index={i} />
+              </TimelineAnimation>
+            ))}
+          </div>
+        </section>
 
-			<GapDivider />
+        <GapDivider />
 
-			{/* New Templates Section */}
-			<div className="px-5 py-16 lg:px-20">
-				<TimelineAnimation
-					animationNum={2}
-					timelineRef={timelineRef}
-					className="flex items-center justify-between mb-8"
-				>
-					<div>
-						<h2 className="text-xl font-semibold text-[var(--foreground)] tracking-tight">
-							New Templates
-						</h2>
-						<p className="mt-1 text-sm text-[var(--muted-foreground)]">
-							GIF mask-based theme transitions
-						</p>
-					</div>
-					<Link
-						to="/templates"
-						className="text-sm font-medium text-[var(--accent)] no-underline transition hover:underline inline-flex items-center gap-1"
-					>
-						View all
-						<ArrowUpRight className="size-3.5" />
-					</Link>
-				</TimelineAnimation>
+        {/* Featured Templates */}
+        <section className="mx-auto w-full px-5 py-16 lg:px-20">
+          <TimelineAnimation
+            animationNum={2}
+            timelineRef={timelineRef}
+            className="mb-8"
+          >
+            <h2 className="text-xl font-semibold text-[var(--foreground)] tracking-tight">
+              Featured Templates
+            </h2>
+            <p className="mt-1 text-sm text-[var(--muted-foreground)]">
+              Mask-based theme transitions
+            </p>
+          </TimelineAnimation>
 
-				<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-					{newTransitions.map((t, i) => (
-						<TimelineAnimation
-							key={t.slug}
-							animationNum={3 + i}
-							timelineRef={timelineRef}
-						>
-							<TransitionCard transition={t} index={i} />
-						</TimelineAnimation>
-					))}
-				</div>
-			</div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {featured.map((t, i) => (
+              <TimelineAnimation
+                key={t.slug}
+                animationNum={3 + i}
+                timelineRef={timelineRef}
+              >
+                <TransitionCard transition={t} index={i} />
+              </TimelineAnimation>
+            ))}
+          </div>
 
-			<GapDivider />
+          <div className="mt-8 flex w-full items-center justify-center">
+            <Link to="/templates" className="w-52 no-underline">
+              <ButtonCreativeRight
+                firstText="Browse All"
+                secondText="Browse All"
+              />
+            </Link>
+          </div>
+        </section>
 
-			{/* Featured Templates Section */}
-			<div className="px-5 py-16 lg:px-20">
-				<TimelineAnimation
-					animationNum={2}
-					timelineRef={timelineRef}
-					className="mb-8"
-				>
-					<h2 className="text-xl font-semibold text-[var(--foreground)] tracking-tight">
-						Featured Templates
-					</h2>
-					<p className="mt-1 text-sm text-[var(--muted-foreground)]">
-						Mask-based theme transitions
-					</p>
-				</TimelineAnimation>
+        <GapDivider />
 
-				<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-					{featured.map((t, i) => (
-						<TimelineAnimation
-							key={t.slug}
-							animationNum={3 + i}
-							timelineRef={timelineRef}
-						>
-							<TransitionCard transition={t} index={i} />
-						</TimelineAnimation>
-					))}
-				</div>
-
-				<div className="w-full mt-8 flex items-center justify-center">
-					<div className="w-52" onClick={() => navigate({ to: "/templates" })}>
-						<ButtonCreativeRight
-							firstText="Browse All"
-							secondText="Browse All"
-						/>
-					</div>
-				</div>
-			</div>
-
-			<GapDivider />
-
-			{/* Browser Support */}
-			<div className="px-5 py-16 lg:px-20">
-				<TimelineAnimation
-					animationNum={2}
-					timelineRef={timelineRef}
-					className="rounded-lg border border-[var(--border)] bg-[var(--card)] p-6"
-				>
-					<p className="island-kicker mb-2">Browser Support</p>
-					<p className="m-0 max-w-3xl text-sm text-[var(--muted-foreground)]">
-						The View Transitions API is currently supported in Chrome 111+ and
-						Edge 111+. All templates include a graceful fallback for unsupported
-						browsers. Firefox and Safari support is expected in future releases.
-					</p>
-				</TimelineAnimation>
-			</div>
-		</main>
-	);
+        {/* Browser Support */}
+        <section className="mx-auto w-full max-w-5xl px-5 py-16 lg:px-20">
+          <TimelineAnimation
+            animationNum={2}
+            timelineRef={timelineRef}
+            className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-8"
+          >
+            <p className="mb-2 text-sm font-medium uppercase tracking-widest text-[var(--muted-foreground)]">
+              Browser Support
+            </p>
+            <p className="m-0 max-w-3xl text-[var(--muted-foreground)]">
+              The View Transitions API is currently supported in Chrome 111+,
+              Edge 111+, and Opera 111+. All templates include a graceful
+              fallback for unsupported browsers. Firefox and Safari support is
+              expected in future releases.
+            </p>
+          </TimelineAnimation>
+        </section>
+      </main>
+    </HomeLayout>
+  );
 }

@@ -179,7 +179,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				) : (
 					<Container>
 						<RootProvider>
-							<Header />
 							{children}
 							<Footer />
 							<TanStackDevtools
