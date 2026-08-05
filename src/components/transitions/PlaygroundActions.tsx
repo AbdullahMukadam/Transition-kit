@@ -5,7 +5,6 @@ import {
 	Share2,
 	Sparkles,
 	SquareCode,
-	Terminal,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
@@ -165,8 +164,6 @@ export function PlaygroundActions({
 	const shareUrl = `${SITE_URL}/transition/${transition.slug}`;
 	const shareText = `Check out the ${transition.name} transition`;
 
-	const installCommand = `npx shadcn@latest add @transitions/${transition.slug}`;
-
 	const buildCode = () => {
 		const componentName =
 			transition.type === "theme" ? "ThemeToggleButton" : "PageTransition";
@@ -225,12 +222,6 @@ export function PlaygroundActions({
 						label: "Copy configured code",
 						icon: SquareCode,
 						action: { copy: buildCode },
-					},
-					{
-						id: "install",
-						label: "Copy install command",
-						icon: Terminal,
-						action: { copy: () => installCommand },
 					},
 				]}
 			/>

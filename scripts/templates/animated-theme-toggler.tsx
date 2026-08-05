@@ -37,8 +37,15 @@ function triggerLiveTransition(css: string, duration: number, easing: string) {
 
 	const style = document.createElement("style");
 	const customCSS = css
-		.replace(/(\d+)ms/g, `${duration}ms`)
-		.replace(/ease-in-out|cubic-bezier\([^)]+\)/g, easing);
+		.replace(/(\d+(?:\.\d+)?)(ms|s)\b/g, `${duration}ms`)
+		.replace(
+			/ease-in-out|ease-in\b|ease-out\b|linear|ease\b|steps\([^)]*\)|cubic-bezier\([^)]+\)|var\(--[a-z0-9-]+\)/g,
+			easing,
+		)
+		.replace(
+			/(animation:\s*[\w-]+\s+\d+(?:\.\d+)?ms)(?=\s+(?:both|forwards|backwards)|;)/g,
+			`$1 ${easing}`,
+		);
 	style.textContent = customCSS;
 	document.head.appendChild(style);
 	activeStyle = style;

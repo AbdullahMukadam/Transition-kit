@@ -146,8 +146,15 @@ function injectTransitionCSS(
 	}
 
 	let customCSS = css
-		.replace(/(\d+)ms/g, `${duration}ms`)
-		.replace(/ease-in-out|cubic-bezier\([^)]+\)/g, easing);
+		.replace(/(\d+(?:\.\d+)?)(ms|s)\b/g, `${duration}ms`)
+		.replace(
+			/ease-in-out|ease-in\b|ease-out\b|linear|ease\b|steps\([^)]*\)|cubic-bezier\([^)]+\)|var\(--[a-z0-9-]+\)/g,
+			easing,
+		)
+		.replace(
+			/(animation:\s*[\w-]+\s+\d+(?:\.\d+)?ms)(?=\s+(?:both|forwards|backwards)|;)/g,
+			`$1 ${easing}`,
+		);
 
 	if (direction) {
 		customCSS += "\n" + getKeyframeOverrides(customCSS, direction);
