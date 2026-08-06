@@ -17,7 +17,6 @@ export function AnimatedThemeTogglerShowcase() {
 	return (
 		<ComponentShowcase
 			name="AnimatedThemeToggler"
-			description="Sun/Moon icon button with transition animations"
 			variants={variants}
 			renderVariant={(v) => <AnimatedThemeToggler transition={v} />}
 			installCode="npx shadcn@latest add @transitions/animated-theme-toggler"
@@ -34,7 +33,6 @@ export function ThemeToggleButtonShowcase() {
 	return (
 		<ComponentShowcase
 			name="ThemeToggleButton"
-			description="Text-cycling button with transition animations"
 			variants={variants}
 			renderVariant={(v) => <ThemeToggleButton transition={v} />}
 			installCode="npx shadcn@latest add @transitions/theme-toggle-button"
@@ -51,7 +49,6 @@ export function ThemeToggleSwitchShowcase() {
 	return (
 		<ComponentShowcase
 			name="ThemeToggleSwitch"
-			description="iOS-style toggle with transition animations"
 			variants={variants}
 			renderVariant={(v) => <ThemeToggleSwitch transition={v} />}
 			installCode="npx shadcn@latest add @transitions/theme-toggle-switch"
@@ -68,7 +65,6 @@ export function ThemeSwitcherShowcase() {
 	return (
 		<ComponentShowcase
 			name="ThemeSwitcher"
-			description="System/Light/Dark segmented switcher with transition animations"
 			variants={variants}
 			renderVariant={(v) => <ThemeSwitcher transition={v} />}
 			installCode="npx shadcn@latest add @transitions/theme-switcher"

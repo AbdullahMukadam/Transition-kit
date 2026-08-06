@@ -54,7 +54,6 @@ function CodeSection({
 
 interface ComponentShowcaseProps {
 	name: string;
-	description?: string;
 	variants?: { value: string; label: string }[];
 	renderVariant?: (variant: string) => React.ReactNode;
 	installCode: string;
@@ -63,7 +62,6 @@ interface ComponentShowcaseProps {
 
 export default function ComponentShowcase({
 	name,
-	description,
 	variants = [],
 	renderVariant,
 	installCode,
@@ -82,11 +80,6 @@ export default function ComponentShowcase({
 						<span className="font-semibold tracking-tight text-foreground">
 							{name}
 						</span>
-						{description && (
-							<span className="hidden text-sm text-muted-foreground sm:inline-block">
-								- {description}
-							</span>
-						)}
 					</div>
 
 					<div className="flex w-full items-center gap-2 sm:w-auto">
