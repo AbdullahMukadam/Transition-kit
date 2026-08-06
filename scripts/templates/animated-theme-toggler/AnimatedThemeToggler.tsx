@@ -60,8 +60,8 @@ export const AnimatedThemeToggler = ({
 			const resolvedEasing = easing ?? (t ? undefined : "ease-in-out");
 			triggerLiveTransition(
 				resolvedCSS,
-				resolvedDuration ?? 300,
-				resolvedEasing ?? "ease-in-out",
+				resolvedDuration,
+				resolvedEasing,
 			);
 		}
 		setInternalIsDark(getCurrentTheme() === "light");

@@ -25,8 +25,8 @@ let activeStyle: HTMLStyleElement | null = null;
 function applyThemeTransition(
 	target: "light" | "dark",
 	css: string,
-	duration: number,
-	easing: string,
+	duration?: number,
+	easing?: string,
 	onApplied?: () => void,
 ) {
 	if (activeStyle) {
@@ -34,17 +34,23 @@ function applyThemeTransition(
 		activeStyle = null;
 	}
 
+	let customCSS = css;
+	if (duration != null) {
+		customCSS = customCSS.replace(/(\d+(?:\.\d+)?)(ms|s)\b/g, `${duration}ms`);
+	}
+	if (easing != null) {
+		customCSS = customCSS
+			.replace(
+				/ease-in-out|ease-in\b|ease-out\b|linear|ease\b|steps\([^)]*\)|cubic-bezier\([^)]+\)|var\(--[a-z0-9-]+\)/g,
+				easing,
+			)
+			.replace(
+				/(animation:\s*[\w-]+\s+\d+(?:\.\d+)?ms)(?=\s+(?:both|forwards|backwards)|;)/g,
+				`$1 ${easing}`,
+			);
+	}
+
 	const style = document.createElement("style");
-	const customCSS = css
-		.replace(/(\d+(?:\.\d+)?)(ms|s)\b/g, `${duration}ms`)
-		.replace(
-			/ease-in-out|ease-in\b|ease-out\b|linear|ease\b|steps\([^)]*\)|cubic-bezier\([^)]+\)|var\(--[a-z0-9-]+\)/g,
-			easing,
-		)
-		.replace(
-			/(animation:\s*[\w-]+\s+\d+(?:\.\d+)?ms)(?=\s+(?:both|forwards|backwards)|;)/g,
-			`$1 ${easing}`,
-		);
 	style.textContent = customCSS;
 	document.head.appendChild(style);
 	activeStyle = style;
@@ -71,7 +77,11 @@ function applyThemeTransition(
 		});
 }
 
-export function triggerLiveTransition(css: string, duration: number, easing: string) {
+export function triggerLiveTransition(
+	css: string,
+	duration?: number,
+	easing?: string,
+) {
 	const next = getCurrentTheme() === "light" ? "dark" : "light";
 	triggerThemeTransition(next, css, duration, easing);
 }
@@ -79,8 +89,8 @@ export function triggerLiveTransition(css: string, duration: number, easing: str
 export function triggerThemeTransition(
 	target: "light" | "dark",
 	css: string,
-	duration: number,
-	easing: string,
+	duration?: number,
+	easing?: string,
 	onApplied?: () => void,
 ) {
 	applyThemeTransition(target, css, duration, easing, onApplied);

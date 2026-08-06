@@ -29,23 +29,33 @@ function setTheme(theme: "light" | "dark") {
 
 let activeStyle: HTMLStyleElement | null = null;
 
-function triggerLiveTransition(css: string, duration: number, easing: string) {
+function triggerLiveTransition(
+	css: string,
+	duration?: number,
+	easing?: string,
+) {
 	if (activeStyle) {
 		activeStyle.remove();
 		activeStyle = null;
 	}
 
+	let customCSS = css;
+	if (duration != null) {
+		customCSS = customCSS.replace(/(\d+(?:\.\d+)?)(ms|s)\b/g, `${duration}ms`);
+	}
+	if (easing != null) {
+		customCSS = customCSS
+			.replace(
+				/ease-in-out|ease-in\b|ease-out\b|linear|ease\b|steps\([^)]*\)|cubic-bezier\([^)]+\)|var\(--[a-z0-9-]+\)/g,
+				easing,
+			)
+			.replace(
+				/(animation:\s*[\w-]+\s+\d+(?:\.\d+)?ms)(?=\s+(?:both|forwards|backwards)|;)/g,
+				`$1 ${easing}`,
+			);
+	}
+
 	const style = document.createElement("style");
-	const customCSS = css
-		.replace(/(\d+(?:\.\d+)?)(ms|s)\b/g, `${duration}ms`)
-		.replace(
-			/ease-in-out|ease-in\b|ease-out\b|linear|ease\b|steps\([^)]*\)|cubic-bezier\([^)]+\)|var\(--[a-z0-9-]+\)/g,
-			easing,
-		)
-		.replace(
-			/(animation:\s*[\w-]+\s+\d+(?:\.\d+)?ms)(?=\s+(?:both|forwards|backwards)|;)/g,
-			`$1 ${easing}`,
-		);
 	style.textContent = customCSS;
 	document.head.appendChild(style);
 	activeStyle = style;
@@ -110,8 +120,8 @@ export const AnimatedThemeToggler = ({
 			const resolvedEasing = easing ?? (t ? undefined : "ease-in-out");
 			triggerLiveTransition(
 				resolvedCSS,
-				resolvedDuration ?? 300,
-				resolvedEasing ?? "ease-in-out",
+				resolvedDuration,
+				resolvedEasing,
 			);
 		}
 		setInternalIsDark(getCurrentTheme() === "light");

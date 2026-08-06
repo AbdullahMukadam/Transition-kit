@@ -51,8 +51,8 @@ export function switchTheme(
 		triggerThemeTransition(
 			resolved,
 			resolvedCSS,
-			resolvedDuration ?? 300,
-			resolvedEasing ?? "ease-in-out",
+			resolvedDuration,
+			resolvedEasing,
 			() => {
 				localStorage.setItem("theme", option);
 				document.cookie = `_preferred-theme=${option}; path=/; max-age=31536000`;
