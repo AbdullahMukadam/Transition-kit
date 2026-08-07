@@ -1,6 +1,14 @@
 <script lang="ts">
 	import { onMount, onDestroy } from "svelte";
 	// --- inlined shared + vanilla engine ---
+type ThemeOption = "light" | "dark" | "system";
+
+function getThemeOption(): ThemeOption {
+	const stored = localStorage.getItem("theme");
+	if (stored === "light" || stored === "dark" || stored === "system") return stored;
+	return "system";
+}
+
 function getCurrentTheme(): "light" | "dark" {
 	const el = document.documentElement;
 	if (el.classList.contains("dark")) return "dark";
@@ -10,6 +18,15 @@ function getCurrentTheme(): "light" | "dark" {
 		: "light";
 }
 
+function resolveTheme(option: ThemeOption): "light" | "dark" {
+	if (option === "system") {
+		return window.matchMedia("(prefers-color-scheme: dark)").matches
+			? "dark"
+			: "light";
+	}
+	return option;
+}
+
 function setTheme(theme: "light" | "dark") {
 	const el = document.documentElement;
 	el.classList.remove("light", "dark");
@@ -17,6 +34,45 @@ function setTheme(theme: "light" | "dark") {
 	el.style.colorScheme = theme;
 	localStorage.setItem("theme", theme);
 	document.cookie = `_preferred-theme=${theme}; path=/; max-age=31536000`;
+}
+
+function setThemeOption(option: ThemeOption) {
+	const resolved = resolveTheme(option);
+	setTheme(resolved);
+	localStorage.setItem("theme", option);
+	document.cookie = `_preferred-theme=${option}; path=/; max-age=31536000`;
+}
+
+function switchTheme(
+	option: ThemeOption,
+	options: { transition?: string; css?: string; duration?: number; easing?: string },
+) {
+	const resolved = resolveTheme(option);
+
+	if (resolved === getCurrentTheme()) {
+		setThemeOption(option);
+		return;
+	}
+
+	const { transition = "fade", css, duration, easing } = options;
+	const t = TRANSITION_CSS[transition];
+	const resolvedCSS = css ?? t;
+	if (resolvedCSS) {
+		const resolvedDuration = duration ?? (t ? undefined : 300);
+		const resolvedEasing = easing ?? (t ? undefined : "ease-in-out");
+		triggerThemeTransition(
+			resolved,
+			resolvedCSS,
+			resolvedDuration,
+			resolvedEasing,
+			() => {
+				localStorage.setItem("theme", option);
+				document.cookie = `_preferred-theme=${option}; path=/; max-age=31536000`;
+			},
+		);
+	} else {
+		setThemeOption(option);
+	}
 }
 
 const TRANSITION_CSS: Record<string, string> = {
@@ -963,7 +1019,7 @@ function triggerThemeTransition(
 	applyThemeTransition(target, css, duration, easing, onApplied);
 }
 
-export type ThemeOption = "light" | "dark" | "system";
+export type { ThemeOption };
 
 export interface ThemeSwitcherOptions {
 	transition?: string;
@@ -972,59 +1028,7 @@ export interface ThemeSwitcherOptions {
 	easing?: string;
 }
 
-export function getThemeOption(): ThemeOption {
-	const stored = localStorage.getItem("theme");
-	if (stored === "light" || stored === "dark" || stored === "system") return stored;
-	return "system";
-}
-
-export function setThemeOption(option: ThemeOption) {
-	const resolved = resolveTheme(option);
-	setTheme(resolved);
-	localStorage.setItem("theme", option);
-	document.cookie = `_preferred-theme=${option}; path=/; max-age=31536000`;
-}
-
-export function resolveTheme(option: ThemeOption): "light" | "dark" {
-	if (option === "system") {
-		return window.matchMedia("(prefers-color-scheme: dark)").matches
-			? "dark"
-			: "light";
-	}
-	return option;
-}
-
-export function switchTheme(
-	option: ThemeOption,
-	options: { transition?: string; css?: string; duration?: number; easing?: string },
-) {
-	const resolved = resolveTheme(option);
-
-	if (resolved === getCurrentTheme()) {
-		setThemeOption(option);
-		return;
-	}
-
-	const { transition = "fade", css, duration, easing } = options;
-	const t = TRANSITION_CSS[transition];
-	const resolvedCSS = css ?? t;
-	if (resolvedCSS) {
-		const resolvedDuration = duration ?? (t ? undefined : 300);
-		const resolvedEasing = easing ?? (t ? undefined : "ease-in-out");
-		triggerThemeTransition(
-			resolved,
-			resolvedCSS,
-			resolvedDuration,
-			resolvedEasing,
-			() => {
-				localStorage.setItem("theme", option);
-				document.cookie = `_preferred-theme=${option}; path=/; max-age=31536000`;
-			},
-		);
-	} else {
-		setThemeOption(option);
-	}
-}
+export { getCurrentTheme, getThemeOption, setTheme, setThemeOption, switchTheme, resolveTheme, triggerThemeTransition, triggerLiveTransition, TRANSITION_CSS };
 
 export function createThemeSwitcher(
 	options: ThemeSwitcherOptions = {},
@@ -1121,8 +1125,6 @@ export function createThemeSwitcher(
 
 	return container;
 }
-
-export { getCurrentTheme, setTheme, triggerThemeTransition, triggerLiveTransition, TRANSITION_CSS };
 // --- end inlined ---
 
 	interface Props {

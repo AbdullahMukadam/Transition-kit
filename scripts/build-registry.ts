@@ -27,6 +27,19 @@ function buildTransitionCSSEntries(cssMap: Record<string, string>): string {
 
 type Framework = "react" | "vue" | "svelte" | "vanilla";
 
+const SHARED_EXPORTS = `export {
+	getCurrentTheme,
+	getThemeOption,
+	resolveTheme,
+	setTheme,
+	setThemeOption,
+	switchTheme,
+	TRANSITION_CSS,
+	triggerLiveTransition,
+	triggerThemeTransition,
+};
+export type { ThemeOption };`;
+
 interface ComponentConfig {
 	name: string;
 	pascalName: string;
@@ -102,6 +115,7 @@ function makeStandalone(
 
 	// For framework wrappers: replace the vanilla engine import with inlined shared + vanilla body
 	const frameworkBody = frameworkContent
+		.replace(/^"use client";\s*\n/, "")
 		.replace(/import \{[^}]+\} from "\.\/[^"]+";\n?/, "")
 		.trim();
 
@@ -111,9 +125,9 @@ function makeStandalone(
 			"",
 			inlinedShared,
 			"",
-			vanillaBody,
-			"",
 			frameworkBody,
+			"",
+			SHARED_EXPORTS,
 		].join("\n\n");
 	}
 
@@ -136,32 +150,37 @@ function makeStandalone(
 	return frameworkContent;
 }
 
+function buildStandalone(
+	component: ComponentConfig,
+	framework: Framework,
+	transitionCSSEntries: string,
+): string {
+	const componentDir = resolve(TEMPLATES, component.name);
+	const ext = getTemplateExtension(framework);
+	const vanillaExt = getTemplateExtension("vanilla");
+
+	// Read vanilla engine
+	const vanillaPath = resolve(componentDir, `${component.pascalName}Vanilla${vanillaExt}`);
+	const vanillaContent = readFileSync(vanillaPath, "utf-8");
+
+	// Read framework wrapper (or use vanilla content for vanilla framework)
+	let frameworkContent: string;
+	if (framework === "vanilla") {
+		frameworkContent = vanillaContent;
+	} else {
+		const frameworkPath = resolve(componentDir, `${component.pascalName}${ext}`);
+		frameworkContent = readFileSync(frameworkPath, "utf-8");
+	}
+
+	// Build standalone output and replace placeholder in vanilla engine
+	const standalone = makeStandalone(vanillaContent, frameworkContent, framework);
+	return standalone.replace(/\{\{TRANSITION_CSS_ENTRIES\}\}/g, transitionCSSEntries);
+}
+
 function buildRegistryFiles(transitionCSSEntries: string) {
 	for (const component of COMPONENTS) {
-		const componentDir = resolve(TEMPLATES, component.name);
-
 		for (const framework of component.frameworks) {
-			const ext = getTemplateExtension(framework);
-			const vanillaExt = getTemplateExtension("vanilla");
-
-			// Read vanilla engine
-			const vanillaPath = resolve(componentDir, `${component.pascalName}Vanilla${vanillaExt}`);
-			const vanillaContent = readFileSync(vanillaPath, "utf-8");
-
-			// Read framework wrapper (or use vanilla content for vanilla framework)
-			let frameworkContent: string;
-			if (framework === "vanilla") {
-				frameworkContent = vanillaContent;
-			} else {
-				const frameworkPath = resolve(componentDir, `${component.pascalName}${ext}`);
-				frameworkContent = readFileSync(frameworkPath, "utf-8");
-			}
-
-			// Build standalone output
-			const standalone = makeStandalone(vanillaContent, frameworkContent, framework);
-
-			// Replace placeholder in vanilla engine with actual entries
-			const output = standalone.replace(/\{\{TRANSITION_CSS_ENTRIES\}\}/g, transitionCSSEntries);
+			const output = buildStandalone(component, framework, transitionCSSEntries);
 
 			// Write output
 			const outputName = `${component.name}${getOutputExtension(framework)}`;
@@ -268,42 +287,50 @@ function updateMDXManualCode(
 	}
 }
 
-// ── Generate public/r/registry.json (new shadcn schema) ────────────
+// ── Generate public/r/registry.json + public/r/{name}.json (shadcn schema) ──
 
-const CSS_VARS = {
-	light: {
-		"--background": "#ffffff",
-		"--foreground": "#171717",
-		"--muted": "#f2f2f2",
-		"--muted-foreground": "#8f8f8f",
-		"--border": "#eaeaea",
-		"--ring": "#171717",
-	},
-	dark: {
-		"--background": "#0a0a0a",
-		"--foreground": "#ededed",
-		"--muted": "#222222",
-		"--muted-foreground": "#888888",
-		"--border": "#333333",
-		"--ring": "#ededed",
-	},
-};
+function buildRegistryItems(transitionCSSEntries: string) {
+	for (const component of COMPONENTS) {
+		const reactCode = buildStandalone(component, "react", transitionCSSEntries);
+
+		const item = {
+			$schema: "https://ui.shadcn.com/schema/registry-item.json",
+			name: component.name,
+			type: "registry:component",
+			title: component.title,
+			description: component.description,
+			files: [
+				{
+					path: `${component.name}.tsx`,
+					type: "registry:component",
+					target: `@ui/${component.name}.tsx`,
+					content: reactCode,
+				},
+			],
+		};
+
+		writeFileSync(
+			resolve(PUBLIC_R, `${component.name}.json`),
+			`${JSON.stringify(item, null, 2)}\n`,
+		);
+		console.log(`  ✓ public/r/${component.name}.json`);
+	}
+}
 
 function buildRegistryJson() {
 	const items = COMPONENTS.map((component) => ({
 		name: component.name,
-		type: "registry:ui",
+		type: "registry:component",
 		title: component.title,
 		description: component.description,
 		dependencies: [],
 		files: [
 			{
 				path: `${component.name}.tsx`,
-				type: "registry:ui",
-				target: `components/ui/${component.name}.tsx`,
+				type: "registry:component",
+				target: `@ui/${component.name}.tsx`,
 			},
 		],
-		cssVars: CSS_VARS,
 	}));
 
 	const registry = {
@@ -334,7 +361,10 @@ mkdirSync(PUBLIC_R, { recursive: true });
 console.log("Generating registry files:");
 buildRegistryFiles(transitionCSSEntries);
 
-console.log("\nGenerating registry manifest (public/r/registry.json):");
+console.log("\nGenerating registry items (public/r/{name}.json):");
+buildRegistryItems(transitionCSSEntries);
+
+console.log("\nGenerating registry catalog (public/r/registry.json):");
 buildRegistryJson();
 
 console.log("\nUpdating MDX manual install code:");

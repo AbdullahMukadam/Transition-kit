@@ -1,3 +1,11 @@
+type ThemeOption = "light" | "dark" | "system";
+
+function getThemeOption(): ThemeOption {
+	const stored = localStorage.getItem("theme");
+	if (stored === "light" || stored === "dark" || stored === "system") return stored;
+	return "system";
+}
+
 function getCurrentTheme(): "light" | "dark" {
 	const el = document.documentElement;
 	if (el.classList.contains("dark")) return "dark";
@@ -7,6 +15,15 @@ function getCurrentTheme(): "light" | "dark" {
 		: "light";
 }
 
+function resolveTheme(option: ThemeOption): "light" | "dark" {
+	if (option === "system") {
+		return window.matchMedia("(prefers-color-scheme: dark)").matches
+			? "dark"
+			: "light";
+	}
+	return option;
+}
+
 function setTheme(theme: "light" | "dark") {
 	const el = document.documentElement;
 	el.classList.remove("light", "dark");
@@ -14,6 +31,45 @@ function setTheme(theme: "light" | "dark") {
 	el.style.colorScheme = theme;
 	localStorage.setItem("theme", theme);
 	document.cookie = `_preferred-theme=${theme}; path=/; max-age=31536000`;
+}
+
+function setThemeOption(option: ThemeOption) {
+	const resolved = resolveTheme(option);
+	setTheme(resolved);
+	localStorage.setItem("theme", option);
+	document.cookie = `_preferred-theme=${option}; path=/; max-age=31536000`;
+}
+
+function switchTheme(
+	option: ThemeOption,
+	options: { transition?: string; css?: string; duration?: number; easing?: string },
+) {
+	const resolved = resolveTheme(option);
+
+	if (resolved === getCurrentTheme()) {
+		setThemeOption(option);
+		return;
+	}
+
+	const { transition = "fade", css, duration, easing } = options;
+	const t = TRANSITION_CSS[transition];
+	const resolvedCSS = css ?? t;
+	if (resolvedCSS) {
+		const resolvedDuration = duration ?? (t ? undefined : 300);
+		const resolvedEasing = easing ?? (t ? undefined : "ease-in-out");
+		triggerThemeTransition(
+			resolved,
+			resolvedCSS,
+			resolvedDuration,
+			resolvedEasing,
+			() => {
+				localStorage.setItem("theme", option);
+				document.cookie = `_preferred-theme=${option}; path=/; max-age=31536000`;
+			},
+		);
+	} else {
+		setThemeOption(option);
+	}
 }
 
 const TRANSITION_CSS: Record<string, string> = {
@@ -1031,4 +1087,15 @@ export function createThemeToggleButton(
 	return button;
 }
 
-export { getCurrentTheme, setTheme, triggerLiveTransition, TRANSITION_CSS };
+export {
+	getCurrentTheme,
+	getThemeOption,
+	resolveTheme,
+	setTheme,
+	setThemeOption,
+	switchTheme,
+	TRANSITION_CSS,
+	triggerLiveTransition,
+	triggerThemeTransition,
+};
+export type { ThemeOption };

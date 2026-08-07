@@ -64,4 +64,15 @@ export function createAnimatedThemeToggler(
 	return button;
 }
 
-export { getCurrentTheme, setTheme, triggerLiveTransition, TRANSITION_CSS };
+export {
+	getCurrentTheme,
+	getThemeOption,
+	resolveTheme,
+	setTheme,
+	setThemeOption,
+	switchTheme,
+	TRANSITION_CSS,
+	triggerLiveTransition,
+	triggerThemeTransition,
+};
+export type { ThemeOption };

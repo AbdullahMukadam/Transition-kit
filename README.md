@@ -72,7 +72,7 @@ Add the registry to your `components.json`, then install a component with the sh
 ```json
 {
   "registries": {
-    "@transitions": "https://transition-kit.space/r/registry.json"
+    "@transitions": "https://transition-kit.space/r/{name}.json"
   }
 }
 ```

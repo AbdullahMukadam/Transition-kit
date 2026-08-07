@@ -2,6 +2,14 @@
 
 
 
+type ThemeOption = "light" | "dark" | "system";
+
+function getThemeOption(): ThemeOption {
+	const stored = localStorage.getItem("theme");
+	if (stored === "light" || stored === "dark" || stored === "system") return stored;
+	return "system";
+}
+
 function getCurrentTheme(): "light" | "dark" {
 	const el = document.documentElement;
 	if (el.classList.contains("dark")) return "dark";
@@ -11,6 +19,15 @@ function getCurrentTheme(): "light" | "dark" {
 		: "light";
 }
 
+function resolveTheme(option: ThemeOption): "light" | "dark" {
+	if (option === "system") {
+		return window.matchMedia("(prefers-color-scheme: dark)").matches
+			? "dark"
+			: "light";
+	}
+	return option;
+}
+
 function setTheme(theme: "light" | "dark") {
 	const el = document.documentElement;
 	el.classList.remove("light", "dark");
@@ -18,6 +35,45 @@ function setTheme(theme: "light" | "dark") {
 	el.style.colorScheme = theme;
 	localStorage.setItem("theme", theme);
 	document.cookie = `_preferred-theme=${theme}; path=/; max-age=31536000`;
+}
+
+function setThemeOption(option: ThemeOption) {
+	const resolved = resolveTheme(option);
+	setTheme(resolved);
+	localStorage.setItem("theme", option);
+	document.cookie = `_preferred-theme=${option}; path=/; max-age=31536000`;
+}
+
+function switchTheme(
+	option: ThemeOption,
+	options: { transition?: string; css?: string; duration?: number; easing?: string },
+) {
+	const resolved = resolveTheme(option);
+
+	if (resolved === getCurrentTheme()) {
+		setThemeOption(option);
+		return;
+	}
+
+	const { transition = "fade", css, duration, easing } = options;
+	const t = TRANSITION_CSS[transition];
+	const resolvedCSS = css ?? t;
+	if (resolvedCSS) {
+		const resolvedDuration = duration ?? (t ? undefined : 300);
+		const resolvedEasing = easing ?? (t ? undefined : "ease-in-out");
+		triggerThemeTransition(
+			resolved,
+			resolvedCSS,
+			resolvedDuration,
+			resolvedEasing,
+			() => {
+				localStorage.setItem("theme", option);
+				document.cookie = `_preferred-theme=${option}; path=/; max-age=31536000`;
+			},
+		);
+	} else {
+		setThemeOption(option);
+	}
 }
 
 const TRANSITION_CSS: Record<string, string> = {
@@ -966,76 +1022,6 @@ function triggerThemeTransition(
 
 
 
-export interface AnimatedThemeTogglerOptions {
-	transition?: string;
-	css?: string;
-	duration?: number;
-	easing?: string;
-}
-
-export function createAnimatedThemeToggler(
-	options: AnimatedThemeTogglerOptions = {},
-): HTMLButtonElement {
-	const { transition = "fade", css, duration, easing } = options;
-
-	const SUN_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`;
-	const MOON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
-
-	const button = document.createElement("button");
-	button.type = "button";
-	button.setAttribute("aria-label", "Toggle theme");
-	Object.assign(button.style, {
-		display: "inline-flex",
-		alignItems: "center",
-		justifyContent: "center",
-		borderRadius: "0.375rem",
-		border: "1px solid var(--border)",
-		backgroundColor: "var(--background)",
-		padding: "0.5rem",
-		color: "var(--foreground)",
-		cursor: "pointer",
-		transition: "background-color 0.15s",
-	});
-
-	function updateIcon() {
-		const isDark = getCurrentTheme() === "dark";
-		button.innerHTML = isDark ? SUN_SVG : MOON_SVG;
-	}
-
-	function toggleTheme() {
-		const t = TRANSITION_CSS[transition];
-		const resolvedCSS = css ?? t;
-		if (resolvedCSS) {
-			const resolvedDuration = duration ?? (t ? undefined : 300);
-			const resolvedEasing = easing ?? (t ? undefined : "ease-in-out");
-			triggerLiveTransition(
-				resolvedCSS,
-				resolvedDuration,
-				resolvedEasing,
-			);
-		}
-		updateIcon();
-	}
-
-	button.addEventListener("click", toggleTheme);
-
-	const observer = new MutationObserver(() => updateIcon());
-	observer.observe(document.documentElement, {
-		attributes: true,
-		attributeFilter: ["class"],
-	});
-
-	updateIcon();
-
-	return button;
-}
-
-export { getCurrentTheme, setTheme, triggerLiveTransition, TRANSITION_CSS };
-
-
-
-"use client";
-
 import { useCallback, useEffect, useState } from "react";
 
 const SUN_SVG = (
@@ -1126,3 +1112,18 @@ export const AnimatedThemeToggler = ({
 		</button>
 	);
 };
+
+
+
+export {
+	getCurrentTheme,
+	getThemeOption,
+	resolveTheme,
+	setTheme,
+	setThemeOption,
+	switchTheme,
+	TRANSITION_CSS,
+	triggerLiveTransition,
+	triggerThemeTransition,
+};
+export type { ThemeOption };
