@@ -45,7 +45,7 @@ export default function Playground({
 					</span>
 				</div>
 				<Slider
-					value={[duration]}
+					value={duration}
 					onValueChange={(v: number | readonly number[]) => {
 						const val = Array.isArray(v) ? v[0] : v;
 						setDuration(val);
