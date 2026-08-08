@@ -100,6 +100,18 @@ export default function Footer() {
 						</a>
 					</div>
 				</div>
+
+				{/* Badges */}
+				<div className="flex justify-center">
+					<a href="https://twelve.tools" target="_blank" rel="noreferrer">
+						<img
+							src="https://twelve.tools/badge0-white.svg"
+							alt="Featured on Twelve Tools"
+							width="148"
+							height="40"
+						/>
+					</a>
+				</div>
 			</div>
 		</footer>
 	);
