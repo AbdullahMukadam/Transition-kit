@@ -39,16 +39,18 @@ interface MenuItem {
 	hidden?: () => boolean;
 }
 
-function ActionMenu({
+export function ActionMenu({
 	label,
 	icon: TriggerIcon,
 	ariaLabel,
 	items,
+	menuClassName,
 }: {
 	label: React.ReactNode;
 	icon?: IconComponent;
 	ariaLabel: string;
 	items: MenuItem[];
+	menuClassName?: string;
 }) {
 	const [open, setOpen] = useState(false);
 	const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -126,7 +128,10 @@ function ActionMenu({
 						animate={{ opacity: 1, y: 0, scale: 1 }}
 						exit={{ opacity: 0, y: -4, scale: 0.98 }}
 						transition={{ duration: 0.15, ease: "easeOut" }}
-						className="absolute inset-x-0 top-full z-50 mt-1.5 origin-top rounded-xl border border-[var(--border)] bg-[var(--background)] p-1 shadow-lg"
+						className={cn(
+							"absolute top-full left-0 z-50 mt-1.5 origin-top rounded-xl border border-[var(--border)] bg-[var(--background)]/95 p-1.5 shadow-xl shadow-black/10 backdrop-blur-xl",
+							menuClassName ?? "w-max min-w-full",
+						)}
 					>
 						{items.map((item) => {
 							if (item.hidden?.()) return null;
@@ -138,9 +143,11 @@ function ActionMenu({
 									role="menuitem"
 									type="button"
 									onClick={() => handleSelect(item)}
-									className="flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-[13px] text-[var(--muted-foreground)] transition-colors duration-100 hover:bg-[var(--muted)]/60 hover:text-[var(--foreground)]"
+									className="flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-2 py-1.5 text-left text-[13px] text-[var(--muted-foreground)] transition-colors duration-100 hover:bg-[var(--muted)]/60 hover:text-[var(--foreground)]"
 								>
-									<Icon aria-hidden className="size-4 shrink-0" />
+									<span className="grid size-7 shrink-0 place-items-center rounded-md border border-[var(--border)]/60 bg-[var(--muted)]/40 text-[var(--foreground)]/70">
+										<Icon aria-hidden className="size-4" />
+									</span>
 									{copied ? "Copied" : item.label}
 								</button>
 							);

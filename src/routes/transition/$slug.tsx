@@ -22,6 +22,7 @@ import {
 import { MockSite } from "#/components/transitions/MockSite";
 import Playground from "#/components/transitions/Playground";
 import { PlaygroundSidebar } from "#/components/transitions/PlaygroundSidebar";
+import { TransitionPageActions } from "#/components/transitions/TransitionPageActions";
 import { Badge } from "#/components/ui/badge";
 import { getTransitionBySlug, transitions } from "#/data/transitions";
 import { triggerLiveTransition } from "#/lib/trigger-transition";
@@ -202,6 +203,9 @@ function TransitionDetail() {
 								{transition.config.duration}ms ·{" "}
 								{transition.config.easing.split("(")[0]}
 							</span>
+						</div>
+						<div className="mt-4">
+							<TransitionPageActions transition={transition} />
 						</div>
 					</div>
 
