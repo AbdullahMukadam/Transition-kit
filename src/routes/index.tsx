@@ -1,6 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { HomeLayout } from "fumadocs-ui/layouts/home";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { useCallback, useRef } from "react";
 import { Hero } from "#/components/home/Hero";
 import GapDivider from "#/components/layout/GapDivider";
@@ -10,7 +10,6 @@ import { Button } from "#/components/ui/button";
 import ButtonCreativeRight from "#/components/ui/creative-button-right";
 import { TimelineAnimation } from "#/components/ui/timeline-animation";
 import { transitions } from "#/data/transitions";
-import { triggerLiveTransition } from "#/lib/trigger-transition";
 import { homeOptions } from "@/lib/layout.shared";
 import NewUpdates from "#/components/home/NewUpdates";
 
@@ -45,18 +44,15 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const maskTransitions = transitions.filter((t) => t.category === "mask");
 const featured = transitions.filter((t) => t.featured);
 const newTransitions = transitions.filter((t) => t.isNew).slice(0, 6);
 
 function App() {
   const timelineRef = useRef<HTMLDivElement>(null);
-  const maskIndexRef = useRef(0);
+  const navigate = useNavigate()
 
   const handleDemo = useCallback(() => {
-    const t = maskTransitions[maskIndexRef.current % maskTransitions.length];
-    maskIndexRef.current += 1;
-    triggerLiveTransition(t.css, t.config.duration, t.config.easing);
+    navigate({href:"/templates/theme-toggles"})
   }, []);
 
   return (
@@ -86,8 +82,8 @@ function App() {
             </h1>
             <div className="flex flex-row flex-wrap items-center justify-center gap-4 w-fit">
               <Button size="lg" onClick={handleDemo} className="gap-2">
-                <Sparkles className="size-4" />
-                Try a theme toggle
+                Get Started
+                <ArrowRight className="size-3.5" />
               </Button>
               <Link to="/templates" className="no-underline">
                 <Button size="lg" variant="secondary" className="gap-1.5">
