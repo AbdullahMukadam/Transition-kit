@@ -26,17 +26,17 @@ export const Route = createRootRoute({
 				content: "width=device-width, initial-scale=1",
 			},
 			{
-				title: "Transition Kit | Page Transition Templates",
+				title: "Transition Kit | Page/Theme Transition Templates",
 			},
 			{
 				name: "description",
 				content:
-					"Pre-built, copy-paste page transition and theme toggle components using the View Transitions API. Fade, slide, scale, flip, blur, mask reveals, and more.",
+					"Pre-built, copy-paste page and theme transition and theme toggle components using the View Transitions API. Fade, slide, scale, flip, blur, mask reveals, and more.",
 			},
 			{
 				name: "keywords",
 				content:
-					"view transitions, page transitions, theme toggle, CSS animations, React components, shadcn, fumadocs",
+					"view transitions, theme transitions, page transitions, theme toggle, CSS animations, React components, shadcn, fumadocs",
 			},
 			{
 				name: "theme-color",
@@ -54,7 +54,7 @@ export const Route = createRootRoute({
 			},
 			{
 				property: "og:title",
-				content: "Transition Kit | Page Transition Templates",
+				content: "Transition Kit | Page/Theme Transition Templates",
 			},
 			{
 				property: "og:description",
@@ -75,12 +75,12 @@ export const Route = createRootRoute({
 			},
 			{
 				name: "twitter:title",
-				content: "Transition Kit | Page Transition Templates",
+				content: "Transition Kit | Page/Theme Transition Templates",
 			},
 			{
 				name: "twitter:description",
 				content:
-					"Pre-built, copy-paste page transition and theme toggle components using the View Transitions API.",
+					"Pre-built, copy-paste page and theme transition and theme toggle components using the View Transitions API.",
 			},
 			{
 				name: "twitter:image",
@@ -133,7 +133,7 @@ export const Route = createRootRoute({
 						name: "Transition Kit",
 						url: "https://transition-kit.space",
 						description:
-							"Pre-built, copy-paste page transition and theme toggle components using the View Transitions API.",
+							"Pre-built, copy-paste page and theme transition and theme toggle components using the View Transitions API.",
 						applicationCategory: "DeveloperApplication",
 						operatingSystem: "All",
 					}),
