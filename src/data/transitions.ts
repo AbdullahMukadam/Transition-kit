@@ -479,7 +479,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/theme-toggles/gif-frog.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "gif-penguin",
@@ -546,7 +546,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/theme-toggles/gif-penguin.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "gif-cat",
@@ -613,6 +613,277 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/theme-toggles/gif-cat.webm",
+		isNew: false,
+	},
+	{
+		slug: "gif-michael-jackson",
+		name: "GIF Michael Jackson",
+		description:
+			"Michael Jackson moonwalks in as the new theme reveals through an expanding mask.",
+		category: "mask",
+		type: "theme",
+		css: `::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/MdlKGirpTAQAAAAi/michael-jackson-moon-walk.gif')
+    center / 0 no-repeat;
+  animation: gif-michael-jackson-reveal 1700ms both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-michael-jackson-reveal 1700ms both;
+}
+
+@keyframes gif-michael-jackson-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}`,
+		js: `function switchTheme() {
+  const el = document.documentElement;
+  el.classList.toggle("dark");
+  localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
+}
+
+if (!document.startViewTransition) switchTheme();
+document.startViewTransition(() => switchTheme());`,
+		frameworks: {
+			vanilla: VANILLA_SNIPPET,
+			react: REACT_SNIPPET,
+			nextjs: NEXTJS_SNIPPET,
+			vue: VUE_SNIPPET,
+			svelte: SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 1700,
+			easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+		},
+		previewColors: {
+			from: "#ededed",
+			to: "#171717",
+		},
+		video: "/demos/theme-toggles/gif-michael-jackson.webm",
+		isNew: true,
+	},
+	{
+		slug: "gif-deadpool",
+		name: "GIF Deadpool",		description:
+			"Deadpool breaks in through an expanding mask to reveal the new theme.",
+		category: "mask",
+		type: "theme",
+		css: `::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/VJlZzo7UdagAAAAi/deadpool-marvel.gif')
+    center / 0 no-repeat;
+  animation: gif-deadpool-reveal 1900ms both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-deadpool-reveal 1900ms both;
+}
+
+@keyframes gif-deadpool-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}`,
+		js: `function switchTheme() {
+  const el = document.documentElement;
+  el.classList.toggle("dark");
+  localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
+}
+
+if (!document.startViewTransition) switchTheme();
+document.startViewTransition(() => switchTheme());`,
+		frameworks: {
+			vanilla: VANILLA_SNIPPET,
+			react: REACT_SNIPPET,
+			nextjs: NEXTJS_SNIPPET,
+			vue: VUE_SNIPPET,
+			svelte: SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 1900,
+			easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+		},
+		previewColors: {
+			from: "#ededed",
+			to: "#171717",
+		},
+		video: "/demos/theme-toggles/gif-deadpool.webm",
+		isNew: true,
+	},
+	{
+		slug: "gif-chika",
+		name: "GIF Chika",
+		description:
+			"Chika's signature dance reveals the new theme through an expanding mask.",
+		category: "mask",
+		type: "theme",
+		css: `::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/gVPazpEOQ3kAAAAi/chika.gif')
+    center / 0 no-repeat;
+  animation: gif-chika-reveal 1700ms both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-chika-reveal 1700ms both;
+}
+
+@keyframes gif-chika-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}`,
+		js: `function switchTheme() {
+  const el = document.documentElement;
+  el.classList.toggle("dark");
+  localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
+}
+
+if (!document.startViewTransition) switchTheme();
+document.startViewTransition(() => switchTheme());`,
+		frameworks: {
+			vanilla: VANILLA_SNIPPET,
+			react: REACT_SNIPPET,
+			nextjs: NEXTJS_SNIPPET,
+			vue: VUE_SNIPPET,
+			svelte: SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 1700,
+			easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+		},
+		previewColors: {
+			from: "#ededed",
+			to: "#171717",
+		},
+		video: "/demos/theme-toggles/gif-chika.webm",
+		isNew: true,
+	},
+	{
+		slug: "gif-hakari-dance",
+		name: "GIF Hakari Dance",
+		description:
+			"Hakari dances in as the new theme reveals through an expanding mask.",
+		category: "mask",
+		type: "theme",
+		css: `::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/uRlxzRNgp2MAAAAi/anime-girl.gif')
+    center / 0 no-repeat;
+  animation: gif-hakari-reveal 1.5s both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-hakari-reveal 1.5s both;
+}
+
+@keyframes gif-hakari-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}`,
+		js: `function switchTheme() {
+  const el = document.documentElement;
+  el.classList.toggle("dark");
+  localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
+}
+
+if (!document.startViewTransition) switchTheme();
+document.startViewTransition(() => switchTheme());`,
+		frameworks: {
+			vanilla: VANILLA_SNIPPET,
+			react: REACT_SNIPPET,
+			nextjs: NEXTJS_SNIPPET,
+			vue: VUE_SNIPPET,
+			svelte: SVELTE_SNIPPET,
+		},
+		config: {
+			duration: 1500,
+			easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+		},
+		previewColors: {
+			from: "#ededed",
+			to: "#171717",
+		},
+		video: "/demos/theme-toggles/gif-hakari.webm",
 		isNew: true,
 	},
 	{
@@ -939,7 +1210,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/page-transitions/rotate.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "zoom",
@@ -989,12 +1260,8 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/page-transitions/zoom.webm",
-		isNew: true,
+		isNew: false,
 	},
-
-	// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-	// NEW: theme transitions
-	// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 	{
 		slug: "star-reveal",
 		name: "Star Reveal",
@@ -1048,7 +1315,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/theme-toggles/star-reveal.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "heart-reveal",
@@ -1103,7 +1370,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/theme-toggles/heart-reveal.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "diagonal-wipe",
@@ -1175,7 +1442,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/theme-toggles/diagonal-wipe.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "checkerboard-reveal",
@@ -1230,7 +1497,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/theme-toggles/checkerboard-reveal.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "ripple-reveal",
@@ -1285,7 +1552,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/theme-toggles/ripple-reveal.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "venetian-blinds-theme",
@@ -1367,7 +1634,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/theme-toggles/venetian-blinds-theme.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "spiral-reveal",
@@ -1421,7 +1688,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/theme-toggles/spiral-reveal.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "wave-reveal-theme",
@@ -1489,7 +1756,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/theme-toggles/wave-reveal-theme.webm",
-		isNew: true,
+		isNew: false,
 	},
 
 	// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -1554,7 +1821,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/page-transitions/curtain.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "cube",
@@ -1607,7 +1874,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/page-transitions/cube.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "skew-slide",
@@ -1658,7 +1925,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/page-transitions/skew-slide.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "page-curl",
@@ -1722,7 +1989,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/page-transitions/page-curl.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "accordion",
@@ -1775,7 +2042,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/page-transitions/accordian.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "doorway",
@@ -1827,7 +2094,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/page-transitions/doorway.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "book-flip",
@@ -1880,7 +2147,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/page-transitions/book-flip.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "roll",
@@ -1933,7 +2200,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/page-transitions/roll.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "fold",
@@ -1985,7 +2252,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/page-transitions/fold.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "glitch",
@@ -2042,7 +2309,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/page-transitions/glitch.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "iris-wipe-page",
@@ -2094,7 +2361,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/page-transitions/iris-wipe.webm",
-		isNew: true,
+		isNew: false,
 	},
 ];
 

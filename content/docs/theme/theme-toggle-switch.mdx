@@ -361,6 +361,154 @@ const TRANSITION_CSS: Record<string, string> = {
   }
 }
 	`,
+	"gif-michael-jackson": `
+::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/MdlKGirpTAQAAAAi/michael-jackson-moon-walk.gif')
+    center / 0 no-repeat;
+  animation: gif-michael-jackson-reveal 1700ms both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-michael-jackson-reveal 1700ms both;
+}
+
+@keyframes gif-michael-jackson-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}
+	`,
+	"gif-deadpool": `
+::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/VJlZzo7UdagAAAAi/deadpool-marvel.gif')
+    center / 0 no-repeat;
+  animation: gif-deadpool-reveal 1900ms both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-deadpool-reveal 1900ms both;
+}
+
+@keyframes gif-deadpool-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}
+	`,
+	"gif-chika": `
+::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/gVPazpEOQ3kAAAAi/chika.gif')
+    center / 0 no-repeat;
+  animation: gif-chika-reveal 1700ms both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-chika-reveal 1700ms both;
+}
+
+@keyframes gif-chika-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}
+	`,
+	"gif-hakari-dance": `
+::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/uRlxzRNgp2MAAAAi/anime-girl.gif')
+    center / 0 no-repeat;
+  animation: gif-hakari-reveal 1.5s both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-hakari-reveal 1.5s both;
+}
+
+@keyframes gif-hakari-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}
+	`,
 	"fade": `
 ::view-transition-old(root) {
   animation: fade-out 300ms ease-in-out both;
@@ -1477,6 +1625,154 @@ const TRANSITION_CSS: Record<string, string> = {
 }
 
 @keyframes gif-cat-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}
+	`,
+	"gif-michael-jackson": `
+::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/MdlKGirpTAQAAAAi/michael-jackson-moon-walk.gif')
+    center / 0 no-repeat;
+  animation: gif-michael-jackson-reveal 1700ms both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-michael-jackson-reveal 1700ms both;
+}
+
+@keyframes gif-michael-jackson-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}
+	`,
+	"gif-deadpool": `
+::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/VJlZzo7UdagAAAAi/deadpool-marvel.gif')
+    center / 0 no-repeat;
+  animation: gif-deadpool-reveal 1900ms both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-deadpool-reveal 1900ms both;
+}
+
+@keyframes gif-deadpool-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}
+	`,
+	"gif-chika": `
+::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/gVPazpEOQ3kAAAAi/chika.gif')
+    center / 0 no-repeat;
+  animation: gif-chika-reveal 1700ms both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-chika-reveal 1700ms both;
+}
+
+@keyframes gif-chika-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}
+	`,
+	"gif-hakari-dance": `
+::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/uRlxzRNgp2MAAAAi/anime-girl.gif')
+    center / 0 no-repeat;
+  animation: gif-hakari-reveal 1.5s both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-hakari-reveal 1.5s both;
+}
+
+@keyframes gif-hakari-reveal {
   0% {
     mask-size: 0;
   }
@@ -2701,6 +2997,154 @@ const TRANSITION_CSS: Record<string, string> = {
   }
 }
 	`,
+	"gif-michael-jackson": `
+::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/MdlKGirpTAQAAAAi/michael-jackson-moon-walk.gif')
+    center / 0 no-repeat;
+  animation: gif-michael-jackson-reveal 1700ms both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-michael-jackson-reveal 1700ms both;
+}
+
+@keyframes gif-michael-jackson-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}
+	`,
+	"gif-deadpool": `
+::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/VJlZzo7UdagAAAAi/deadpool-marvel.gif')
+    center / 0 no-repeat;
+  animation: gif-deadpool-reveal 1900ms both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-deadpool-reveal 1900ms both;
+}
+
+@keyframes gif-deadpool-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}
+	`,
+	"gif-chika": `
+::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/gVPazpEOQ3kAAAAi/chika.gif')
+    center / 0 no-repeat;
+  animation: gif-chika-reveal 1700ms both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-chika-reveal 1700ms both;
+}
+
+@keyframes gif-chika-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}
+	`,
+	"gif-hakari-dance": `
+::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/uRlxzRNgp2MAAAAi/anime-girl.gif')
+    center / 0 no-repeat;
+  animation: gif-hakari-reveal 1.5s both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-hakari-reveal 1.5s both;
+}
+
+@keyframes gif-hakari-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}
+	`,
 	"fade": `
 ::view-transition-old(root) {
   animation: fade-out 300ms ease-in-out both;
@@ -3868,6 +4312,154 @@ const TRANSITION_CSS: Record<string, string> = {
 }
 
 @keyframes gif-cat-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}
+	`,
+	"gif-michael-jackson": `
+::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/MdlKGirpTAQAAAAi/michael-jackson-moon-walk.gif')
+    center / 0 no-repeat;
+  animation: gif-michael-jackson-reveal 1700ms both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-michael-jackson-reveal 1700ms both;
+}
+
+@keyframes gif-michael-jackson-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}
+	`,
+	"gif-deadpool": `
+::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/VJlZzo7UdagAAAAi/deadpool-marvel.gif')
+    center / 0 no-repeat;
+  animation: gif-deadpool-reveal 1900ms both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-deadpool-reveal 1900ms both;
+}
+
+@keyframes gif-deadpool-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}
+	`,
+	"gif-chika": `
+::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/gVPazpEOQ3kAAAAi/chika.gif')
+    center / 0 no-repeat;
+  animation: gif-chika-reveal 1700ms both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-chika-reveal 1700ms both;
+}
+
+@keyframes gif-chika-reveal {
+  0% {
+    mask-size: 0;
+  }
+  10% {
+    mask-size: 50vmax;
+  }
+  90% {
+    mask-size: 50vmax;
+  }
+  100% {
+    mask-size: 2000vmax;
+  }
+}
+	`,
+	"gif-hakari-dance": `
+::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  mask: url('https://media.tenor.com/uRlxzRNgp2MAAAAi/anime-girl.gif')
+    center / 0 no-repeat;
+  animation: gif-hakari-reveal 1.5s both;
+}
+
+.dark::view-transition-new(root) {
+  animation: gif-hakari-reveal 1.5s both;
+}
+
+@keyframes gif-hakari-reveal {
   0% {
     mask-size: 0;
   }

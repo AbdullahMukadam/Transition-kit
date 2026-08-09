@@ -33,7 +33,7 @@ export default function TransitionGrid({ transitions }: TransitionGridProps) {
 	}, [transitions, activeCategory, search]);
 
 	return (
-		<div className="flex flex-col gap-6">
+		<div className="not-prose flex flex-col gap-6">
 			{/* Search + filters */}
 			<div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 				<div className="relative flex-1 max-w-sm">

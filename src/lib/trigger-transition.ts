@@ -135,16 +135,12 @@ function getMaskPositionOverrides(css: string, direction: string): string {
 	return overrides;
 }
 
-function injectTransitionCSS(
+export function buildTransitionCSS(
 	css: string,
 	duration: number,
 	easing: string,
 	direction?: string,
-): HTMLStyleElement {
-	if (activeStyle) {
-		activeStyle.remove();
-	}
-
+): string {
 	let customCSS = css
 		.replace(/(\d+(?:\.\d+)?)(ms|s)\b/g, `${duration}ms`)
 		.replace(
@@ -161,8 +157,21 @@ function injectTransitionCSS(
 		customCSS += "\n" + getMaskPositionOverrides(customCSS, direction);
 	}
 
+	return customCSS;
+}
+
+function injectTransitionCSS(
+	css: string,
+	duration: number,
+	easing: string,
+	direction?: string,
+): HTMLStyleElement {
+	if (activeStyle) {
+		activeStyle.remove();
+	}
+
 	const style = document.createElement("style");
-	style.textContent = customCSS;
+	style.textContent = buildTransitionCSS(css, duration, easing, direction);
 	document.head.appendChild(style);
 	activeStyle = style;
 	return style;

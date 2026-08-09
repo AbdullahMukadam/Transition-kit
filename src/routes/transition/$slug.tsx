@@ -5,7 +5,7 @@ import {
 	useNavigate,
 } from "@tanstack/react-router";
 import { ArrowLeft, ChevronDown, Settings2, Zap } from "lucide-react";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -25,7 +25,7 @@ import { PlaygroundSidebar } from "#/components/transitions/PlaygroundSidebar";
 import { TransitionPageActions } from "#/components/transitions/TransitionPageActions";
 import { Badge } from "#/components/ui/badge";
 import { getTransitionBySlug, transitions } from "#/data/transitions";
-import { triggerLiveTransition } from "#/lib/trigger-transition";
+import { buildTransitionCSS, triggerLiveTransition } from "#/lib/trigger-transition";
 
 export const Route = createFileRoute("/transition/$slug")({
 	component: TransitionDetail,
@@ -106,6 +106,17 @@ function TransitionDetail() {
 	const handleSelectTransition = (slug: string) => {
 		nav({ to: "/transition/$slug", params: { slug } });
 	};
+
+	const previewCSS = useMemo(
+		() =>
+			buildTransitionCSS(
+				transition.css,
+				duration,
+				easing,
+				hasDirection ? direction : undefined,
+			),
+		[transition.css, duration, easing, hasDirection, direction],
+	);
 
 	return (
 		<div className="min-h-screen">
@@ -273,7 +284,7 @@ function TransitionDetail() {
 										{
 											language: "css",
 											filename: "transitions.css",
-											code: transition.css,
+											code: previewCSS,
 										},
 									]}
 								>

@@ -40,7 +40,7 @@ export default function TransitionCard({
 			className={`group no-underline flex h-full flex-col rounded-2xl border border-border/60 bg-muted/30 p-2 transition-colors duration-150 hover:bg-muted/50 ${className}`}
 		>
 			<div
-				className={`relative flex aspect-16/9 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-dashed border-border/70 bg-zinc-800 dark:bg-zinc-900`}
+				className={`relative flex h-44 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-dashed border-border/70 bg-zinc-800 dark:bg-zinc-900 sm:h-52`}
 				style={{ animationDelay: `${index * 80 + 60}ms` }}
 			>
 				{transition.video ? (
@@ -53,7 +53,7 @@ export default function TransitionCard({
 					<div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/10" />
 				) : null}
 				{flash ? <div className="absolute inset-0 bg-white/10" /> : null}
-				<div className="flex flex-col items-center gap-3 text-center">
+				{transition.video ? null : <div className="flex flex-col items-center gap-3 text-center">
 					<div className="flex flex-col items-center gap-1.5">
 						<p className="text-lg font-medium text-white/90">
 							{transition.name}
@@ -71,7 +71,7 @@ export default function TransitionCard({
 						<Zap className="size-3" />
 						Try it
 					</button>
-				</div>
+				</div>}
 			</div>
 			<div className="px-2.5 pt-3.5 pb-2.5">
 				<h2 className="text-[15px] font-medium tracking-tight">
