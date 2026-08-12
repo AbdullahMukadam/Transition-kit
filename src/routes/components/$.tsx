@@ -51,15 +51,32 @@ export const Route = createFileRoute("/components/$")({
 				{ title: `${loaderData.title} | Transition Kit` },
 				{ name: "description", content: loaderData.description },
 				{
+					name: "keywords",
+					content:
+						"view transitions api, css transitions, theme transition, page transition, react component, shadcn ui, copy paste component",
+				},
+				{
 					property: "og:title",
 					content: `${loaderData.title} | Transition Kit`,
 				},
 				{ property: "og:description", content: loaderData.description },
 				{
+					property: "og:type",
+					content: "article",
+				},
+				{
+					property: "og:image",
+					content: "https://transition-kit.space/og-image.webp",
+				},
+				{
 					name: "twitter:title",
 					content: `${loaderData.title} | Transition Kit`,
 				},
 				{ name: "twitter:description", content: loaderData.description },
+				{
+					name: "twitter:image",
+					content: "https://transition-kit.space/og-image.webp",
+				},
 			],
 			links: [
 				{

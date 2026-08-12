@@ -1,7 +1,7 @@
 <div align="center">
 
 <a href="https://transition-kit.space">
-  <img src="public/og-image.png" alt="Transition Kit" width="100%" />
+  <img src="public/og-image.webp" alt="Transition Kit" width="100%" />
 </a>
 
 <br />

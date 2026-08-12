@@ -23,6 +23,11 @@ export const Route = createFileRoute("/")({
           "Browse 30+ page transition and theme toggle templates. Fade, slide, scale, flip, blur, mask reveals, and 3D transitions for the View Transitions API.",
       },
       {
+        name: "keywords",
+        content:
+          "view transitions, view transitions api, page transition, theme transition, theme toggle, dark mode transition, CSS mask, fade transition, slide transition, scale transition, flip transition, 3d page transition, react router transition, next.js transition, shadcn",
+      },
+      {
         property: "og:title",
         content: "Transition Kit | Beautiful Transitions for the Modern Web",
       },
@@ -32,6 +37,14 @@ export const Route = createFileRoute("/")({
           "Browse 30+ page transition and theme toggle templates for the View Transitions API.",
       },
       {
+        property: "og:url",
+        content: "https://transition-kit.space/",
+      },
+      {
+        property: "og:image",
+        content: "https://transition-kit.space/og-image.webp",
+      },
+      {
         name: "twitter:title",
         content: "Transition Kit | Beautiful Transitions for the Modern Web",
       },
@@ -39,6 +52,37 @@ export const Route = createFileRoute("/")({
         name: "twitter:description",
         content:
           "Browse 30+ page transition and theme toggle templates for the View Transitions API.",
+      },
+      {
+        name: "twitter:image",
+        content: "https://transition-kit.space/og-image.webp",
+      },
+    ],
+    links: [
+      {
+        rel: "canonical",
+        href: "https://transition-kit.space/",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        dangerouslySetInnerHTML: {
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: "Transition Kit Templates",
+            url: "https://transition-kit.space/",
+            description:
+              "Pre-built, copy-paste page transition and theme toggle components using the View Transitions API.",
+            isPartOf: {
+              "@type": "WebSite",
+              name: "Transition Kit",
+              url: "https://transition-kit.space",
+            },
+            numberOfItems: transitions.length,
+          }),
+        },
       },
     ],
   }),

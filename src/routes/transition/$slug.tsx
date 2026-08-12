@@ -46,12 +46,24 @@ export const Route = createFileRoute("/transition/$slug")({
 					content: loaderData.transition.description,
 				},
 				{
+					name: "keywords",
+					content: `${loaderData.transition.name.toLowerCase()}, ${loaderData.transition.category} transition, view transitions api, css transition, theme transition, page transition, copy paste transition component`,
+				},
+				{
 					property: "og:title",
 					content: `${loaderData.transition.name} — Transition Kit`,
 				},
 				{
 					property: "og:description",
 					content: loaderData.transition.description,
+				},
+				{
+					property: "og:type",
+					content: "article",
+				},
+				{
+					property: "og:image",
+					content: "https://transition-kit.space/og-image.webp",
 				},
 				{
 					name: "twitter:title",
@@ -61,11 +73,46 @@ export const Route = createFileRoute("/transition/$slug")({
 					name: "twitter:description",
 					content: loaderData.transition.description,
 				},
+				{
+					name: "twitter:image",
+					content: "https://transition-kit.space/og-image.webp",
+				},
 			],
 			links: [
 				{
 					rel: "canonical",
 					href: `https://transition-kit.space/transition/${loaderData.transition.slug}`,
+				},
+			],
+			scripts: [
+				{
+					type: "application/ld+json",
+					dangerouslySetInnerHTML: {
+						__html: JSON.stringify({
+							"@context": "https://schema.org",
+							"@type": "TechArticle",
+							headline: `${loaderData.transition.name} transition for the View Transitions API`,
+							description: loaderData.transition.description,
+							url: `https://transition-kit.space/transition/${loaderData.transition.slug}`,
+							author: {
+								"@type": "Organization",
+								name: "Transition Kit",
+							},
+							publisher: {
+								"@type": "Organization",
+								name: "Transition Kit",
+								logo: {
+									"@type": "ImageObject",
+									url: "https://transition-kit.space/logo512.png",
+								},
+							},
+							about: [
+								"View Transitions API",
+								"CSS transitions",
+								`${loaderData.transition.category} transitions`,
+							],
+						}),
+					},
 				},
 			],
 		};

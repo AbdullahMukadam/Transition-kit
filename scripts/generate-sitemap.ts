@@ -11,6 +11,8 @@ import { transitions } from "../src/data/transitions";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BASE = "https://transition-kit.space";
 
+const LAST_MOD = new Date().toISOString().split("T")[0];
+
 const staticPages = [
   { path: "", priority: "1.0", changefreq: "weekly" },
   { path: "about", priority: "0.5", changefreq: "monthly" },
@@ -39,6 +41,7 @@ ${allPages
   .map(
     (page) => `  <url>
     <loc>${BASE}/${page.path}</loc>
+    <lastmod>${LAST_MOD}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
   </url>`,

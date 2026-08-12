@@ -36,7 +36,15 @@ export const Route = createRootRoute({
 			{
 				name: "keywords",
 				content:
-					"view transitions, theme transitions, page transitions, theme toggle, CSS animations, React components, shadcn, fumadocs",
+					"view transitions, view transitions api, page transitions, theme transitions, theme toggle, dark mode transition, CSS transitions, CSS animations, CSS mask, Web Animations API, React transition component, next.js page transition, Vue route transition, Svelte page transition, shadcn ui, animated theme switcher, transition kit, copy paste components",
+			},
+			{
+				name: "robots",
+				content: "index, follow, max-image-preview:large, max-snippet:-1",
+			},
+			{
+				name: "author",
+				content: "Transition Kit",
 			},
 			{
 				name: "theme-color",
@@ -53,6 +61,14 @@ export const Route = createRootRoute({
 				content: "website",
 			},
 			{
+				property: "og:site_name",
+				content: "Transition Kit",
+			},
+			{
+				property: "og:locale",
+				content: "en_US",
+			},
+			{
 				property: "og:title",
 				content: "Transition Kit | Page/Theme Transition Templates",
 			},
@@ -67,7 +83,20 @@ export const Route = createRootRoute({
 			},
 			{
 				property: "og:image",
-				content: "https://transition-kit.space/og-image.png",
+				content: "https://transition-kit.space/og-image.webp",
+			},
+			{
+				property: "og:image:width",
+				content: "1200",
+			},
+			{
+				property: "og:image:height",
+				content: "630",
+			},
+			{
+				property: "og:image:alt",
+				content:
+					"Transition Kit — copy-paste page transition and theme toggle templates for the View Transitions API.",
 			},
 			{
 				name: "twitter:card",
@@ -84,7 +113,16 @@ export const Route = createRootRoute({
 			},
 			{
 				name: "twitter:image",
-				content: "https://transition-kit.space/og-image.png",
+				content: "https://transition-kit.space/og-image.webp",
+			},
+			{
+				name: "twitter:image:alt",
+				content:
+					"Transition Kit — copy-paste page transition and theme toggle templates for the View Transitions API.",
+			},
+			{
+				name: "twitter:site",
+				content: "@transitionkit",
 			},
 		],
 		links: [
@@ -122,6 +160,14 @@ export const Route = createRootRoute({
 				rel: "manifest",
 				href: "/manifest.json",
 			},
+			{
+				rel: "preconnect",
+				href: "https://media.tenor.com",
+			},
+			{
+				rel: "dns-prefetch",
+				href: "https://media.tenor.com",
+			},
 		],
 		scripts: [
 			{
@@ -136,6 +182,48 @@ export const Route = createRootRoute({
 							"Pre-built, copy-paste page and theme transition and theme toggle components using the View Transitions API.",
 						applicationCategory: "DeveloperApplication",
 						operatingSystem: "All",
+						potentialAction: {
+							"@type": "SearchAction",
+							target: {
+								"@type": "EntryPoint",
+								urlTemplate:
+									"https://transition-kit.space/templates?q={search_term_string}",
+							},
+							"query-input": "required name=search_term_string",
+						},
+					}),
+				},
+			},
+			{
+				type: "application/ld+json",
+				dangerouslySetInnerHTML: {
+					__html: JSON.stringify({
+						"@context": "https://schema.org",
+						"@type": "Organization",
+						name: "Transition Kit",
+						url: "https://transition-kit.space",
+						logo: "https://transition-kit.space/logo512.png",
+						sameAs: [],
+					}),
+				},
+			},
+			{
+				type: "application/ld+json",
+				dangerouslySetInnerHTML: {
+					__html: JSON.stringify({
+						"@context": "https://schema.org",
+						"@type": "SoftwareApplication",
+						name: "Transition Kit",
+						url: "https://transition-kit.space",
+						description:
+							"Pre-built, copy-paste page transition and theme toggle components using the View Transitions API.",
+						applicationCategory: "DeveloperApplication",
+						operatingSystem: "Web",
+						offers: {
+							"@type": "Offer",
+							price: "0",
+							priceCurrency: "USD",
+						},
 					}),
 				},
 			},

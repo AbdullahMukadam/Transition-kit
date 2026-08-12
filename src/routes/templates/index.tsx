@@ -28,6 +28,11 @@ export const Route = createFileRoute("/templates/")({
 				{ title: `${loaderData.title} | Transition Kit` },
 				{ name: "description", content: loaderData.description },
 				{
+					name: "keywords",
+					content:
+						"page transitions, theme transitions, theme toggle, view transitions api, css transitions, transition templates, copy paste transitions",
+				},
+				{
 					property: "og:title",
 					content: `${loaderData.title} | Transition Kit`,
 				},
