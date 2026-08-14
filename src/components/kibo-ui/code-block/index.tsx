@@ -145,6 +145,7 @@ const highlight = (
 	});
 
 type CodeBlockData = {
+	highlightLang?: BundledLanguage | undefined;
 	language: string;
 	filename: string;
 	code: string;

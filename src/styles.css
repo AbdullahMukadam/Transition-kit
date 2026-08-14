@@ -173,3 +173,26 @@ body {
     @apply font-sans;
   }
 }
+
+.tk-fs-preview:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  border-radius: 0 !important;
+  background: var(--background);
+}
+
+.tk-fs-preview:fullscreen .tk-fs-fill {
+  width: 100%;
+}
+
+.tk-fs-preview:fullscreen .tk-fs-fill > * {
+  max-width: none !important;
+}
+
+.tk-fs-preview:fullscreen > button.tk-fs-exit {
+  position: fixed;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 10;
+}

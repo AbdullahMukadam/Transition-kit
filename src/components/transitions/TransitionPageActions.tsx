@@ -177,7 +177,7 @@ export function TransitionPageActions({ transition }: { transition: TransitionTe
 			</button>
 			<ActionMenu
 				label="Open in AI"
-				icon={Sparkles}
+				// icon={Sparkles}
 				ariaLabel={`Open the ${transition.name} page in an AI assistant`}
 				menuClassName="w-64"
 				items={[
