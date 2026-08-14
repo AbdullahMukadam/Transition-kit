@@ -15,7 +15,7 @@ import {
   CodeBlockHeader,
   CodeBlockItem,
 } from "#/components/kibo-ui/code-block";
-import { EMBED_MESSAGE_SOURCE, buildEmbedSnippet } from "#/lib/embed";
+import { EMBED_MESSAGE_SOURCE } from "#/lib/embed";
 import { cn } from "#/lib/utils";
 
 export interface EmbedPreviewHandle {

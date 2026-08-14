@@ -1,4 +1,4 @@
-import { Check, Copy, Sparkles } from "lucide-react";
+import { Check, Copy } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { TransitionTemplate } from "#/data/transitions";
 import { cn } from "#/lib/utils";
