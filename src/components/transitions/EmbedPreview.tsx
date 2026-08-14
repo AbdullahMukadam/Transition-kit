@@ -38,7 +38,6 @@ const SNIPPET_TABS: {
     filename: "Script Tag",
     highlightLang: "html",
     code: `<script
-  crossOrigin="anonymous"
   src="https://transition-kit.space/live-preview.min.js"
 ></script>`,
   },
