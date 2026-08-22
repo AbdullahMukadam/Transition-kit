@@ -122,7 +122,7 @@ function App() {
               Build beautiful
               <br className="md:hidden" /> transitions,
               <br />
-              your <span className="text-white">style</span>.
+              of your <span className="text-white">style</span>.
             </h1>
             <div className="flex flex-row flex-wrap items-center justify-center gap-4 w-fit">
               <Button size="lg" onClick={handleDemo} className="gap-2">

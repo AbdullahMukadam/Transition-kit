@@ -681,7 +681,8 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/theme-toggles/gif-michael-jackson.webm",
-		isNew: true,
+		isNew: false,
+		featured: true,
 	},
 	{
 		slug: "gif-deadpool",
@@ -749,6 +750,7 @@ document.startViewTransition(() => switchTheme());`,
 		},
 		video: "/demos/theme-toggles/gif-deadpool.webm",
 		isNew: true,
+		featured: true,
 	},
 	{
 		slug: "gif-chika",
@@ -817,6 +819,7 @@ document.startViewTransition(() => switchTheme());`,
 		},
 		video: "/demos/theme-toggles/gif-chika.webm",
 		isNew: true,
+		featured: true,
 	},
 	{
 		slug: "gif-hakari-dance",
@@ -884,7 +887,7 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/theme-toggles/gif-hakari.webm",
-		isNew: true,
+		isNew: false,
 	},
 	{
 		slug: "fade",
@@ -934,7 +937,6 @@ document.startViewTransition(() => switchTheme());`,
 			to: "#171717",
 		},
 		video: "/demos/page-transitions/fade.webm",
-		featured: true,
 	},
 	{
 		slug: "slide",
@@ -2362,6 +2364,73 @@ document.startViewTransition(() => switchTheme());`,
 		},
 		video: "/demos/page-transitions/iris-wipe.webm",
 		isNew: false,
+	},
+	{
+		slug: "clock-wipe",
+		name: "Clock Wipe",
+		description:
+		  "A radial wedge sweeps clockwise around the center, like a clock hand, to reveal the new theme.",
+		category: "composite",
+		type: "theme",
+		css: `::view-transition-old(root),
+	  .dark::view-transition-old(root) {
+		animation: none;
+		animation-fill-mode: both;
+		z-index: -1;
+	  }
+	  
+	  ::view-transition-new(root) {
+		animation: clock-wipe 1.1s linear both;
+	  }
+	  
+	  .dark::view-transition-new(root) {
+		animation: clock-wipe 1.1s linear both;
+	  }
+	  
+	  @keyframes clock-wipe {
+		0%      { clip-path: polygon(50% 50%, 50% 0%, 50% 0%); }
+		6.25%   { clip-path: polygon(50% 50%, 50% 0%, 75% 0%); }
+		12.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%); }
+		18.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 25%); }
+		25%     { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 50%); }
+		31.25%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 75%); }
+		37.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%); }
+		43.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 75% 100%); }
+		50%     { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 50% 100%); }
+		56.25%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 25% 100%); }
+		62.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%); }
+		68.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 75%); }
+		75%     { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 50%); }
+		81.25%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 25%); }
+		87.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%); }
+		93.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 25% 0%); }
+		100%    { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 50% 0%); }
+	  }`,
+		js: `function switchTheme() {
+		const el = document.documentElement;
+		el.classList.toggle("dark");
+		localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
+	  }
+	  
+	  if (!document.startViewTransition) switchTheme();
+	  document.startViewTransition(() => switchTheme());`,
+		frameworks: {
+		  vanilla: VANILLA_SNIPPET,
+		  react: REACT_SNIPPET,
+		  nextjs: NEXTJS_SNIPPET,
+		  vue: VUE_SNIPPET,
+		  svelte: SVELTE_SNIPPET,
+		},
+		config: {
+		  duration: 1100,
+		  easing: "linear",
+		},
+		previewColors: {
+		  from: "#ededed",
+		  to: "#171717",
+		},
+		video: "/demos/theme-toggles/clock-wipe.mp4",
+		isNew: true,
 	},
 ];
 

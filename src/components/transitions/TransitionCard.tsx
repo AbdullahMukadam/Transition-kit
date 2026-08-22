@@ -53,6 +53,11 @@ export default function TransitionCard({
 					<div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/10" />
 				) : null}
 				{flash ? <div className="absolute inset-0 bg-white/10" /> : null}
+				{transition.isNew && (
+					<span className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1 rounded-full bg-accent/90 px-2 py-0.5 text-[10px] font-medium text-accent-foreground backdrop-blur-sm">
+						New
+					</span>
+				)}
 				{transition.video ? null : <div className="flex flex-col items-center gap-3 text-center">
 					<div className="flex flex-col items-center gap-1.5">
 						<p className="text-lg font-medium text-white/90">
@@ -80,16 +85,6 @@ export default function TransitionCard({
 				<p className="mt-1 text-sm leading-6 text-muted-foreground">
 					{transition.description}
 				</p>
-				<div className="mt-2 flex items-center gap-2">
-					<p className="text-xs rounded-full border border-border/60 px-2 py-0.5 text-muted-foreground">
-						{transition.category}
-					</p>
-					{transition.isNew && (
-						<p className="text-xs rounded-full border border-accent px-2 py-0.5 text-accent">
-							New
-						</p>
-					)}
-				</div>
 			</div>
 		</Link>
 	);

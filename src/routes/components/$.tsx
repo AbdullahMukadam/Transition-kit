@@ -120,7 +120,7 @@ const clientLoader = browserCollections.docs.createClientLoader({
 			<DocsPage toc={props.toc}>
 				<DocsTitle>{frontmatter.title}</DocsTitle>
 				<DocsDescription>{frontmatter.description}</DocsDescription>
-				<div className="flex flex-row gap-2 items-center border-b pb-6">
+				<div className="flex flex-row items-center border-b pb-6">
 					<MarkdownCopyButton markdownUrl={encodeMarkdownUrl(props.slugs)} />
 					<ViewOptionsPopover markdownUrl={encodeMarkdownUrl(props.slugs)} />
 				</div>

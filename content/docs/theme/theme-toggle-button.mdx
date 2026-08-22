@@ -1159,6 +1159,42 @@ const TRANSITION_CSS: Record<string, string> = {
   from { mask: radial-gradient(circle at center, white 0%, white 0%, transparent 0%); }
   to { mask: radial-gradient(circle at center, white 100%, white 100%, transparent 100%); }
 }
+	`,
+	"clock-wipe": `
+::view-transition-old(root),
+	  .dark::view-transition-old(root) {
+		animation: none;
+		animation-fill-mode: both;
+		z-index: -1;
+	  }
+	  
+	  ::view-transition-new(root) {
+		animation: clock-wipe 1.1s linear both;
+	  }
+	  
+	  .dark::view-transition-new(root) {
+		animation: clock-wipe 1.1s linear both;
+	  }
+	  
+	  @keyframes clock-wipe {
+		0%      { clip-path: polygon(50% 50%, 50% 0%, 50% 0%); }
+		6.25%   { clip-path: polygon(50% 50%, 50% 0%, 75% 0%); }
+		12.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%); }
+		18.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 25%); }
+		25%     { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 50%); }
+		31.25%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 75%); }
+		37.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%); }
+		43.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 75% 100%); }
+		50%     { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 50% 100%); }
+		56.25%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 25% 100%); }
+		62.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%); }
+		68.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 75%); }
+		75%     { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 50%); }
+		81.25%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 25%); }
+		87.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%); }
+		93.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 25% 0%); }
+		100%    { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 50% 0%); }
+	  }
 	`
 };
 
@@ -2427,6 +2463,42 @@ const TRANSITION_CSS: Record<string, string> = {
   from { mask: radial-gradient(circle at center, white 0%, white 0%, transparent 0%); }
   to { mask: radial-gradient(circle at center, white 100%, white 100%, transparent 100%); }
 }
+	`,
+	"clock-wipe": `
+::view-transition-old(root),
+	  .dark::view-transition-old(root) {
+		animation: none;
+		animation-fill-mode: both;
+		z-index: -1;
+	  }
+	  
+	  ::view-transition-new(root) {
+		animation: clock-wipe 1.1s linear both;
+	  }
+	  
+	  .dark::view-transition-new(root) {
+		animation: clock-wipe 1.1s linear both;
+	  }
+	  
+	  @keyframes clock-wipe {
+		0%      { clip-path: polygon(50% 50%, 50% 0%, 50% 0%); }
+		6.25%   { clip-path: polygon(50% 50%, 50% 0%, 75% 0%); }
+		12.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%); }
+		18.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 25%); }
+		25%     { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 50%); }
+		31.25%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 75%); }
+		37.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%); }
+		43.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 75% 100%); }
+		50%     { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 50% 100%); }
+		56.25%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 25% 100%); }
+		62.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%); }
+		68.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 75%); }
+		75%     { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 50%); }
+		81.25%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 25%); }
+		87.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%); }
+		93.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 25% 0%); }
+		100%    { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 50% 0%); }
+	  }
 	`
 };
 
@@ -3760,6 +3832,42 @@ const TRANSITION_CSS: Record<string, string> = {
   from { mask: radial-gradient(circle at center, white 0%, white 0%, transparent 0%); }
   to { mask: radial-gradient(circle at center, white 100%, white 100%, transparent 100%); }
 }
+	`,
+	"clock-wipe": `
+::view-transition-old(root),
+	  .dark::view-transition-old(root) {
+		animation: none;
+		animation-fill-mode: both;
+		z-index: -1;
+	  }
+	  
+	  ::view-transition-new(root) {
+		animation: clock-wipe 1.1s linear both;
+	  }
+	  
+	  .dark::view-transition-new(root) {
+		animation: clock-wipe 1.1s linear both;
+	  }
+	  
+	  @keyframes clock-wipe {
+		0%      { clip-path: polygon(50% 50%, 50% 0%, 50% 0%); }
+		6.25%   { clip-path: polygon(50% 50%, 50% 0%, 75% 0%); }
+		12.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%); }
+		18.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 25%); }
+		25%     { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 50%); }
+		31.25%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 75%); }
+		37.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%); }
+		43.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 75% 100%); }
+		50%     { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 50% 100%); }
+		56.25%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 25% 100%); }
+		62.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%); }
+		68.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 75%); }
+		75%     { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 50%); }
+		81.25%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 25%); }
+		87.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%); }
+		93.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 25% 0%); }
+		100%    { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 50% 0%); }
+	  }
 	`
 };
 
@@ -5071,6 +5179,42 @@ const TRANSITION_CSS: Record<string, string> = {
   from { mask: radial-gradient(circle at center, white 0%, white 0%, transparent 0%); }
   to { mask: radial-gradient(circle at center, white 100%, white 100%, transparent 100%); }
 }
+	`,
+	"clock-wipe": `
+::view-transition-old(root),
+	  .dark::view-transition-old(root) {
+		animation: none;
+		animation-fill-mode: both;
+		z-index: -1;
+	  }
+	  
+	  ::view-transition-new(root) {
+		animation: clock-wipe 1.1s linear both;
+	  }
+	  
+	  .dark::view-transition-new(root) {
+		animation: clock-wipe 1.1s linear both;
+	  }
+	  
+	  @keyframes clock-wipe {
+		0%      { clip-path: polygon(50% 50%, 50% 0%, 50% 0%); }
+		6.25%   { clip-path: polygon(50% 50%, 50% 0%, 75% 0%); }
+		12.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%); }
+		18.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 25%); }
+		25%     { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 50%); }
+		31.25%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 75%); }
+		37.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%); }
+		43.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 75% 100%); }
+		50%     { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 50% 100%); }
+		56.25%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 25% 100%); }
+		62.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%); }
+		68.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 75%); }
+		75%     { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 50%); }
+		81.25%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 25%); }
+		87.5%   { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%); }
+		93.75%  { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 25% 0%); }
+		100%    { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 50% 0%); }
+	  }
 	`
 };
 

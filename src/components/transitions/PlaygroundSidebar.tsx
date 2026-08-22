@@ -47,12 +47,9 @@ function TransitionPreviewCard({
 					/>
 				)}
 			</div>
-			<div className="mt-1.5 flex items-center gap-1.5 px-1 pb-0.5">
-				<span className="min-w-0 truncate text-[12px] font-medium text-[var(--foreground)]">
+			<div className="mt-1.5 px-1 pb-0.5">
+				<span className="min-w-0 truncate block text-[12px] font-medium text-[var(--foreground)]">
 					{transition.name}
-				</span>
-				<span className="shrink-0 rounded-full bg-[var(--muted)] px-1.5 py-0.5 text-[9px] font-medium uppercase text-[var(--muted-foreground)]">
-					{transition.category}
 				</span>
 			</div>
 		</button>
@@ -81,7 +78,7 @@ function useScrollFade() {
 	return setEl;
 }
 
-export function PlaygroundSidebar({
+export default function PlaygroundSidebar({
 	activeTransition,
 	transitions: allTransitions,
 	duration,

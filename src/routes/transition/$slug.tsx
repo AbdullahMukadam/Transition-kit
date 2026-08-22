@@ -15,6 +15,7 @@ import {
   Zap,
 } from "lucide-react";
 import {
+  lazy,
   type ReactNode,
   useCallback,
   useEffect,
@@ -39,14 +40,16 @@ import {
 import { MockSite } from "#/components/transitions/MockSite";
 import { EmbedPreview } from "#/components/transitions/EmbedPreview";
 import Playground from "#/components/transitions/Playground";
-import { PlaygroundSidebar } from "#/components/transitions/PlaygroundSidebar";
 import { TransitionPageActions } from "#/components/transitions/TransitionPageActions";
-import { Badge } from "#/components/ui/badge";
 import { getTransitionBySlug, transitions } from "#/data/transitions";
 import {
   buildTransitionCSS,
   triggerLiveTransition,
 } from "#/lib/trigger-transition";
+
+const PlaygroundSidebar = lazy(
+  () => import("#/components/transitions/PlaygroundSidebar")
+);
 
 export const Route = createFileRoute("/transition/$slug")({
   component: TransitionDetail,
@@ -263,27 +266,16 @@ function TransitionDetail() {
               <h1 className="text-2xl font-semibold text-[var(--foreground)] tracking-tight sm:text-3xl">
                 {transition.name}
               </h1>
-              <Badge
-                variant="secondary"
-                className="uppercase text-[10px] px-2 py-0.5"
-              >
-                {transition.category}
-              </Badge>
               {transition.isNew && (
-                <Badge className="uppercase text-[10px] px-2 py-0.5 bg-[var(--accent)] text-[var(--accent-foreground)]">
+                <span className="flex items-center gap-1 text-[11px] font-medium text-[var(--accent)]">
+                  <span className="size-1.5 rounded-full bg-[var(--accent)]" />
                   New
-                </Badge>
+                </span>
               )}
             </div>
             <p className="max-w-2xl text-sm text-[var(--muted-foreground)] leading-relaxed">
               {transition.description}
             </p>
-            <div className="flex items-center gap-4 mt-2 text-xs text-[var(--muted-foreground)]">
-              <span>
-                {transition.config.duration}ms ·{" "}
-                {transition.config.easing.split("(")[0]}
-              </span>
-            </div>
             <div className="mt-4">
               <TransitionPageActions transition={transition} />
             </div>
@@ -596,59 +588,59 @@ function MobileControls({
 }
 
 function FullscreenPreview({
-	children,
-	label = "Preview",
-  }: {
-	children: ReactNode;
-	label?: string;
-  }) {
-	const ref = useRef<HTMLDivElement>(null);
-	const [isFullscreen, setIsFullscreen] = useState(false);
-  
-	useEffect(() => {
-	  const onFullscreenChange = () =>
-		setIsFullscreen(!!document.fullscreenElement);
-	  document.addEventListener("fullscreenchange", onFullscreenChange);
-	  return () =>
-		document.removeEventListener("fullscreenchange", onFullscreenChange);
-	}, []);
-  
-	const toggle = () => {
-	  if (document.fullscreenElement) {
-		void document.exitFullscreen();
-	  } else if (ref.current) {
-		void ref.current.requestFullscreen();
-	  }
-	};
-  
-	return (
-	  <div
-		ref={ref}
-		className="tk-fs-preview overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--background)]"
-	  >
-		<div className="flex items-center justify-between border-b border-[var(--border)] bg-[var(--muted)]/30 px-3 py-2">
-		  <span className="text-xs font-medium text-[var(--muted-foreground)]">
-			{label}
-		  </span>
-		  <button
-			type="button"
-			onClick={toggle}
-			className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-[var(--muted-foreground)] transition-colors duration-150 hover:bg-[var(--muted)] hover:text-[var(--foreground)]"
-		  >
-			{isFullscreen ? (
-			  <>
-				<Shrink aria-hidden className="size-3.5" />
-				Exit
-			  </>
-			) : (
-			  <>
-				<Expand aria-hidden className="size-3.5" />
-				Fullscreen
-			  </>
-			)}
-		  </button>
-		</div>
-		<div className="tk-fs-fill py-2">{children}</div>
-	  </div>
-	);
-  }
+  children,
+  label = "Preview",
+}: {
+  children: ReactNode;
+  label?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  useEffect(() => {
+    const onFullscreenChange = () =>
+      setIsFullscreen(!!document.fullscreenElement);
+    document.addEventListener("fullscreenchange", onFullscreenChange);
+    return () =>
+      document.removeEventListener("fullscreenchange", onFullscreenChange);
+  }, []);
+
+  const toggle = () => {
+    if (document.fullscreenElement) {
+      void document.exitFullscreen();
+    } else if (ref.current) {
+      void ref.current.requestFullscreen();
+    }
+  };
+
+  return (
+    <div
+      ref={ref}
+      className="tk-fs-preview overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--background)]"
+    >
+      <div className="flex items-center justify-between border-b border-[var(--border)] bg-[var(--muted)]/30 px-3 py-2">
+        <span className="text-xs font-medium text-[var(--muted-foreground)]">
+          {label}
+        </span>
+        <button
+          type="button"
+          onClick={toggle}
+          className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-[var(--muted-foreground)] transition-colors duration-150 hover:bg-[var(--muted)] hover:text-[var(--foreground)]"
+        >
+          {isFullscreen ? (
+            <>
+              <Shrink aria-hidden className="size-3.5" />
+              Exit
+            </>
+          ) : (
+            <>
+              <Expand aria-hidden className="size-3.5" />
+              Fullscreen
+            </>
+          )}
+        </button>
+      </div>
+      <div className="tk-fs-fill py-2">{children}</div>
+    </div>
+  );
+}
